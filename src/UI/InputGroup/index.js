@@ -10,15 +10,17 @@ export default styled.div.attrs({
   }
   input,
   select {
-    height: 56px;
+    height: ${rem('56px')};
     width: 100%;
     background: #ffffff;
     border: 1px solid #aeaeae;
     border-radius: 4px;
     letter-spacing: 0.14px;
-    color: #aeaeae;
     padding: 0 1em;
     border-radius: 4px;
+    font-size: ${rem('14px')};
+    letter-spacing: 0.14px;
+    font-weight: 200;
     &:active,
     &:focus {
       outline: none;
@@ -39,8 +41,8 @@ export default styled.div.attrs({
     display: flex;
     align-items: center;
     font-weight: normal;
-    font-size: 14.5px;
-    line-height: 20px;
+    font-size: ${rem('14.5px')};
+    line-height: ${rem('20px')};
     letter-spacing: 0px;
     color: #222222;
     opacity: 0.5;

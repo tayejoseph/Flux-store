@@ -7,7 +7,7 @@ import Container from './styles'
 const SmImg = () => {
   return (
     <div className="smImg--container">
-      <Button icon>
+      <Button type="button" icon onClick={console.log}>
         <IoClose />
       </Button>
     </div>

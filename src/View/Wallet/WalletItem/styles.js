@@ -2,7 +2,7 @@ import Styled from 'styled-components'
 import { rem } from 'polished'
 
 export default Styled.div`
-    width: ${rem('315px')};
+    min-width: ${rem('315px')};
     position: relative;
     display: flex;
     color: #fff;

@@ -29,13 +29,13 @@ export default Styled.div`
         background: #FFFFFF;
         box-shadow: 0px 0px 30px #00000029;
         border-radius: 10px;
-        width: 720px;
+        width: ${rem('720px')};
         position: relative;
-        ${maxQuery('md')} {
+        /* ${maxQuery('md')} {
             width: 100vw;
             height: 100vh;
             border-radius: 0px;
-        }
+        } */
         button.close-btn {
             position: absolute;
             top: 0.3em;

@@ -9,6 +9,8 @@ export default Styled.div`
         div.wallet--middle__content {
             display: flex;
             align-items: center;
+            max-width: 100vw;
+            overflow-x: auto;
         }
         div.wallet--action {
             button:not(:last-child) {

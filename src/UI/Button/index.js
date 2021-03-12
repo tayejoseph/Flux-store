@@ -40,9 +40,8 @@ const Button = ({
       // small={small ? small : undefined}
       onClick={onClick}
       // loading={loading ? JSON.stringify(loading) : undefined}
-      // type={type}
+      type={type}
       style={style}
-      {...rest}
     >
       {loading ? <Spinner /> : children}
     </Container>

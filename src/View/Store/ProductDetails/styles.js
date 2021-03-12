@@ -1,7 +1,15 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { maxQuery } from '../../../helpers'
 
 export default Styled.div`
+    div.modal--container {
+        ${maxQuery('md')} {
+            height: 100vh;
+            width: 100vw;
+            border-radius: 0px;
+        }
+    }
     div.productDetails--container {
         padding: 2.5em;
         p {
@@ -14,6 +22,9 @@ export default Styled.div`
         }
         main.flux--row {
             display: flex;
+            ${maxQuery('md')} {
+                flex-direction: column;
+            }
             div.flux--col {
                 &:first-child {
                     padding-right: 2em;
@@ -22,6 +33,9 @@ export default Styled.div`
                         height: ${rem('333px')};
                         box-shadow: 0px 0px 2px #00000029;
                         border-radius: 10px;
+                    }
+                    ${maxQuery('md')} {
+                        margin-bottom: 2em;
                     }
                 }
                 &:last-child {
@@ -82,7 +96,7 @@ export default Styled.div`
                 display: flex;
                 width: ${rem('317px')};
                 justify-content: center;
-                div.sm--img {         
+                div.md--img {         
                     position: relative;           
                     width: ${rem('48px')};
                     height: ${rem('48px')};
@@ -111,8 +125,8 @@ export default Styled.div`
                 display: flex;
                 align-items: center;
                 button {                    
-                    width: 35px;
-                    height: 36px;    
+                    width: ${rem('35px')};
+                    height: ${rem('36px')};    
                     &:nth-child(2) {
                         margin: 0 1em;
                         .icon {

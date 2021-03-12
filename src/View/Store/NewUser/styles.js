@@ -1,12 +1,13 @@
 import Styled from 'styled-components'
+import { rem } from 'polished'
 
 export default Styled.div`
     div.modal--container {  
-        width: 373px;
-        height: 485px;
+        width: ${rem('373px')};
+        height: ${rem('485px')};
     }
     div.newuser--container {
-        height: 485px;
+        height: ${rem('485px')};
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -36,14 +37,14 @@ export default Styled.div`
                         background: #FF5E5E;
                         border-radius: 50%;
                         border: 2px solid #fff;                        
-                        width: 9px;
-                        height: 9px;
-                        top:0px;
+                        width: ${rem('9px')};
+                        height: ${rem('9px')};
+                        top: 0px;
                         right: 0px;
                     }
                 }
                 div.img--container {
-                    height: 120px;
+                    height: ${rem('120px')};
                     background: red;
                     width: 100%;
                 }
@@ -92,8 +93,8 @@ export default Styled.div`
             }
         }
         footer {        
-            width: 373px;
-            height: 81px;
+            width: ${rem('373px')};
+            height: ${rem('81px')};
             box-shadow: 0px 0px 1px #00000029;
             border-radius: 0px 0px 10px 10px;
             display: flex;

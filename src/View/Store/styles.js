@@ -47,6 +47,13 @@ export default Styled.div`
             grid-template-columns: repeat(5, 1fr);
             grid-gap: 1em;
             } */
+             ${maxQuery('md')} {
+                grid-template-columns: repeat(4, 1fr);
+                /* background: red; */
+            }
+            ${maxQuery('sm')} {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         footer {
             box-shadow: 0px 0px 3px #00000029;

@@ -1,32 +1,42 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { maxQuery } from '../../../helpers'
 
 export default Styled.div`
     div.modal--container {                
-        width: 602px;
-        height: 485px;
+        width: ${rem('602px')};
+        height: ${rem('485px')};
     }
     div.productForm--container {
         header {
             display: flex;
             align-items: center;
             padding: 0px 2em;
-            height: 63px;
+            height: ${rem('63px')};
             box-shadow: 0px 0px 3px #00000029;
             border-radius: 10px 10px 0px 0px;
             opacity: 1;
         }
         main { 
             display: flex;
+            ${maxQuery('sm')} {
+                flex-direction: column;
+            }
             aside {
-                width: 198px;                
+                width: ${rem('198px')};                
                 box-shadow: 1.5px 0px 2px -1px #00000029;
+                 ${maxQuery('sm')} {
+                    width: 100%;
+                }
             }
             form {
-                height: 341px;
+                height: ${rem('341px')};
                 overflow-y: auto;
-                width: calc(100% - 198px);
+                width: calc(100% - ${rem('198px')});
                 padding: 1.5em 2em;
+                ${maxQuery('sm')} {
+                    width: 100%;
+                }
                 div.hide--section {
                     visibility: hidden;
                     pointer-events: none;
@@ -37,7 +47,7 @@ export default Styled.div`
             }
         }
         footer {
-            height: 81px;
+            height: ${rem('81px')};
             display: flex;
             align-items: center;
             justify-content: space-between;

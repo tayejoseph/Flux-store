@@ -1,6 +1,16 @@
-import Styled from 'styled-components'
+import Styled, { keyframes } from 'styled-components'
 import { DIMENSIONS } from '../../base/theme'
 import { minQuery, maxQuery } from '../../helpers'
+
+const slideIn = keyframes`
+from {
+    left: -50%;
+}
+to {
+    left: 0px;
+}
+
+`
 
 export default Styled.div`
     width: 100vw;
@@ -31,11 +41,16 @@ export default Styled.div`
         ${maxQuery('lg')} {
             width: 100vw;
             position: fixed;
+            left: -100%;
             display: none;
             backdrop-filter: blur(4px);
+            box-shadow: none;
         }
         &.open--menu__mobile {
             display: block;
+            animation: ${slideIn} 0.5s;
+            animation-fill-mode: forwards;
+
             div.dashboard--sideNav {
                 box-shadow: 0px 0px 5px #00000029;
             }

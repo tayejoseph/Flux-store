@@ -46,7 +46,7 @@ const AddCash = () => {
                 type="radio"
                 value="Debit Card"
                 name={'paymentMethod'}
-                checked={formData.paymentMethod === 'Debit Card'}
+                // checked={formData.paymentMethod === 'Debit Card'}
               />
               Debit Card
             </label>
@@ -57,7 +57,7 @@ const AddCash = () => {
                 type="radio"
                 value="Bank Transfer"
                 name={'paymentMethod'}
-                checked={formData.paymentMethod === 'Bank Transfer'}
+                // checked={formData.paymentMethod === 'Bank Transfer'}
               />
               Bank Transfer
             </label>
