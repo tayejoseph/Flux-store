@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { rem } from 'polished'
 
 export default styled.button`
   &:disabled {
@@ -24,6 +23,7 @@ export default styled.button`
           background: transparent;
           border-color: ${({ theme }) => theme.primary};
           color: ${({ theme }) => theme.primary};
+          outline: none;
         }
         &:disabled {
           background: ${({ theme }) => theme.disabled}!important;

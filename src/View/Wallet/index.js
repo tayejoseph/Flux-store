@@ -42,7 +42,7 @@ const Wallet = () => {
         middleContent={
           <div className="wallet--middle__content">
             {wallets.map((item) => (
-              <WalletItem {...item} />
+              <WalletItem key={item.walletType} {...item} />
             ))}
           </div>
         }

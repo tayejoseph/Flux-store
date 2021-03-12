@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import { rem, rgba } from 'polished'
+import { rem } from 'polished'
 
 export default Styled.div`
     flex: 1;

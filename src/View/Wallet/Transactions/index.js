@@ -1,23 +1,11 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
 import DashboardHeader from '../../../Layout/DashboardHeader'
 import { TiFilter } from 'react-icons/ti'
-import { IoIosArrowForward } from 'react-icons/io'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { Button, InputGroup, Table } from '../../../UI'
 import Container from './styles'
 
 const Transactions = () => {
-  const history = useHistory()
-  const [formData, setFormState] = useState({
-    amount: '',
-    paymentMethod: 'Debit Card',
-  })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
-
   return (
     <Container>
       <header>
@@ -51,7 +39,7 @@ const Transactions = () => {
                 </thead>
                 <tbody>
                   {[...Array(50).keys()].map((item, index) => (
-                    <tr>
+                    <tr key={index}>
                       <td>₦48,995.00</td>
                       <td>Jun 20, 2020</td>
                       <td>Transfer</td>

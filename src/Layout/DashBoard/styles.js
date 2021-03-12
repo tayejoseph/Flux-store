@@ -27,6 +27,7 @@ export default Styled.div`
         align-items: center;
         padding: 0 1em;
         width: 100vw;
+        z-index: 999;
         .icon {
             font-size: 30px;
         }

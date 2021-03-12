@@ -10,7 +10,7 @@ const TabNav = ({ tabItems }) => {
     <Container className="flux--tab__nav">
       <ol>
         {tabItems.map((item) => (
-          <li>
+          <li key={`tab-${item.toLowerCase()}`}>
             <Link
               to={`${path}?tab=${item.toLowerCase()}`}
               className={query === item.toLowerCase() ? 'active' : ''}

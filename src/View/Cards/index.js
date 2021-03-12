@@ -39,7 +39,7 @@ const Card = () => {
               </thead>
               <tbody>
                 {[...Array(6).keys()].map((item, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>Jackson Doe</td>
                     <td>FAC16</td>
                     <td className="action--cell">

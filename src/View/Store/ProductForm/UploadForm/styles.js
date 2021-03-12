@@ -1,5 +1,4 @@
-import Styled, { css } from 'styled-components'
-import { rem } from 'polished'
+import Styled from 'styled-components'
 
 export default Styled.div`
     padding: 0 1em;
