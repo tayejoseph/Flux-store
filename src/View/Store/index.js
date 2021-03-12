@@ -1,5 +1,6 @@
 import React from 'react'
 import { IoMdAdd, IoIosArrowDown } from 'react-icons/io'
+import { useHistory } from 'react-router-dom'
 import { Button } from '../../UI'
 import StoreItem from './StoreItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
@@ -18,6 +19,7 @@ const content = {
 }
 
 const Store = () => {
+  const history = useHistory()
   return (
     <Container>
       <DashboardHeader
@@ -25,7 +27,13 @@ const Store = () => {
         sectionAction={
           <div className="wallet--actions__container">
             <div className="flux--row">
-              <Button rounded iconRight>
+              <Button
+                rounded
+                iconRight
+                onClick={() =>
+                  history.push('/dashboard/store/add', { section: 'infoForm' })
+                }
+              >
                 <IoMdAdd />
                 Add Product
               </Button>
@@ -42,8 +50,12 @@ const Store = () => {
       />
       <div className="store--container">
         <div className="store--content">
-          {[...Array(10).keys()].map((item, index) => (
-            <StoreItem key={index} {...content} />
+          {[...Array(40).keys()].map((item, index) => (
+            <StoreItem
+              key={index}
+              {...content}
+              onClick={() => history.push(`/dashboard/store/${index}/details`)}
+            />
           ))}
         </div>
         <footer />

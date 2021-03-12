@@ -10,7 +10,7 @@ const DataTopUp = () => {
     <Container>
       <Modal
         showModal={true}
-        className="modal--size__md modal--close__relative"
+        className="modal--size__sm modal--close__relative"
         modalTitle={'Withdraw'}
       >
         <form onSubmit={handleSubmit}>

@@ -2,10 +2,21 @@ import Styled from 'styled-components'
 import { rem } from 'polished'
 
 export default Styled.div`
-    div.img--container {
-        
+    cursor: pointer;
+    div.img--container {      
+        height: ${rem('141px')}; 
+        margin-bottom: 0.5em;
+        box-shadow: 0px 0px 2px #00000029;
+        border-radius: 5px;
+        opacity: 1;
     }
-    div.text-content {
+    div.text--content {
+        p {
+            margin: 0px;
+            &:not(:last-child) {
+                margin-bottom: 0.3em;
+            }
+        }
         p.productName {
             font-weight: normal; 
             font-size: 14px;

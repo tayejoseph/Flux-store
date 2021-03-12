@@ -17,6 +17,7 @@ ol {
             text-decoration: none;
             font-weight: 630;
             opacity: 0.5;
+            user-select: none;
             text-transform: capitalize;
         }
         a.active {

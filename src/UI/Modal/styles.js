@@ -14,7 +14,7 @@ export default Styled.div`
     height: 100vh;
     width: 100vw;
     position: fixed;
-    animation: ${slideIn} 0.2s ease-in-out;
+    /* animation: ${slideIn} 0.2s ease-in-out; */
     top: 0px;
     left: 0px;
     z-index: 999;
@@ -63,8 +63,13 @@ export default Styled.div`
             top: 1.2em;
             right: 1.2em;
     }
-    div.modal--size__md {        
+    div.modal--size__sm {        
         width: ${rem('373px')};
         /* height: ${rem('485px')}; */
+    }
+
+    div.modal--size__md {        
+        width: ${rem('811px')};
+        height: ${rem('485px')};
     }
 `

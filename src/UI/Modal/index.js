@@ -7,6 +7,7 @@ import Container from './styles'
 const Modal = ({
   showModal,
   onClose,
+  showCloseBtn = true,
   modalTitle,
   backdropHide = true,
   escapeOnClose = true,
@@ -52,9 +53,12 @@ const Modal = ({
         {modalTitle && (
           <h2 className="modal--title u--typo__title">{modalTitle}</h2>
         )}
-        <button className="close-btn" onClick={handleClose}>
-          <IoClose />
-        </button>
+        {showCloseBtn && (
+          <button className="close-btn" onClick={handleClose}>
+            <IoClose />
+          </button>
+        )}
+
         {children}
       </div>
     </Container>

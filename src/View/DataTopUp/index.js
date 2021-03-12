@@ -10,7 +10,7 @@ const DataTopUp = () => {
     <Container>
       <Modal
         showModal={true}
-        className="modal--size__md modal--close__relative"
+        className="modal--size__sm modal--close__relative"
         modalTitle={'Data Topup'}
       >
         <form onSubmit={handleSubmit}>
@@ -39,7 +39,7 @@ const DataTopUp = () => {
             </InputGroup>
             <p className="who">Who is this for?</p>
             <InputGroup className="radio--btn__container">
-              <label>
+              <label className="u--color__dark">
                 <RadioButton
                   type="radio"
                   value="Myself"
@@ -50,7 +50,7 @@ const DataTopUp = () => {
               </label>
             </InputGroup>
             <InputGroup className="radio--btn__container">
-              <label>
+              <label className="u--color__dark">
                 <RadioButton
                   type="radio"
                   value="Someone else"

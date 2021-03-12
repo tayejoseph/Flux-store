@@ -13,14 +13,26 @@ export default Styled.div`
     }
     header {
         display: flex;
-        padding: 1em 0.8em;
+        padding: 0.2em 0.8em;
         align-items: center;
         div.img--container {            
             width: 32px;
             height: 32px;
-            background: red;
             border: 50%;
-            overflow: hidden;
+        }
+        hr {
+            width: 32px;
+            margin: 0px;
+            padding: 0px;
+            background: pink;
+            transform: rotate(90deg);
+        }
+        p {
+            padding-left: 0.5em;
+            font-weight: 100;
+            span {
+                font-weight: bold;
+            }
         }
     }
     
@@ -41,8 +53,9 @@ export default Styled.div`
                 transition: all 0.3s;
                 font-size: ${rem('14px')};
                 opacity: 0.5;
+                user-select: none;
                 .icon {
-                    font-size: 1.2em;
+                    font-size: 1.4em;
                     margin-right: 1em;
                 }
                 &.active {

@@ -22,7 +22,7 @@ export default styled.div.attrs({
     &:active,
     &:focus {
       outline: none;
-      border: 1px solid #855aaf;
+      border: 1.5px solid #855aaf;
     }
     &:invalid {
       color: #222222;
@@ -30,14 +30,20 @@ export default styled.div.attrs({
     }
   }
   input::placeholder {
-    color: #AEAEAE;
-    font-size: ${rem("14px")};
+    color: #aeaeae;
+    font-size: ${rem('14px')};
     letter-spacing: 0.14px;
   }
   label {
     display: flex;
     align-items: center;
-    /* margin-bottom: 0.5em; */
+    font-weight: normal;
+    font-size: 14.5px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #222222;
+    opacity: 0.5;
+    margin-bottom: 0.5em;
   }
   p.helper--text {
     letter-spacing: 0.13px;

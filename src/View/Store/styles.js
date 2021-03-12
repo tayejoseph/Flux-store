@@ -1,5 +1,6 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { minQuery, maxQuery } from '../../helpers'
 
 export default Styled.div`
     height: 100%;
@@ -23,11 +24,29 @@ export default Styled.div`
         padding-top: 1em;
         div.store--content {
             height: 71.8vh;
-            padding: 0px 1em;
+            padding: 0px 1.5em;
+            padding-top: 0.5em;
+            padding-left: 2em;
             overflow-y: auto;
             display: grid;
-            background: pink;
-            grid-template-columns: repeat(auto-fill, 250px);
+            align-content: flex-start;
+            justify-content: center;
+            grid-template-columns: repeat(5, 1fr);
+            /* grid-template-columns: calc(50% - 0.5em) calc(50% - 0.5em); */
+            /* column-gap: 1.5em; */
+             grid-gap: 1.5em;
+            /* ${minQuery('sm')} {
+            grid-template-columns: repeat(3, 1fr);
+           
+            }
+            ${minQuery('lg')} {
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 0.5em;
+            }
+            ${minQuery('1883px')} {
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 1em;
+            } */
         }
         footer {
             box-shadow: 0px 0px 3px #00000029;

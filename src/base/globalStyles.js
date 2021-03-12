@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { rem, normalize } from 'polished'
+import { rem, rgba, normalize } from 'polished'
 
 export default createGlobalStyle`
     ${normalize};
@@ -22,6 +22,12 @@ export default createGlobalStyle`
          width: 100%;
          height: 100%;
        }
+
+      hr {
+          border-top: none;
+          border-bottom: 1px solid ${rgba('#E1E1E1', 0.5)};
+          margin: 1em 0px;
+      }
     
       /* reset */
       h1, h2, h3, h4 {
@@ -48,16 +54,26 @@ export default createGlobalStyle`
         line-height: ${rem('16px')};
         font-weight: medium;
       }
+      .u--typo__normal {
+        font-weight: normal;
+        font-size: ${rem('14px')};
+        line-height: ${rem('20px')};
+        letter-spacing: 0px;
+      }
       .u--typo__caption {
         font-size: ${rem('13px')};
         line-height: ${rem('16px')};
       }
 
       /* color */
-      .u-dark {        
-        font-weight: normal;
+      .u--color__dark {        
         color: #222222;
         opacity: 1;
+      }
+      .u--color__light {
+        opacity: 0.7;
+        color: #222222;
+
       }
 }
 `

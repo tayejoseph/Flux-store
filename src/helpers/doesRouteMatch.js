@@ -3,11 +3,9 @@ const doesRouteMatch = (pathname, route) => {
   //   return pathname.includes(route)
   // } else
   if (typeof pathname === 'object') {
-    return !pathname.some((r) =>
-      route.split('/').includes(r.replace(/\//g, '')),
-    )
+    return pathname.some((r) => route.split('/').includes(r.replace(/\//g, '')))
   } else {
-    return !route.split('/').includes(pathname.replace(/\//g, ''))
+    return route.split('/').includes(pathname.replace(/\//g, ''))
   }
 }
 
