@@ -1,14 +1,18 @@
 import Styled from 'styled-components'
+import { rem } from 'polished'
 
 export default Styled.div`
     div.modal--container {
+        p {
+            font-size: ${rem('14px')};
+            letter-spacing: 0px;
+            color: #222222;
+            opacity: 0.7;
+        }
         form {
-            padding-top: 0.5em;      
             div.form--inputs {
-                padding: 1.5em;
-            }
-            div.radio--btn__container {
-                font-weight: bold;
+                padding: 1em 1.5em;  
+                padding-top: 2em;          
             }
             footer {
                 padding: 0px;

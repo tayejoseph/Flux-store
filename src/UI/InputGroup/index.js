@@ -33,6 +33,7 @@ export default styled.div.attrs({
     color: #aeaeae;
     font-size: ${rem('14px')};
     letter-spacing: 0.14px;
+    font-weight: 200;
   }
   label {
     display: flex;
@@ -49,6 +50,6 @@ export default styled.div.attrs({
     letter-spacing: 0.13px;
     color: #aeaeae;
     margin-top: 0.6em;
-    font-size: ${rem('13px')};
+    font-weight: 100;
   }
 `

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+import { IoIosArrowForward } from 'react-icons/io'
 import WalletItem from './WalletItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import { Button, Table } from '../../UI'
@@ -47,10 +48,22 @@ const Wallet = () => {
         }
         sectionAction={
           <div className="wallet--action">
-            <Button rounded onClick={() => history.push(`${location.pathname}/addCash`)}>
+            <Button
+              rounded
+              onClick={() => history.push(`${location.pathname}/addCash`)}
+            >
               Add Cash
             </Button>
-            <Button rounded  onClick={() => history.push(`${location.pathname}/withdraw`, {background: location})}>Withdraw</Button>
+            <Button
+              rounded
+              onClick={() =>
+                history.push(`${location.pathname}/withdraw`, {
+                  background: location,
+                })
+              }
+            >
+              Withdraw
+            </Button>
           </div>
         }
       />
@@ -62,26 +75,40 @@ const Wallet = () => {
               <>
                 <thead>
                   <tr>
-                    <th colSpan="5" className="caption u--typo__title">
-                      Recent Transactions
+                    <th colSpan="5" className="caption">
+                      <header>
+                        <h2 className="u--typo__title">Recent Transactions</h2>
+                        <Button
+                          iconRight
+                          rounded
+                          onClick={() =>
+                            history.push('/dashboard/wallet/transactions')
+                          }
+                        >
+                          View All Transactions
+                          <IoIosArrowForward />
+                        </Button>
+                      </header>
                     </th>
                   </tr>
                   <tr>
-                    <th>Recipient</th>
                     <th>Amount</th>
+                    <th>Recipient</th>
                     <th>Date</th>
                     <th>Transaction Type</th>
-                    <th>Status</th>
+                    <th className="u--typo__center">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[...Array(10).keys()].map((item, index) => (
                     <tr>
-                      <td>FAC16</td>
                       <td>₦48,995.00</td>
-                      <td>Jun 20, 2020</td>
+                      <td>Julia Bradley</td>
+                      <td>Jun 20, 2020 4:55 AM</td>
                       <td>Transfer</td>
-                      <td>{index % 2 === 0 ? 'Success' : 'Pending'}</td>
+                      <td className="u--typo__center">
+                        {index % 2 === 0 ? 'Success' : 'Pending'}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

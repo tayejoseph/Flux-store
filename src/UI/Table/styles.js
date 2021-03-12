@@ -19,10 +19,14 @@ export default Styled.div`
             }
         }
         tbody {
-            overflow-y: auto;
             box-shadow: 0px 0px 2px #00000029;
-            height: 10vh;
-            overflow: hidden;
+            display: block;
+            overflow: auto;
+        }
+        thead tr, tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed; //even columns width , fix width of table too
         }
         th, td {
             text-align: left;
@@ -31,7 +35,6 @@ export default Styled.div`
             font-size: ${rem('14px')};
             line-height: ${rem('20px')};
             padding: 0.8em 0px;
-            min-width: 5rem;
         }
         td {
             border-bottom: 1px solid ${rgba('#E1E1E1', 0.5)};

@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { MdKeyboardArrowRight } from 'react-icons/md'
-import { IoMdSettings, IoMdArrowRoundBack } from 'react-icons/io'
-import { IoArrowBackOutline, IoArrowBack } from 'react-icons/io5'
-import { FaBell } from 'react-icons/fa'
+import DashboardHeader from '../../../Layout/DashboardHeader'
 import { Button, InputGroup, RadioButton } from '../../../UI'
 import Container from './styles'
 
 const AddCash = () => {
-  const history = useHistory()
   const [formData, setFormState] = useState({
     amount: '',
     paymentMethod: 'Debit Card',
@@ -21,28 +16,10 @@ const AddCash = () => {
   return (
     <Container>
       <header>
-        <nav>
-          <Button
-            className="back--btn"
-            icon
-            iconRight
-            onClick={() => history.goBack()}
-          >
-            <IoMdArrowRoundBack />
-            Go Back
-          </Button>
-          <div className="btn--tray">
-            <Button icon>
-              <IoMdSettings />
-            </Button>
-            <Button icon>
-              <FaBell />
-            </Button>
-          </div>
-        </nav>
-        <div>
+        <DashboardHeader navType="small" />
+        <div className="cash--header__container">
           <h1 className="u--typo__headline">Add Cash</h1>
-          <p>
+          <p className="u--typo__normal u--color__lighter">
             Flux Wallet > <span className="u--color__dark">Add Cash</span>
           </p>
         </div>
@@ -64,7 +41,7 @@ const AddCash = () => {
         <div className="payment--method__container">
           <p>Select Payment method</p>
           <InputGroup className="radio--btn__container">
-            <label>
+            <label className="u--color__dark ">
               <RadioButton
                 type="radio"
                 value="Debit Card"
@@ -75,7 +52,7 @@ const AddCash = () => {
             </label>
           </InputGroup>
           <InputGroup className="radio--btn__container">
-            <label>
+            <label className="u--color__dark ">
               <RadioButton
                 type="radio"
                 value="Bank Transfer"

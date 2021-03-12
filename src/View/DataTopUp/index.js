@@ -22,7 +22,7 @@ const DataTopUp = () => {
                 <option value="mercedes">Mercedes</option>
                 <option value="audi">Audi</option>
               </select>
-              <p className="helper--text">
+              <p className="u--typo__smBody helper--text">
                 Check your balance by dialling *127*0#
               </p>
             </InputGroup>
@@ -33,11 +33,11 @@ const DataTopUp = () => {
                 <option value="mercedes">Mercedes</option>
                 <option value="audi">Audi</option>
               </select>
-              <p className="helper--text">
+              <p className="u--typo__smBody helper--text">
                 All data plans last 30days unless otherwise indicated.
               </p>
             </InputGroup>
-            <p className="who">Who is this for?</p>
+            <p className="u--typo__normal">Who is this for?</p>
             <InputGroup className="radio--btn__container">
               <label className="u--color__dark">
                 <RadioButton

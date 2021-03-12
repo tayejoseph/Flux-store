@@ -10,6 +10,9 @@ export default Styled.div`
             th.action--cell, td.action--cell {
                 text-align: center;
             }
+            tbody {
+                height: 40vh;
+            }
             button.btn--edit {
                 margin: 0 1em;               
             }

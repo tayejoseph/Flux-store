@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Route, useRouteMatch, Switch } from 'react-router'
+import { IoMdMenu } from 'react-icons/io'
+import { Button } from '../../UI'
 import SideNav from '../SideNav'
 import {
   Wallet,
@@ -12,18 +14,46 @@ import {
   NewUser,
   ProductDetails,
   ProductForm,
+  Transactions,
 } from '../../View'
 import Container from './styles'
 
 const DashBoard = () => {
+  const [showMenu, setDisplay] = useState(false)
   const { path } = useRouteMatch()
+
+  const handleHideDrawer = (e) => {
+    e.stopPropagation()
+    setDisplay(false)
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDisplay(false)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <Container>
-      <SideNav />
+      <header className={'nav--mobile'}>
+        <Button icon onClick={() => setDisplay(!showMenu)}>
+          <IoMdMenu />
+        </Button>
+      </header>
+      <aside
+        className={`side--nav ${showMenu ? 'open--menu__mobile' : ''}`}
+        onClick={handleHideDrawer}
+      >
+        <SideNav />
+      </aside>
       <main className="dashboard--main">
         <Route path={`${path}/wallet`} exact={true} component={Wallet} />
         <Route path={`${path}/wallet/addCash`} component={AddCash} />
+        <Route path={`${path}/wallet/transactions`} component={Transactions} />
         <Route path={`${path}/cards`} component={Cards} />
         <Route path={`${path}/gifts`} component={Gifts} />
         <Route path={`${path}/store`} component={Store} />

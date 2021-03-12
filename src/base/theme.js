@@ -8,6 +8,7 @@ export const BREAKPOINTS = {
 
 export const DIMENSIONS = {
   dashboardSideWidth: rem('245px'),
+  mobileTopNavHeight: '56px',
 }
 
 export const theme = {

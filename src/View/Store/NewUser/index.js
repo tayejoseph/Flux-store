@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { FaStore, FaBell, FaMoneyBillWave } from 'react-icons/fa'
@@ -51,6 +51,19 @@ const NewUser = () => {
   const handleCarouselChange = (action) => {
     setState(action === 'prev' ? activeIndex - 1 : activeIndex + 1)
   }
+
+  useEffect(() => {
+    const handleKeyNav = (e) => {
+      if (e.code === 'ArrowRight') document.getElementById('next--btn').click()
+      else if (e.code === 'ArrowLeft')
+        document.getElementById('prev--btn').click()
+    }
+    document.addEventListener('keyup', handleKeyNav)
+    return () => {
+      document.removeEventListener('keyup', handleKeyNav)
+    }
+  }, [])
+
   return (
     <Container>
       <Modal
@@ -65,6 +78,7 @@ const NewUser = () => {
               <Button
                 icon
                 disabled={activeIndex === 0}
+                id="prev--btn"
                 onClick={() => handleCarouselChange('prev')}
               >
                 <MdKeyboardArrowLeft />
@@ -78,6 +92,7 @@ const NewUser = () => {
                 icon
                 disabled={activeIndex === carouselContent.length - 1}
                 onClick={() => handleCarouselChange('next')}
+                id="next--btn"
               >
                 <MdKeyboardArrowRight />
               </Button>

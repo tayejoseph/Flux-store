@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { rem, rgba, normalize } from 'polished'
+import { maxQuery } from '../helpers'
 
 export default createGlobalStyle`
     ${normalize};
@@ -10,7 +11,9 @@ export default createGlobalStyle`
       padding: 0px;
       margin: 0px;
       font-weight: normal;
-      /* font-size: ${rem('14px')}; */
+      ${maxQuery('lg')} {
+        font-size: 80%;
+      }
     }
     body {
         font-family: ${({ theme }) => theme.fontFamily};
@@ -45,6 +48,11 @@ export default createGlobalStyle`
         line-height: ${rem('20px')};
         font-weight: bold;
       }
+      .u--typo__smBody {
+        font-size: ${rem('13px')};
+        line-height: ${rem('15px')};
+        letter-spacing: 0.13px;
+      }
       .u--typo__lgBody {
         font-size: ${rem('16px')};
         line-height: ${rem('20px')};
@@ -64,7 +72,9 @@ export default createGlobalStyle`
         font-size: ${rem('13px')};
         line-height: ${rem('16px')};
       }
-
+      .u--typo__center {
+        text-align: center!important;
+      }
       /* color */
       .u--color__dark {        
         color: #222222;
@@ -73,7 +83,10 @@ export default createGlobalStyle`
       .u--color__light {
         opacity: 0.7;
         color: #222222;
-
+      }
+      .u--color__lighter {
+        opacity: 0.5;
+        color: #222222;
       }
 }
 `

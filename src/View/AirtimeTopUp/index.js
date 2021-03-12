@@ -18,7 +18,7 @@ const AirTimeTopUp = () => {
             <InputGroup>
               <input placeholder={'Amount of Airtime'} />
             </InputGroup>
-            <p className="who">Who is this for?</p>
+            <p className="u--typo__normal u--color__light">Who is this for?</p>
             <InputGroup className="radio--btn__container">
               <label className="u--color__dark">
                 <RadioButton

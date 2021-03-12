@@ -10,9 +10,6 @@ export default styled.button`
   ${(props) => css`
     padding: 0.9em 1.8em;
     user-select: none;
-    font-weight: medium;
-    font-size: ${rem('14px')};
-    line-height: ${rem('16px')};
     width: ${props.full ? '100%' : 'fit-content'};
     display: ${props.full ? 'block' : 'inline-block'};
     border-radius: ${props.rounded ? '100px' : '5px'};

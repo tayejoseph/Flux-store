@@ -9,7 +9,7 @@ import Container from './styles'
 const content = {
   productName: 'PS4 Pro 1TB + FIFA 20 and 2 Controllers',
   price: '₦175,499.99',
-  publishStatus: 'published',
+  publishStatus: 'Published',
   imgSrc: '',
   productDetail:
     'The PlayStation 4 (PS4) is an eighth-generation home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013.',

@@ -1,11 +1,11 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { DIMENSIONS } from '../../base/theme'
 
 export default Styled.div`
-    height: 100vh;
-    box-shadow: 0px 0px 5px #00000029;
-    background-color: #FFFFFF;
-    
+    background: #fff;
+    height: 100%;
+    width: ${DIMENSIONS.dashboardSideWidth};
     hr {
         margin: 0px;
         border: none;
@@ -13,7 +13,7 @@ export default Styled.div`
     }
     header {
         display: flex;
-        padding: 0.2em 0.8em;
+        padding: 0.3em 0.8em;
         align-items: center;
         div.img--container {            
             width: 32px;

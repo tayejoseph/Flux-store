@@ -21,10 +21,11 @@ const Button = ({
   hasShadow,
   onClick,
   children,
+  ...rest
 }) => {
   return (
     <Container
-      className={`btn typo__btn ${className ? className : ''}`}
+      className={`btn u--typo__btn ${className ? className : ''}`}
       icon={icon ? icon : undefined}
       iconRight={iconRight ? iconRight : undefined}
       iconLeft={iconLeft ? iconLeft : undefined}
@@ -41,6 +42,7 @@ const Button = ({
       // loading={loading ? JSON.stringify(loading) : undefined}
       // type={type}
       style={style}
+      {...rest}
     >
       {loading ? <Spinner /> : children}
     </Container>

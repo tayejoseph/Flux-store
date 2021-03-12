@@ -20,58 +20,27 @@ export default Styled.div`
     div.transaction--container {
         max-width: ${rem('1002px')};
         flex: 1;
-        header, footer {
-            background: #fff;
-        }
         header {
-            padding: 1.5em;
-            height: ${rem('93px')};
-            box-shadow: 0px 0px 3px #00000029;
-        
-            border-radius: 10px 10px 0px 0px;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding-right: 2em;
+           button {
+               background: #855AAF1A;
+               color: #855AAF;
+               border: none;
+               font-weight: bold;
+               font-size: 14px;
+               padding: 0.5em 1.2em;
+           }
         }
-        div.table--container {
-            /* table {
-                width: 100%;
-                background: #fff;
-                thead {
-                   background: #FFFFFF 0% 0% no-repeat padding-box;
-                    box-shadow: 0px 0px 3px #00000029;
-                    border-radius: 10px 10px 0px 0px;
-                    opacity: 1; 
-                    th.caption {
-                        padding-top: 1.5em;
-                        font-weight: bold;
-                        font-size: ${rem('16px')};
-                    }
-                    th:not(.caption) {                    
-                        color: #222222;
-                        opacity: 0.5;
-                        font-weight: normal;
-                    }
-                }
-                tbody {
-                    overflow-y: auto;
-                    box-shadow: 0px 0px 2px #00000029;
-                    height: 10vh;
-                    overflow: hidden;
-                }
-                th, td {
-                    text-align: left;
-                    color: #222222;
-                    font-weight: 450;
-                    font-size: ${rem('14px')};
-                    padding: 0.8em 0px;
-                }
-                td {
-                    border-bottom: 1px solid ${rgba('#E1E1E1', 0.5)};
-                }
-                th:first-child, td:first-child {
-                    width: 25%;
-                    padding-left: 1.5em;
-                }
-            } */
+        thead, tr {
+           padding-left: 0.5em;
         }
+        tbody {
+            height: 45vh;
+        }
+
         footer.flux--table__footer {
             display: flex;
             align-items: center;

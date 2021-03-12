@@ -10,11 +10,11 @@ import { NavLink, Link, useLocation } from 'react-router-dom'
 import { doesRouteMatch } from '../../helpers'
 import Container from './styles'
 
-const SideNav = () => {
+const SideNav = ({ className }) => {
   const location = useLocation()
 
   return (
-    <Container className="dashboard--sideNav">
+    <Container className={`dashboard--sideNav ${className}`}>
       <header>
         <Link to="/">
           <div className="img--container">

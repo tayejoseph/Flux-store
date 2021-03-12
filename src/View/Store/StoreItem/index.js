@@ -12,7 +12,7 @@ const StoreItem = ({ productName, price, publishStatus, onClick }) => {
       <div className="text--content">
         <p className="productName">{productName}</p>
         <p className="price">{price}</p>
-        <p className="publish--status">{publishStatus}</p>
+        <p className="u--typo__normal publish--status">{publishStatus}</p>
       </div>
     </Container>
   )

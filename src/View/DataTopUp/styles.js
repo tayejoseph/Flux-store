@@ -9,9 +9,6 @@ export default Styled.div`
                 max-height: 21.8rem;
                 overflow-y: auto;
             }
-             p.who {
-                opacity: 0.7;
-            }
             div.radio--btn__container {
                 font-weight: bold;
             }

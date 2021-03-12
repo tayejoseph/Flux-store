@@ -6,35 +6,25 @@ export default Styled.div`
     border-radius: 10px;
     box-shadow: 0px 0px 2px #00000029;
     height: 100%;
+    
+    header {
+        display: flex;
+        flex-direction: column;
+        padding: 0px 2em;
+        padding-top: 1em;
+        div.cash--header__container {
+            margin-top: 2em;
+            p {
+                padding: 0px;
+                margin-top: 0.7em;
+                margin-bottom: 0px;
+            }
+        }
+    }
     p, label {
         color: #222222;
         font-size: ${rem('14px')};
         opacity: 0.5;
-    }
-    label {
-        color: #222222;
-        opacity: 0.7;
-    }
-    header {
-        padding: 2em;
-        padding-bottom: 0px;
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5em;
-            button.back--btn {
-               .icon {
-                   font-weight: bold;
-                   margin-right: 0.8em;
-               } 
-            }
-            div.btn--tray {
-                button:not(:last-child) {
-                    margin-right: 1.2em;
-                }
-            }
-        }
     }
     hr {
         border-top: none;

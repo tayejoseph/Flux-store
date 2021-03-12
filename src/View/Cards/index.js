@@ -28,7 +28,7 @@ const Card = () => {
               <thead>
                 <tr>
                   <th colSpan="5" className="caption">
-                    Saved Addresses
+                    <h2 className="u--typo__title"> Saved Addresses</h2>
                   </th>
                 </tr>
                 <tr>

@@ -2,38 +2,36 @@ import React from 'react'
 import { Button, Modal, InputGroup } from '../../../UI'
 import Container from './styles'
 
-const WithDraw = () => {
+const ModalSendMoney = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+
   return (
     <Container>
       <Modal
         showModal={true}
         className="modal--size__sm modal--close__relative"
-        modalTitle={'Withdraw'}
+        modalTitle={'Send Money'}
       >
         <form onSubmit={handleSubmit}>
           <div className="form--inputs">
-            <p className="intro--txt">
-              Enter the amount and account you wish to withdraw
-            </p>
             <InputGroup>
-              <input placeholder={'₦0.00'} />
+              <input placeholder={'Amount to send'} type="number" />
             </InputGroup>
             <InputGroup>
-              <input placeholder={'Bank'} />
+              <input placeholder={'Flux ID or Flux tag (e.g @snapdragon)'} />
             </InputGroup>
             <InputGroup>
-              <input placeholder={'Account Number'} />
+              <input placeholder={'Receiver’s name'} />
             </InputGroup>
-            <div className="account--name">
-              <p>Balogun Darius Olanrewaju</p>
-            </div>
+            <InputGroup>
+              <input placeholder={'Description'} />
+            </InputGroup>
           </div>
           <footer>
             <Button full type="submit" rounded>
-              Withdraw
+              Send
             </Button>
           </footer>
         </form>
@@ -42,4 +40,4 @@ const WithDraw = () => {
   )
 }
 
-export default WithDraw
+export default ModalSendMoney
