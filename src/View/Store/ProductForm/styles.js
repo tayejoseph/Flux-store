@@ -6,6 +6,11 @@ export default Styled.div`
     div.modal--container {                
         width: ${rem('602px')};
         height: ${rem('485px')};
+        ${maxQuery('md')} {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0px;
+        }
     }
     div.productForm--container {
         header {
@@ -19,14 +24,16 @@ export default Styled.div`
         }
         main { 
             display: flex;
-            ${maxQuery('sm')} {
+            ${maxQuery('md')} {
                 flex-direction: column;
             }
             aside {
                 width: ${rem('198px')};                
                 box-shadow: 1.5px 0px 2px -1px #00000029;
-                 ${maxQuery('sm')} {
+                 ${maxQuery('>md')} {
                     width: 100%;
+                                box-shadow: 0px 0px 3px #00000029;
+
                 }
             }
             form {
@@ -34,8 +41,16 @@ export default Styled.div`
                 overflow-y: auto;
                 width: calc(100% - ${rem('198px')});
                 padding: 1.5em 2em;
-                ${maxQuery('sm')} {
+                ${maxQuery('md')} {
                     width: 100%;
+                    height: 75vh;
+                    overflow-y: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    div.input--group {
+                        margin-bottom: 2.5em;
+                    }
                 }
                 div.hide--section {
                     visibility: hidden;

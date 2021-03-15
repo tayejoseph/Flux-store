@@ -1,7 +1,9 @@
 import Styled from 'styled-components'
+import { maxQuery } from '../../../../helpers'
 
 export default Styled.div`
     padding: 0 1em;
+    height: 60vh;
     p {
         font-weight: normal; 
         font-size: 14px;
@@ -18,7 +20,10 @@ export default Styled.div`
         align-items: center;
         border: 2px dashed ${({ theme }) => theme.primary};
         border-radius: 10px;
-        input {
+        ${maxQuery('md')} {
+            margin: 4em 0px;
+        }
+         input {
             visibility: hidden;
         }
         .icon {

@@ -1,5 +1,6 @@
 import Styled from 'styled-components'
 import { rem, rgba } from 'polished'
+import ScrollBar from '../../base/scrollBar'
 
 export default Styled.div`
     table.flux--table {
@@ -7,7 +8,7 @@ export default Styled.div`
         background: #fff;
         thead {
             background: #FFFFFF 0% 0% no-repeat padding-box;
-            box-shadow: 0px 0px 3px #00000029;
+            box-shadow: 0px 0px 2px #00000029;
             border-radius: 10px 10px 0px 0px;
             opacity: 1; 
             th.caption {
@@ -19,7 +20,7 @@ export default Styled.div`
             }
         }
         tbody {
-            box-shadow: 0px 0px 2px #00000029;
+            /* box-shadow: 0px 0px 2px #00000029; */
             display: block;
             overflow: auto;
         }
@@ -27,6 +28,9 @@ export default Styled.div`
             display: table;
             width: 100%;
             table-layout: fixed; //even columns width , fix width of table too
+        }
+        tbody {
+            ${ScrollBar}
         }
         th, td {
             text-align: left;
@@ -39,7 +43,7 @@ export default Styled.div`
         td {
             border-bottom: 1px solid ${rgba('#E1E1E1', 0.5)};
         }
-        th:first-child, td:first-child {
+        th:first-child:not(.table--tab__container), td:first-child {
             padding-left: 1.5em;
         }
     }

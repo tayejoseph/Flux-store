@@ -1,5 +1,6 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { maxQuery } from '../../helpers'
 
 export default Styled.div`
     flex: 1;
@@ -34,6 +35,9 @@ export default Styled.div`
                font-weight: bold;
                font-size: 14px;
                padding: 0.5em 1.2em;
+               ${maxQuery('sm')} {
+                   display: none;
+               }
            }
         }
         thead, tr {
@@ -41,6 +45,9 @@ export default Styled.div`
         }
         tbody {
             height: 45vh;
+            ${maxQuery('md')} {
+                height: 34vh;
+            }
         }
 
         footer.flux--table__footer {

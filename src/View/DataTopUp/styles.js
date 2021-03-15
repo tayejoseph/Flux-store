@@ -1,4 +1,5 @@
 import Styled from 'styled-components'
+import scrollBar from '../../base/scrollBar'
 
 export default Styled.div`
     div.modal--container {
@@ -7,6 +8,7 @@ export default Styled.div`
             div.form--inputs {
                 padding: 1.5em;
                 max-height: 21.8rem;
+                ${scrollBar};
                 overflow-y: auto;
             }
             div.radio--btn__container {

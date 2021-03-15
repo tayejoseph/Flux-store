@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import { IconContext } from 'react-icons'
 import { ThemeProvider } from 'styled-components'
 import DashBoard from './Layout/DashBoard'
@@ -9,13 +9,24 @@ import GlobalStyle from './base/globalStyles'
 
 const App = () => {
   const location = useLocation()
-  const background = location.state && location.state.background
+  const background = location.state && {
+    ...location.state.background,
+    state: {
+      background: location?.state.background
+        ? location.pathname.split('/')[location.pathname.split('/').length - 1]
+        : false,
+    },
+  }
 
+  console.log(location, 'jdskdkjsdkj')
   return (
     <ThemeProvider theme={theme()}>
       <GlobalStyle />
       <IconContext.Provider value={{ className: 'icon' }}>
         <Switch location={background || location}>
+          <Route path="/" exact>
+            <Redirect to="/dashboard/wallet" />
+          </Route>
           <Route path="/dashboard" component={DashBoard} />
         </Switch>
 

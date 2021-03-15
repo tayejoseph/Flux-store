@@ -81,6 +81,7 @@ const Wallet = () => {
                         <Button
                           iconRight
                           rounded
+                          className="all--transactions"
                           onClick={() =>
                             history.push('/dashboard/wallet/transactions')
                           }

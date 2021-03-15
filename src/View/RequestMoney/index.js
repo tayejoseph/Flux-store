@@ -34,7 +34,7 @@ const RequestMoney = () => {
             <>
               <thead>
                 <tr>
-                  <th colSpan="5" className="caption">
+                  <th colSpan="5" className="caption table--tab__container">
                     <TabNav tabItems={['Sent', 'Received']} />
                   </th>
                 </tr>

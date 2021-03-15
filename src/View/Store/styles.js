@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
 import { minQuery, maxQuery } from '../../helpers'
+import scrollBar from '../../base/scrollBar'
 
 export default Styled.div`
     height: 100%;
@@ -24,6 +25,10 @@ export default Styled.div`
         padding-top: 1em;
         div.store--content {
             height: 71.8vh;
+            ${scrollBar}
+            ${maxQuery('lg')} {
+                height: 64vh;
+            }
             padding: 0px 1.5em;
             padding-top: 0.5em;
             padding-left: 2em;

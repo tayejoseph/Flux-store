@@ -6,12 +6,14 @@ import { FiArrowUpRight } from 'react-icons/fi'
 import { ImCreditCard } from 'react-icons/im'
 import fluxLogo from '../../assets/Flux Logo@2x.png'
 import UserAvatar from '../../assets/autumn-goodman-vTL_qy03D1I-unsplash (1)@2x.png'
-import { NavLink, Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { doesRouteMatch } from '../../helpers'
 import Container from './styles'
 
 const SideNav = ({ className }) => {
   const location = useLocation()
+
+  const backgroundPathname = location.state?.background
 
   return (
     <Container className={`dashboard--sideNav ${className}`}>
@@ -35,71 +37,93 @@ const SideNav = ({ className }) => {
       <nav>
         <ol>
           <li>
-            <NavLink
+            <Link
               to="/dashboard/wallet"
               className={
-                doesRouteMatch('wallet', location.pathname) ? 'active' : ''
+                doesRouteMatch('wallet', location.pathname) &&
+                !backgroundPathname
+                  ? 'active'
+                  : ''
               }
             >
               <IoMdWallet />
               Wallet
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               to="/dashboard/cards"
               className={
-                doesRouteMatch('cards', location.pathname) ? 'active' : ''
+                doesRouteMatch('cards', location.pathname) &&
+                !backgroundPathname
+                  ? 'active'
+                  : ''
               }
             >
               <ImCreditCard />
               Cards
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               to="/dashboard/gifts?tab=created"
               className={
-                doesRouteMatch('gifts', location.pathname) ? 'active' : ''
+                doesRouteMatch('gifts', location.pathname) &&
+                !backgroundPathname
+                  ? 'active'
+                  : ''
               }
             >
               <FaGift />
               Gifts
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               className={
-                doesRouteMatch('store', location.pathname) ? 'active' : ''
-              }
-              to={{
-                pathname: '/dashboard/store/newUser',
-              }}
-            >
-              <IoMdBasket />
-              Flux Store
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/requestMoney?tab=sent">
-              <RiArrowLeftUpLine />
-              Request Money
-            </NavLink>
-          </li>
-          <hr />
-          <li>
-            <NavLink to="/dashboard/sendMoney?tab=sent">
-              <FiArrowUpRight />
-              Send Money
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={
-                doesRouteMatch('airtimeTopUp', location.pathname)
+                doesRouteMatch('store', location.pathname) &&
+                !backgroundPathname
                   ? 'active'
                   : ''
               }
+              to="/dashboard/store/newUser"
+            >
+              <IoMdBasket />
+              Flux Store
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/dashboard/requestMoney?tab=sent"
+              className={
+                doesRouteMatch('requestMoney', location.pathname) &&
+                !backgroundPathname
+                  ? 'active'
+                  : ''
+              }
+            >
+              <RiArrowLeftUpLine />
+              Request Money
+            </Link>
+          </li>
+          <hr />
+          <li>
+            <Link
+              to="/dashboard/sendMoney?tab=sent"
+              className={
+                doesRouteMatch('sendMoney', location.pathname) &&
+                !backgroundPathname
+                  ? 'active'
+                  : ''
+              }
+            >
+              <FiArrowUpRight />
+              Send Money
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={backgroundPathname === 'airtimeTopUp' ? 'active' : ''}
               to={{
                 pathname: '/dashboard/airtimeTopUp',
                 state: { background: location },
@@ -107,10 +131,10 @@ const SideNav = ({ className }) => {
             >
               <IoMdCall />
               Airtime Topup
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               className={
                 doesRouteMatch('dataTopUp', location.pathname) ? 'active' : ''
               }
@@ -121,7 +145,7 @@ const SideNav = ({ className }) => {
             >
               <RiArrowUpDownFill />
               Data Topup
-            </NavLink>
+            </Link>
           </li>
         </ol>
       </nav>

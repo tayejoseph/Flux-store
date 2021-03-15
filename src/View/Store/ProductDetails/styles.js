@@ -92,11 +92,18 @@ export default Styled.div`
             justify-content: space-between;
             align-items: center;
             margin-top: 1.5em;
-            div.img--container__row {
+           div.img--container__row {
                 display: flex;
                 width: ${rem('317px')};
                 justify-content: center;
-                div.md--img {         
+                ${maxQuery('md')} {
+                    position: absolute;
+                    top: 15vw;
+                    left: 50vw;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                div.sm--img {         
                     position: relative;           
                     width: ${rem('48px')};
                     height: ${rem('48px')};
@@ -104,6 +111,9 @@ export default Styled.div`
                     border-radius: 10px;
                     &:nth-child(2) {
                         margin: 0 1em;
+                         ${maxQuery('md')} {
+                             margin: 2em 0px;
+                        }
                     }
                     &.active {
                         &:after {
@@ -124,6 +134,11 @@ export default Styled.div`
             div.action--tray {
                 display: flex;
                 align-items: center;
+                ${maxQuery('md')} {
+                    justify-content: flex-end;
+                    margin-top: 2em;
+                    width: 100%;
+                }
                 button {                    
                     width: ${rem('35px')};
                     height: ${rem('36px')};    

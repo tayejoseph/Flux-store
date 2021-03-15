@@ -7,5 +7,8 @@ export default Styled.div`
         td.action--cell, th.action--cell {
             text-align: center;
         }
+        tbody {
+            height: 50vh;
+        }
     }
 `
