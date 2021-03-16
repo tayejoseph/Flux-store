@@ -4,13 +4,33 @@ import { rem } from 'polished'
 export default Styled.div`
     cursor: pointer;
     padding-bottom: 1.5em;
+    position: relative;
     /* margin-bottom: 1em; */
+    button.shop--item__btn {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+        background: #FFFFFF;
+        display: flex;
+        align-items: center;
+        background: blue;
+        justify-content: center;
+        backdrop-filter: blur(7px);
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        .icon {
+            color: #fff;
+            font-size: 1.5em;
+        }
+    }
     div.img--container {      
         height: ${rem('141px')}; 
         margin-bottom: 0.5em;
         box-shadow: 0px 0px 2px #00000029;
         border-radius: 5px;
         opacity: 1;
+        /* background: blue; */
     }
     div.text--content {
         p {
@@ -43,6 +63,30 @@ export default Styled.div`
             background-color: ${(props) =>
               props.published ? '#E2FFEC' : '#FFE9E9'};
             padding: 0.5em;
+        }
+    }
+
+    div.storeItem--action__container {
+        position: absolute;
+        z-index: 1;
+        top: 2.5em;
+        right: 0px;
+        ol {
+            padding: 0px;
+            background: #fff;
+            font-weight: 180;
+            list-style: none;   
+            box-shadow: 0px 1px 6px #00000029;
+            border-radius: 10px;         
+            width: ${rem('186px')};
+            /* height: ${rem('161px')}; */
+            li {
+                padding: 0.8em 0px;
+                padding-left: 1em;
+                &:not(:last-child) {
+                    border-bottom: 1px solid #E1E1E1;
+                }
+            }
         }
     }
 

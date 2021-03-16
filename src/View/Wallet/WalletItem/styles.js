@@ -9,8 +9,6 @@ export default Styled.div`
     flex-direction: column;
     padding: 1.2em 1.6em;
     justify-content: space-between;
-    background-image: url(${(props) => props.bgImg});
-    background-position: center center;
     height: ${rem('140px')};
     box-shadow: 0px 5px 12px #00000029;
     border-radius: 5px;
