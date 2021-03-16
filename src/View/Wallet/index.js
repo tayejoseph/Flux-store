@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { IoIosArrowForward } from 'react-icons/io'
 import WalletItem from './WalletItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
@@ -115,17 +115,17 @@ const Wallet = () => {
                 </tbody>
               </>
             }
-            tableFooter={
-              <div className="table--nav">
-                <Button icon>
-                  <MdKeyboardArrowLeft />
-                </Button>
-                <div className="nav--text__container">1/3</div>
-                <Button icon>
-                  <MdKeyboardArrowRight />
-                </Button>
-              </div>
-            }
+            // tableFooter={
+            //   <div className="table--nav">
+            //     <Button icon>
+            //       <MdKeyboardArrowLeft />
+            //     </Button>
+            //     <div className="nav--text__container">1/3</div>
+            //     <Button icon>
+            //       <MdKeyboardArrowRight />
+            //     </Button>
+            //   </div>
+            // }
           />
         </div>
       </div>

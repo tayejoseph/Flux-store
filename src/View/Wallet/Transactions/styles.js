@@ -40,6 +40,13 @@ export default Styled.div`
                     padding-right: 1em;
                     font-weight: bold;
                 }
+                hr {
+                    height: 2.5em;
+                    margin: 0px 1.5em;
+                    margin-right: 2em;
+                    border: none;
+                    border-right: 1.2px solid #E1E1E1;
+                }
                 input {
                     width: ${rem('232px')};
                     height: ${rem('42px')};

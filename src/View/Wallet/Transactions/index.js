@@ -1,7 +1,7 @@
 import React from 'react'
 import DashboardHeader from '../../../Layout/DashboardHeader'
 import { TiFilter } from 'react-icons/ti'
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { Button, InputGroup, Table } from '../../../UI'
 import Container from './styles'
 
@@ -49,17 +49,17 @@ const Transactions = () => {
                 </tbody>
               </>
             }
-            tableFooter={
-              <div className="table--nav">
-                <Button icon>
-                  <MdKeyboardArrowLeft />
-                </Button>
-                <div className="nav--text__container">1/3</div>
-                <Button icon>
-                  <MdKeyboardArrowRight />
-                </Button>
-              </div>
-            }
+            // tableFooter={
+            //   <div className="table--nav">
+            //     <Button icon>
+            //       <MdKeyboardArrowLeft />
+            //     </Button>
+            //     <div className="nav--text__container">1/3</div>
+            //     <Button icon>
+            //       <MdKeyboardArrowRight />
+            //     </Button>
+            //   </div>
+            // }
           />
         </div>
       </div>
