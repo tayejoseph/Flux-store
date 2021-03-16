@@ -36,28 +36,19 @@ export default Styled.div`
             display: grid;
             align-content: flex-start;
             justify-content: center;
-            grid-template-columns: repeat(5, 1fr);
-            /* grid-template-columns: calc(50% - 0.5em) calc(50% - 0.5em); */
-            /* column-gap: 1.5em; */
-             grid-gap: 1.5em;
-            /* ${minQuery('sm')} {
-            grid-template-columns: repeat(3, 1fr);
-           
-            }
-            ${minQuery('lg')} {
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 0.5em;
-            }
-            ${minQuery('1883px')} {
-            grid-template-columns: repeat(5, 1fr);
-            grid-gap: 1em;
-            } */
-             ${maxQuery('md')} {
+            grid-column-gap: 1.5em;
+            grid-template-columns: repeat(3, 1fr);    
+            ${maxQuery('lg')} {
                 grid-template-columns: repeat(4, 1fr);
-                /* background: red; */
+            }
+             ${maxQuery('md')} {
+                grid-template-columns: repeat(3, 1fr);
             }
             ${maxQuery('sm')} {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            ${minQuery('xl')} {
+                grid-template-columns: repeat(5, 1fr);
             }
         }
         footer {

@@ -3,6 +3,8 @@ import { rem } from 'polished'
 
 export default Styled.div`
     cursor: pointer;
+    padding-bottom: 1.5em;
+    /* margin-bottom: 1em; */
     div.img--container {      
         height: ${rem('141px')}; 
         margin-bottom: 0.5em;
