@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { FaStore, FaBell, FaMoneyBillWave } from 'react-icons/fa'
+import caousel1 from '../../../assets/Group 503.svg'
+import caousel2 from '../../../assets/Group 504.svg'
+import caousel3 from '../../../assets/Group 505.svg'
 import { Modal, Button } from '../../../UI'
 import Container from './styles'
 
@@ -9,17 +12,20 @@ const carouselContent = [
   {
     title: 'Build your store',
     icon: <FaStore />,
+    imgSrc: caousel1,
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
   },
   {
     title: 'Share Payment Links',
     icon: <FaMoneyBillWave />,
+    imgSrc: caousel2,
     description:
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.',
   },
   {
     title: 'Push Notifications',
+    imgSrc: caousel3,
     icon: (
       <div className="notification--bell">
         <FaBell />
@@ -30,10 +36,14 @@ const carouselContent = [
   },
 ]
 
-const CarouselItem = ({ title, description, icon }) => (
+const CarouselItem = ({ title, description, icon, imgSrc }) => (
   <div className="carousel--item">
-    {icon}
-    <div className="img--container"></div>
+    <div>
+      {icon}
+      <div className="img--container">
+        <img src={imgSrc} alt={title} />
+      </div>
+    </div>
     <div>
       <h2 className="u--typo__title">{title}</h2>
       <p className="u--color__light u--typo__normal">

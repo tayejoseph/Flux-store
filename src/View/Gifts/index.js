@@ -36,7 +36,7 @@ const Gift = () => {
               </thead>
               <tbody>
                 {[...Array(10).keys()].map((item, index) => (
-                  <tr>
+                  <tr key={`table-${index}`}>
                     <td>Jackson Doe</td>
                     <td>Shopping List for Jason's</td>
                     <td className="action--cell">

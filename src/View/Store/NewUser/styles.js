@@ -22,9 +22,10 @@ export default Styled.div`
                 align-items: center;
                 justify-content: space-between;
                 padding: 2em;
-                padding-top: 3em;
                 .icon {
                     font-size: 1.8em;
+                    margin-top: 0.5em;
+                    margin-bottom: 0.1em;
                     color: ${({ theme }) => theme.primary};
                 }
                 div.notification--bell {
@@ -39,13 +40,12 @@ export default Styled.div`
                         border: 2px solid #fff;                        
                         width: ${rem('9px')};
                         height: ${rem('9px')};
-                        top: 0px;
+                        top: 10px;
                         right: 0px;
                     }
                 }
                 div.img--container {
                     height: ${rem('120px')};
-                    background: red;
                     width: 100%;
                 }
                 div {

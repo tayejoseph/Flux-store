@@ -102,7 +102,7 @@ const Wallet = () => {
                 </thead>
                 <tbody>
                   {[...Array(10).keys()].map((item, index) => (
-                    <tr>
+                    <tr key={`table-${index}`}>
                       <td>₦48,995.00</td>
                       <td>Julia Bradley</td>
                       <td>Jun 20, 2020 4:55 AM</td>
