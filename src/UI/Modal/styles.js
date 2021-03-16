@@ -62,6 +62,7 @@ export default Styled.div`
     div.modal--close__relative button.close-btn {
             top: 1.2em;
             right: 1.2em;
+            position: absolute;
     }
     div.modal--size__sm {        
         width: ${rem('373px')};

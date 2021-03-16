@@ -8,9 +8,9 @@ const RadioButton = ({ name, checked, onChange }) => {
         type="radio"
         name={name ? name : 'radio'}
         checked={checked}
-        onChange={() => {
+        onChange={(e) => {
           if (typeof onChange === 'function') {
-            onChange()
+            onChange(e)
           }
         }}
       />

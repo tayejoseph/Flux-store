@@ -9,7 +9,7 @@ import GlobalStyle from './base/globalStyles'
 
 const App = () => {
   const location = useLocation()
-  const background = location.state && {
+  const background = location.state?.background && {
     ...location.state.background,
     state: {
       background: location?.state.background

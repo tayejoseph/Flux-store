@@ -22,43 +22,43 @@ const Card = () => {
         }
       />
       <div className="card__content">
-        <Table
-          tableContent={
-            <>
-              <thead>
-                <tr>
-                  <th colSpan="5" className="caption">
-                    <h2 className="u--typo__title"> Saved Addresses</h2>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Recipient</th>
-                  <th>Amount</th>
-                  <th className="action--cell">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(6).keys()].map((item, index) => (
-                  <tr key={index}>
-                    <td>Jackson Doe</td>
-                    <td>FAC16</td>
-                    <td className="action--cell">
-                      <Button icon className="btn--money">
-                        <FaMoneyBillWave />
-                      </Button>
-                      <Button icon className="btn--edit">
-                        <MdEdit />
-                      </Button>
-                      <Button icon className="btn--delete">
-                        <IoMdTrash />
-                      </Button>
-                    </td>
+        <header>
+          <h2 className="u--typo__title"> Saved Addresses</h2>
+        </header>
+        <div className="table--container">
+          <Table
+            tableContent={
+              <>
+                <thead>
+                  <tr>
+                    <th>Recipient</th>
+                    <th>Amount</th>
+                    <th className="action--cell">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </>
-          }
-        />
+                </thead>
+                <tbody>
+                  {[...Array(6).keys()].map((item, index) => (
+                    <tr key={index}>
+                      <td>Jackson Doe</td>
+                      <td>FAC16</td>
+                      <td className="action--cell">
+                        <Button icon className="btn--money">
+                          <FaMoneyBillWave />
+                        </Button>
+                        <Button icon className="btn--edit">
+                          <MdEdit />
+                        </Button>
+                        <Button icon className="btn--delete">
+                          <IoMdTrash />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            }
+          />
+        </div>
       </div>
     </Container>
   )

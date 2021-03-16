@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Modal, InputGroup } from '../../../UI'
 import Container from './styles'
 
 const WithDraw = () => {
+  const [formData, setFormState] = useState({
+    amount: '',
+    bankName: '',
+    accountNo: '',
+  })
+
+  const handleInput = (e) => {
+    setFormState({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
   }
@@ -19,13 +31,28 @@ const WithDraw = () => {
               Enter the amount and account you wish to withdraw
             </p>
             <InputGroup>
-              <input placeholder={'₦0.00'} />
+              <input
+                placeholder={'₦0.00'}
+                name="amount"
+                onChange={handleInput}
+                value={formData.amount}
+              />
             </InputGroup>
             <InputGroup>
-              <input placeholder={'Bank'} />
+              <input
+                placeholder={'Bank'}
+                name="bankName"
+                onChange={handleInput}
+                value={formData.bankName}
+              />
             </InputGroup>
             <InputGroup>
-              <input placeholder={'Account Number'} />
+              <input
+                placeholder={'Account Number'}
+                name="accountNo"
+                onChange={handleInput}
+                value={formData.accountNo}
+              />
             </InputGroup>
             <div className="account--name">
               <p>Balogun Darius Olanrewaju</p>

@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
 import { maxQuery } from '../../../helpers'
+import ScrollBar from '../../../base/scrollBar'
 
 export default Styled.div`
     div.modal--container {                
@@ -36,7 +37,8 @@ export default Styled.div`
 
                 }
             }
-            form {
+            form {                
+                ${ScrollBar};
                 height: ${rem('341px')};
                 overflow-y: auto;
                 width: calc(100% - ${rem('198px')});

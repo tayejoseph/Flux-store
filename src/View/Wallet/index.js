@@ -31,6 +31,23 @@ const wallets = [
   },
 ]
 
+const getStatus = (index, result, section) => {
+  switch (result) {
+    case 'className':
+      return index % 2 === 0
+        ? `status--${section}__success`
+        : index % 3 === 0
+        ? `status--${section}__pending`
+        : `status--${section}__failed`
+    case 'status':
+      return index % 2 === 0
+        ? 'Success'
+        : index % 3 === 0
+        ? 'Pending'
+        : 'Failed'
+  }
+}
+
 const Wallet = () => {
   const location = useLocation()
   const history = useHistory()
@@ -69,29 +86,23 @@ const Wallet = () => {
       />
 
       <div className="transaction--container">
+        <header className="transaction--header">
+          <h2 className="u--typo__title">Recent Transactions</h2>
+          <Button
+            iconRight
+            rounded
+            className="all--transactions"
+            onClick={() => history.push('/dashboard/wallet/transactions')}
+          >
+            View All Transactions
+            <IoIosArrowForward />
+          </Button>
+        </header>
         <div className="table--container">
           <Table
             tableContent={
               <>
                 <thead>
-                  <tr>
-                    <th colSpan="5" className="caption">
-                      <header>
-                        <h2 className="u--typo__title">Recent Transactions</h2>
-                        <Button
-                          iconRight
-                          rounded
-                          className="all--transactions"
-                          onClick={() =>
-                            history.push('/dashboard/wallet/transactions')
-                          }
-                        >
-                          View All Transactions
-                          <IoIosArrowForward />
-                        </Button>
-                      </header>
-                    </th>
-                  </tr>
                   <tr>
                     <th>Amount</th>
                     <th>Recipient</th>
@@ -103,12 +114,22 @@ const Wallet = () => {
                 <tbody>
                   {[...Array(10).keys()].map((item, index) => (
                     <tr key={`table-${index}`}>
-                      <td>₦48,995.00</td>
+                      <td className={getStatus(index, 'className', 'txt')}>
+                        ₦48,995.00
+                      </td>
                       <td>Julia Bradley</td>
                       <td>Jun 20, 2020 4:55 AM</td>
                       <td>Transfer</td>
-                      <td className="u--typo__center">
-                        {index % 2 === 0 ? 'Success' : 'Pending'}
+                      <td className={'u--typo__center'}>
+                        <span
+                          className={`status--container ${getStatus(
+                            index,
+                            'className',
+                            'container',
+                          )}`}
+                        >
+                          {getStatus(index, 'status')}
+                        </span>
                       </td>
                     </tr>
                   ))}

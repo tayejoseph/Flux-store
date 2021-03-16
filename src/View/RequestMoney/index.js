@@ -29,33 +29,33 @@ const RequestMoney = () => {
       />
       {showModal && <ModalSendMoney />}
       <div className="transaction--container">
-        <Table
-          tableContent={
-            <>
-              <thead>
-                <tr>
-                  <th colSpan="5" className="caption table--tab__container">
-                    <TabNav tabItems={['Sent', 'Received']} />
-                  </th>
-                </tr>
-                <tr>
-                  <th>Recipient</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(10).keys()].map((item, index) => (
-                  <tr key={index}>
-                    <td>Jackson Doe</td>
-                    <td>Shopping List for Jason's</td>
-                    <td>₦ 4,354,955.23</td>
+        <header>
+          <TabNav tabItems={['Sent', 'Received']} />
+        </header>
+        <div className="transaction--table__container">
+          <Table
+            tableContent={
+              <>
+                <thead>
+                  <tr>
+                    <th>Recipient</th>
+                    <th>Description</th>
+                    <th>Amount</th>
                   </tr>
-                ))}
-              </tbody>
-            </>
-          }
-        />
+                </thead>
+                <tbody>
+                  {[...Array(10).keys()].map((item, index) => (
+                    <tr key={index}>
+                      <td>Jackson Doe</td>
+                      <td>Shopping List for Jason's</td>
+                      <td>₦ 4,354,955.23</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            }
+          />
+        </div>
       </div>
     </Container>
   )
