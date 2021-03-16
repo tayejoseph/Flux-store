@@ -115,17 +115,17 @@ const Wallet = () => {
                 </tbody>
               </>
             }
-            tableFooter={
-              <div className="table--nav">
-                <Button icon>
-                  <MdKeyboardArrowLeft />
-                </Button>
-                <div className="nav--text__container">1/3</div>
-                <Button icon>
-                  <MdKeyboardArrowRight />
-                </Button>
-              </div>
-            }
+            // tableFooter={
+            //   <div className="table--nav">
+            //     <Button icon>
+            //       <MdKeyboardArrowLeft />
+            //     </Button>
+            //     <div className="nav--text__container">1/3</div>
+            //     <Button icon>
+            //       <MdKeyboardArrowRight />
+            //     </Button>
+            //   </div>
+            // }
           />
         </div>
       </div>
