@@ -1,7 +1,7 @@
 import React from 'react'
 import DashboardHeader from '../../../Layout/DashboardHeader'
 import { TiFilter } from 'react-icons/ti'
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { Button, InputGroup, Table } from '../../../UI'
 import Container from './styles'
 
