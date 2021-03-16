@@ -1,9 +1,15 @@
 import React from 'react'
 import Container from './styles'
 
-const WalletItem = ({ balance, walletType, title, imgSrc }) => {
+const WalletItem = ({ balance, gradient, background, walletType, title }) => {
   return (
-    <Container className="wallet--item" bgImg={imgSrc}>
+    <Container
+      className="wallet--item"
+      style={{
+        background: background,
+        background: gradient,
+      }}
+    >
       <div>
         <h3 className="wallet--title">{title}</h3>
         <h1 className="wallet--balance">{balance}</h1>

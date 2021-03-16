@@ -108,6 +108,9 @@ export default createGlobalStyle`
             content: "-"
           }
       }
+      .status--txt__failed2 {
+          color: #FF5E5E!important;
+      }
       .status--container__pending {
           background: #FFFBC5!important;
           color: #FFCC00!important;

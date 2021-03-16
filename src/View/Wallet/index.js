@@ -15,17 +15,26 @@ const wallets = [
     balance: '₦48,995.00',
     walletType: 'Flux Wallet',
     title: 'F96B9',
+    background: 'rgb(135,168,192)',
+    gradient:
+      'linear-gradient(211deg, rgba(135,168,192,1) 20%, rgba(123,34,159,1) 70%)',
     imgSrc: wallet1,
   },
   {
     balance: '₦48,995.00',
     walletType: 'Crypto Wallet',
     title: 'BTC, ETH',
+    background: 'rgb(135,168,192)',
+    gradient:
+      'linear-gradient(17deg, rgba(135,168,192,1) 20%, rgba(122,55,164,1) 70%)',
     imgSrc: wallet2,
   },
   {
     balance: '₦238,395.67',
     walletType: 'Payments Wallet',
+    background: 'rgb(142,16,149)',
+    gradient:
+      'linear-gradient(342deg, rgba(142,16,149,1) 20%, rgba(222,97,142,1) 70%)',
     title: 'SALES BALANCE',
     imgSrc: wallet3,
   },

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { IoMdAdd, IoIosArrowDown } from 'react-icons/io'
 import { useHistory } from 'react-router-dom'
 import { Button } from '../../UI'
@@ -19,7 +19,35 @@ const content = {
 }
 
 const Store = () => {
+  const [showActionSheet, setDisplay] = useState(null)
   const history = useHistory()
+
+  const handleBodyClick = useCallback(
+    (e) => {
+      console.log(showActionSheet)
+      if (
+        !e.target.classList.contains('shop--item__btn') &&
+        typeof showActionSheet === 'number'
+      ) {
+        setDisplay(null)
+      }
+    },
+    [showActionSheet],
+  )
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {}
+    window.addEventListener('keypress', handleKeyPress)
+    return () => {
+      window.removeEventListener('keypress', handleKeyPress)
+    }
+  })
+  useEffect(() => {
+    document.addEventListener('click', handleBodyClick)
+    return () => {
+      document.removeEventListener('click', handleBodyClick)
+    }
+  }, [handleBodyClick])
   return (
     <Container>
       <DashboardHeader
@@ -53,7 +81,11 @@ const Store = () => {
           {[...Array(40).keys()].map((item, index) => (
             <StoreItem
               key={index}
-              {...content}
+              {...{ ...content, showActionSheet, index }}
+              onActionClick={(e) => {
+                e.stopPropagation()
+                setDisplay(index)
+              }}
               onClick={() => history.push(`/dashboard/store/${index}/details`)}
             />
           ))}
