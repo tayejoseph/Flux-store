@@ -5,6 +5,23 @@ import { TiFilter } from 'react-icons/ti'
 import { Button, InputGroup, Table } from '../../../UI'
 import Container from './styles'
 
+const getStatus = (index, result, section) => {
+  switch (result) {
+    case 'className':
+      return index % 2 === 0
+        ? `status--${section}__success`
+        : index % 3 === 0
+        ? `status--${section}__pending`
+        : `status--${section}__failed`
+    case 'status':
+      return index % 2 === 0
+        ? 'Success'
+        : index % 3 === 0
+        ? 'Pending'
+        : 'Failed'
+  }
+}
+
 const Transactions = () => {
   return (
     <Container>
@@ -32,18 +49,32 @@ const Transactions = () => {
                 <thead>
                   <tr>
                     <th>Amount</th>
+                    <th>Recipient</th>
                     <th>Date</th>
-                    <th>Transaction Type</th>
-                    <th>Status</th>
+                    <th>Transaction type</th>
+                    <th className={'u--typo__center'}>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[...Array(50).keys()].map((item, index) => (
                     <tr key={index}>
-                      <td>₦48,995.00</td>
-                      <td>Jun 20, 2020</td>
+                      <td className={getStatus(index, 'className', 'txt')}>
+                        ₦48,995.00
+                      </td>
+                      <td>Julia Bradley</td>
+                      <td>Jun 20, 2020 4:55 AM</td>
                       <td>Transfer</td>
-                      <td>{index % 2 === 0 ? 'Success' : 'Pending'}</td>
+                      <td className={'u--typo__center'}>
+                        <span
+                          className={`status--container ${getStatus(
+                            index,
+                            'className',
+                            'container',
+                          )}`}
+                        >
+                          {getStatus(index, 'status')}
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

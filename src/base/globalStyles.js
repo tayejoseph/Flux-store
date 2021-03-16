@@ -88,5 +88,37 @@ export default createGlobalStyle`
         opacity: 0.5;
         color: #222222;
       }
+
+      /* Status */
+      .status--txt__pending {
+          color: #FFCC00!important;
+          &:before {
+            content: "+"
+          }
+      }
+      .status--txt__success {
+          color: #47C479!important;
+          &:before {
+            content: "+"
+          }
+      }
+      .status--txt__failed {
+          color: #FF5E5E!important;
+          &:before {
+            content: "-"
+          }
+      }
+      .status--container__pending {
+          background: #FFFBC5!important;
+          color: #FFCC00!important;
+      }
+      .status--container__success {
+          background: #E2FFEC!important;
+          color: #47C479!important;
+      }
+      .status--container__failed {
+          background: #FFE9E9!important;
+          color: #FF5E5E!important;
+      }
 }
 `

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom'
 import { Modal, Button } from '../../../UI'
 import SideNav from './SideNav'
@@ -7,12 +7,25 @@ import UploadForm from './UploadForm'
 import Container from './styles'
 
 const ProductForm = () => {
+  const [formData, setFormState] = useState({
+    title: '',
+    description: '',
+    amount: '',
+    quantity: '',
+    delivery: '',
+  })
   const {
     params: { productId },
   } = useRouteMatch()
   const { state, pathname } = useLocation()
   const history = useHistory()
 
+  const handleFormInput = ({ target }) => {
+    setFormState({
+      ...formData,
+      [target.name]: target.value,
+    })
+  }
   return (
     <Container>
       <Modal
@@ -30,12 +43,12 @@ const ProductForm = () => {
             <SideNav />
             <form>
               <div className={state?.section !== 'infoForm' && 'hide--section'}>
-                <InfoForm />
+                <InfoForm {...{ handleFormInput, formData }} />
               </div>
               <div
                 className={state?.section !== 'uploadForm' && 'hide--section'}
               >
-                <UploadForm />
+                <UploadForm {...{ handleFormInput, formData }} />
               </div>
             </form>
           </main>

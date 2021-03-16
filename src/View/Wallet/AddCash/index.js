@@ -44,9 +44,15 @@ const AddCash = () => {
             <label className="u--color__dark ">
               <RadioButton
                 type="radio"
-                value="Debit Card"
-                name={'paymentMethod'}
-                // checked={formData.paymentMethod === 'Debit Card'}
+                onChange={(e) => {
+                  setFormState({
+                    ...formData,
+                    paymentMethod: e.target.checked
+                      ? 'Debit Card'
+                      : 'Bank Transfer',
+                  })
+                }}
+                checked={formData.paymentMethod === 'Debit Card'}
               />
               Debit Card
             </label>
@@ -55,9 +61,16 @@ const AddCash = () => {
             <label className="u--color__dark ">
               <RadioButton
                 type="radio"
-                value="Bank Transfer"
                 name={'paymentMethod'}
-                // checked={formData.paymentMethod === 'Bank Transfer'}
+                onChange={(e) => {
+                  setFormState({
+                    ...formData,
+                    paymentMethod: e.target.checked
+                      ? 'Bank Transfer'
+                      : 'Debit Card',
+                  })
+                }}
+                checked={formData.paymentMethod === 'Bank Transfer'}
               />
               Bank Transfer
             </label>

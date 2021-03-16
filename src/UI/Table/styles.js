@@ -1,6 +1,5 @@
 import Styled from 'styled-components'
 import { rem, rgba } from 'polished'
-import ScrollBar from '../../base/scrollBar'
 
 export default Styled.div`
     table.flux--table {
@@ -29,9 +28,6 @@ export default Styled.div`
             width: 100%;
             table-layout: fixed; //even columns width , fix width of table too
         }
-        tbody {
-            ${ScrollBar}
-        }
         th, td {
             text-align: left;
             color: #222222;
@@ -39,10 +35,12 @@ export default Styled.div`
             font-size: ${rem('14px')};
             line-height: ${rem('20px')};
             padding: 0.8em 0px;
+            vertical-align: center;
         }
-        td {
+        tbody tr {
             border-bottom: 1px solid ${rgba('#E1E1E1', 0.5)};
         }
+
         th:first-child:not(.table--tab__container), td:first-child {
             padding-left: 1.5em;
         }

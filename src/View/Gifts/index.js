@@ -18,38 +18,38 @@ const Gift = () => {
           </div>
         }
       />
-      <div className="gift--table__container">
-        <Table
-          tableContent={
-            <>
-              <thead>
-                <tr>
-                  <th colSpan="5" className="caption table--tab__container">
-                    <TabNav tabItems={['Created', 'Sent', 'Received']} />
-                  </th>
-                </tr>
-                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th className="action--cell">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...Array(10).keys()].map((item, index) => (
-                  <tr key={`table-${index}`}>
-                    <td>Jackson Doe</td>
-                    <td>Shopping List for Jason's</td>
-                    <td className="action--cell">
-                      <Button icon className="btn--delete">
-                        <IoMdTrash />
-                      </Button>
-                    </td>
+      <div className="gift--content">
+        <header>
+          <TabNav tabItems={['Created', 'Sent', 'Received']} />
+        </header>
+        <div className="gift--table__container">
+          <Table
+            tableContent={
+              <>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th className="action--cell">Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </>
-          }
-        />
+                </thead>
+                <tbody>
+                  {[...Array(10).keys()].map((item, index) => (
+                    <tr key={`table-${index}`}>
+                      <td>Jackson Doe</td>
+                      <td>Shopping List for Jason's</td>
+                      <td className="action--cell">
+                        <Button icon className="btn--delete">
+                          <IoMdTrash />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            }
+          />
+        </div>
       </div>
     </Container>
   )

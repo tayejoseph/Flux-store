@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
 import { maxQuery } from '../../../helpers'
+import scrollBar from '../../../base/scrollBar'
 
 export default Styled.div`
    header {       
@@ -57,15 +58,28 @@ export default Styled.div`
 
    div.transaction--container {
        margin-top: 1.2em;
+        max-width: ${rem('1078px')};
        div.table--container {
-           max-width: ${rem('1078px')};
-           tbody {
-                height: 70vh;
-               ${maxQuery('md')} {
-                height: 58vh;
-               }
+           overflow: auto;
+            box-shadow: 0px 0px 3px #00000029;
+            border-radius: 10px;
+            table {
+             width:  ${rem('1078px')};
+                tbody {
+                    height: 70vh;
+                    ${scrollBar};
+                    ${maxQuery('md')} {
+                        height: 58vh;
+                    }
+                    span[class^="status--container"] {
+                        border-radius: 5px;
+                        padding: 0.4em 0.5em;
+                        font-weight: 100;
+                        display: inline-block;
+                        width: ${rem('76px')};           
+                    }
+                }
             }
        }
-
    }
 `

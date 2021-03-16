@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
 import Container from './styles'
 
 const DataTopUp = () => {
+  const [formData, setFormState] = useState({
+    whoFor: 'mySelf',
+    phoneNo: '',
+  })
   const handleSubmit = (e) => {
     e.preventDefault()
   }

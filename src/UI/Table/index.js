@@ -3,7 +3,7 @@ import Container from './styles'
 
 const Table = ({ tableContent, tableFooter = true }) => {
   return (
-    <Container>
+    <Container className="flux--table__container">
       <table className="flux--table">{tableContent && tableContent}</table>
       {tableFooter && (
         <footer className="flux--table__footer">{tableFooter}</footer>

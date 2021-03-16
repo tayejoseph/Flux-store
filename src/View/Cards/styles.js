@@ -5,16 +5,30 @@ export default Styled.div`
     flex: 1;
     height: 100%;
     div.card__content {
+        background: #fff;
         max-width: ${rem('562px')};
-        table.flux--table {
-            th.action--cell, td.action--cell {
-                text-align: center;
-            }
-            tbody {
-                height: 40vh;
-            }
-            button.btn--edit {
-                margin: 0 1em;               
+        border-radius: 10px;
+        box-shadow: 0px 0px 3px #00000029;
+        header {
+            padding: 1.5em;
+            padding-bottom: 1em;
+        }
+        div.table--container {        
+            overflow: auto;
+            div.flux--table__container {
+                width: ${rem('562px')};
+                thead {
+                    border-radius: 0px;
+                }
+                th.action--cell, td.action--cell {
+                    text-align: center;
+                }
+                tbody {
+                    height: 40vh;
+                }
+                button.btn--edit {
+                    margin: 0 1em;               
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
 import { maxQuery } from '../../helpers'
+import scrollBar from '../../base/scrollBar'
 
 export default Styled.div`
     flex: 1;
@@ -25,12 +26,16 @@ export default Styled.div`
 
     div.transaction--container {
         max-width: ${rem('1002px')};
+        background: #fff;
         flex: 1;
-        header {
+        border-radius: 10px;
+        box-shadow: 0px 0px 3px #00000029;
+        header.transaction--header {
            display: flex;
            justify-content: space-between;
            align-items: center;
-           padding-right: 2em;
+           padding: 1.5em 2em;
+           padding-bottom: 0.2em;
            button {
                background: #855AAF1A;
                color: #855AAF;
@@ -43,13 +48,30 @@ export default Styled.div`
                }
            }
         }
+        thead {
+            border-radius: 0px;
+        }
         thead, tr {
            padding-left: 0.5em;
         }
+        div.table--container {
+            overflow: auto;
+            div.flux--table__container {
+                width: ${rem('1002px')};
+            }
+        }
         tbody {
             height: 45vh;
+            ${scrollBar}
             ${maxQuery('md')} {
                 height: 34vh;
+            }
+            span[class^="status--container"] {
+                border-radius: 5px;
+                padding: 0.4em 0.5em;
+                font-weight: 100;
+                display: inline-block;
+                width: ${rem('76px')};           
             }
         }
 

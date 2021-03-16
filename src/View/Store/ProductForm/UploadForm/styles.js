@@ -3,7 +3,9 @@ import { maxQuery } from '../../../../helpers'
 
 export default Styled.div`
     padding: 0 1em;
-    height: 60vh;
+    ${maxQuery('md')} {
+        height: 60vh;
+    }
     p {
         font-weight: normal; 
         font-size: 14px;

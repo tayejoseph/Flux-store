@@ -1,7 +1,7 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
-export default Styled.nav`
 
+export default Styled.nav`
 ol {
     margin: 0px;
     padding: 0px;
