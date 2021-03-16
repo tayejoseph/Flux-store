@@ -18,7 +18,6 @@ const App = () => {
     },
   }
 
-  console.log(location, 'jdskdkjsdkj')
   return (
     <ThemeProvider theme={theme()}>
       <GlobalStyle />

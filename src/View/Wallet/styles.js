@@ -12,6 +12,9 @@ export default Styled.div`
             align-items: center;
             max-width: 100vw;
             overflow-x: auto;
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
         div.wallet--action {
             button:not(:last-child) {

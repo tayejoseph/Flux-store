@@ -11,7 +11,7 @@ export const DIMENSIONS = {
   mobileTopNavHeight: '56px',
 }
 
-export const theme = {
+const theme = {
   primary: '#855AAF',
   secondary: '#7B0073',
   bgColor: '#FCFCFC',
