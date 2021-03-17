@@ -3,7 +3,7 @@ import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import { IconContext } from 'react-icons'
 import { ThemeProvider } from 'styled-components'
 import DashBoard from './Layout/DashBoard'
-import { AirtimeTopUp, DataTopUp, WithDraw } from './View'
+import { AirtimeTopUp, DataTopUp, WithDraw, Auth } from './View'
 import theme from './base/theme'
 import GlobalStyle from './base/globalStyles'
 
@@ -23,9 +23,7 @@ const App = () => {
       <GlobalStyle />
       <IconContext.Provider value={{ className: 'icon' }}>
         <Switch location={background || location}>
-          <Route path="/" exact>
-            <Redirect to="/dashboard/wallet" />
-          </Route>
+          <Route path="/auth/:authMethod" component={Auth} />
           <Route path="/dashboard" component={DashBoard} />
         </Switch>
 

@@ -26,7 +26,10 @@ const DashboardHeader = ({
               <Button icon>
                 <IoMdSettings />
               </Button>
-              <Button icon>
+              <Button
+                icon
+                onClick={() => history.push('/dashboard/notification')}
+              >
                 <FaBell />
               </Button>
             </div>
@@ -49,7 +52,10 @@ const DashboardHeader = ({
             <Button icon>
               <IoMdSettings />
             </Button>
-            <Button icon>
+            <Button
+              icon
+              onClick={() => history.push('/dashboard/notification')}
+            >
               <FaBell />
             </Button>
           </div>

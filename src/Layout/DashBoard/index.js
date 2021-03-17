@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, useRouteMatch, Switch } from 'react-router'
 import { IoMdMenu } from 'react-icons/io'
 import { Button } from '../../UI'
-import SideNav from '../SideNav'
+import DashboardSideNav from '../DashboardSideNav'
 import {
   Wallet,
   Cards,
@@ -15,6 +15,7 @@ import {
   ProductDetails,
   ProductForm,
   Transactions,
+  Notification,
 } from '../../View'
 import Container from './styles'
 
@@ -48,9 +49,10 @@ const DashBoard = () => {
         className={`side--nav ${showMenu ? 'open--menu__mobile' : ''}`}
         onClick={handleHideDrawer}
       >
-        <SideNav />
+        <DashboardSideNav />
       </aside>
       <main className="dashboard--main">
+        <Route path={`${path}/notification`} component={Notification} />
         <Route path={`${path}/wallet`} exact={true} component={Wallet} />
         <Route path={`${path}/wallet/addCash`} component={AddCash} />
         <Route path={`${path}/wallet/transactions`} component={Transactions} />

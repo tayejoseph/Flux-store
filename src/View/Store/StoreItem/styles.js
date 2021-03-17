@@ -13,7 +13,7 @@ export default Styled.div`
         background: #FFFFFF;
         display: flex;
         align-items: center;
-        background: blue;
+        /* background: blue; */
         justify-content: center;
         backdrop-filter: blur(7px);
         width: 28px;

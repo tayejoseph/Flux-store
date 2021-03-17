@@ -24,11 +24,11 @@ const Store = () => {
 
   const handleBodyClick = useCallback(
     (e) => {
-      console.log(showActionSheet)
       if (
         !e.target.classList.contains('shop--item__btn') &&
         typeof showActionSheet === 'number'
       ) {
+        e.preventDefault()
         setDisplay(null)
       }
     },
@@ -37,9 +37,9 @@ const Store = () => {
 
   useEffect(() => {
     const handleKeyPress = (e) => {}
-    window.addEventListener('keypress', handleKeyPress)
+    window.addEventListener('keypress', handleKeyPress, true)
     return () => {
-      window.removeEventListener('keypress', handleKeyPress)
+      window.removeEventListener('keypress', handleKeyPress, true)
     }
   })
   useEffect(() => {

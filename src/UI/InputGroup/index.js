@@ -8,7 +8,7 @@ export default styled.div.attrs({
   &:not(:last-child) {
     margin-bottom: 1.5em;
   }
-  input,
+  input:not([type='checkbox']),
   select {
     height: ${rem('56px')};
     width: 100%;
@@ -31,6 +31,7 @@ export default styled.div.attrs({
       border: 1px solid #ff5e5e;
     }
   }
+
   input::placeholder {
     color: #aeaeae;
     font-size: ${rem('14px')};

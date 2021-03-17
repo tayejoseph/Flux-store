@@ -57,7 +57,7 @@ export default createGlobalStyle`
         font-size: ${rem('16px')};
         line-height: ${rem('20px')};
       }
-      .u--typo__btn {
+      .u--typo__btn, .u--typo__normalBold {
         font-size: ${rem('14px')};
         line-height: ${rem('16px')};
         font-weight: medium;
