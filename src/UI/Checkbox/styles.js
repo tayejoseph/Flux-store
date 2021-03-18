@@ -1,11 +1,12 @@
 import Styled from 'styled-components'
 
 export default Styled.div`
-  display: block;
   position: relative;
   padding-left: 18px;
-  margin-bottom: 18px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
+  display: inline-block;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -29,7 +30,8 @@ span {
   width: 18px;
   height: 18px;
   border-radius: 2px;
-  background-color: #eee;
+  border: 2px solid #E1E1E1;
+
 }
 
 /* On mouse-over, add a grey background color */
@@ -38,10 +40,14 @@ span {
 }
 
 /* When the checkbox is checked, add a blue background */
-& input:checked ~ span {
+input:checked ~ span {
   background-color: ${({ theme }) => theme.primary};
+  border: 2px solid ${({ theme }) => theme.primary};
 }
 
+input:focus ~ span {
+  border: 2px solid ${({ theme }) => theme.primary};
+}
 /* Create the checkmark/indicator (hidden when not checked) */
 span:after {
   content: "";
@@ -56,8 +62,8 @@ span:after {
 
 /* Style the checkmark/indicator */
 span:after {
-  left: 0.45em;
-  top: 0.1em;
+  left: 0.3em;
+  top: 0.01em;
   width: 4px;
   height: 9px;
   border: solid white;

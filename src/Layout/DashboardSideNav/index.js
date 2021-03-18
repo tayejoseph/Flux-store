@@ -38,7 +38,7 @@ const SideNav = ({ className }) => {
         <ol>
           <li>
             <Link
-              to="/dashboard/wallet"
+              to="/dashboard/wallet/summary"
               className={
                 doesRouteMatch('wallet', location.pathname) &&
                 !backgroundPathname

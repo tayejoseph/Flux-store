@@ -48,7 +48,7 @@ export default styled.button`
         &:disabled {
           background: transparent !important;
           color: ${props.theme.disabled}!important;
-          border-color: ${props.theme.disabled}!important;
+          /* border-color: ${props.theme.disabled}!important; */
         }
       `
     }

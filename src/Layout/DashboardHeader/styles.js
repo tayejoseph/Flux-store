@@ -16,9 +16,7 @@ export default Styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
-            div.btn--tray button:not(:last-child) {
-                margin-right: 1.5em
-            }
+          
         }
     }
     &.sm--nav {
@@ -32,11 +30,15 @@ export default Styled.div`
                 margin-right: 0.8em;
             }
             }
-            div.btn--tray {
-                button:not(:last-child) {
-                    margin-right: 1.2em;
-                }
+        }
+    }
+    div.btn--tray {
+        button {
+            .icon {
+                font-size: 1.3em;
             }
+            &:not(:last-child) {
+            margin-right: 2em
         }
     }
 `

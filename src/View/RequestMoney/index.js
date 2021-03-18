@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Button, TabNav, Table } from '../../UI'
 import { useQuery } from '../../hooks'
 import DashboardHeader from '../../Layout/DashboardHeader'
-import ModalSendMoney from './ModalSendMoney'
+import ModalRequestMoney from './ModalRequestMoney'
 import Container from './styles'
 
 const RequestMoney = () => {
@@ -27,7 +27,7 @@ const RequestMoney = () => {
           </Button>
         }
       />
-      {showModal && <ModalSendMoney />}
+      {showModal && <ModalRequestMoney />}
       <div className="transaction--container">
         <header>
           <TabNav tabItems={['Sent', 'Received']} />

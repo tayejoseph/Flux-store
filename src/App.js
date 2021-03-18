@@ -1,13 +1,18 @@
 import React from 'react'
 import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
 import { IconContext } from 'react-icons'
+import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import DashBoard from './Layout/DashBoard'
-import { AirtimeTopUp, DataTopUp, WithDraw, Auth } from './View'
+// import { ProtectedRoute } from './Components'
+import { AirtimeTopUp, DataTopUp, WithDraw, Auth, Settings } from './View'
 import theme from './base/theme'
 import GlobalStyle from './base/globalStyles'
 
 const App = () => {
+  const {
+    user: { authenticated },
+  } = useSelector((s) => s)
   const location = useLocation()
   const background = location.state?.background && {
     ...location.state.background,
@@ -23,14 +28,28 @@ const App = () => {
       <GlobalStyle />
       <IconContext.Provider value={{ className: 'icon' }}>
         <Switch location={background || location}>
-          <Route path="/auth/:authMethod" component={Auth} />
-          <Route path="/dashboard" component={DashBoard} />
+          <Route path="/" exact={true}>
+            {authenticated ? (
+              <Redirect to="/dashboard/wallet/summary" />
+            ) : (
+              <Redirect to="/auth/logIn" />
+            )}
+          </Route>
+          <Route path="/auth/:authMethod">
+            {authenticated ? (
+              <Redirect to="/dashboard/wallet/summary" />
+            ) : (
+              <Auth />
+            )}
+          </Route>
+          {authenticated && <Route path="/dashboard" component={DashBoard} />}
         </Switch>
 
         {/* Switch for modals with background routes */}
         <Switch>
           <Route path={`/dashboard/airTimeTopUp`} component={AirtimeTopUp} />
           <Route path={`/dashboard/dataTopUp`} component={DataTopUp} />
+          <Route path={`/dashboard/settings`} component={Settings} />
           <Route path={`/dashboard/wallet/withdraw`} component={WithDraw} />
         </Switch>
       </IconContext.Provider>

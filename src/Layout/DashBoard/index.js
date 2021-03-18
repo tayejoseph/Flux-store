@@ -53,7 +53,7 @@ const DashBoard = () => {
       </aside>
       <main className="dashboard--main">
         <Route path={`${path}/notification`} component={Notification} />
-        <Route path={`${path}/wallet`} exact={true} component={Wallet} />
+        <Route path={`${path}/wallet/summary`} component={Wallet} />
         <Route path={`${path}/wallet/addCash`} component={AddCash} />
         <Route path={`${path}/wallet/transactions`} component={Transactions} />
         <Route path={`${path}/cards`} component={Cards} />

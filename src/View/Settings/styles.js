@@ -1,7 +1,7 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
-import { maxQuery } from '../../../helpers'
-import ScrollBar from '../../../base/scrollBar'
+import { maxQuery } from '../../helpers'
+import ScrollBar from '../../base/scrollBar'
 
 export default Styled.div`
     div.modal--container {                
@@ -33,7 +33,7 @@ export default Styled.div`
                 box-shadow: 1.5px 0px 2px -1px #00000029;
                  ${maxQuery('>md')} {
                     width: 100%;
-                    box-shadow: 0px 0px 3px #00000029;
+                                box-shadow: 0px 0px 3px #00000029;
 
                 }
             }

@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
+import { fetchDataPlan, handleAirTimeTopUp } from '../../store/actions/App'
 import Container from './styles'
 
 const AirTimeTopUp = () => {
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+  const { dataPlans } = useSelector((s) => s.app)
   const [formData, setFormState] = useState({
     amount: '',
-    whoFor: 'mySelf',
+    whoFor: 'self',
     receiptNo: '',
-    airTimeType: '',
   })
   const handleInput = ({ target }) => {
     setFormState({
@@ -15,9 +19,24 @@ const AirTimeTopUp = () => {
       [target.name]: target.value,
     })
   }
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    try {
+      setLoading(true)
+      const { phoneNo, amount, whoFor } = formData
+      const { status, data: response } = await handleAirTimeTopUp({
+        whoFor: whoFor === 'self' ? whoFor : phoneNo,
+        amount,
+      })
+    } finally {
+      setLoading(false)
+    }
   }
+
+  useEffect(() => {
+    fetchDataPlan(dispatch)
+  }, [dispatch])
   return (
     <Container>
       <Modal
@@ -39,28 +58,28 @@ const AirTimeTopUp = () => {
               <label className="u--color__dark">
                 <RadioButton
                   type="radio"
-                  name={'airtime'}
-                  checked={formData.whoFor === 'mySelf' && true}
+                  name={'whoFor'}
+                  checked={formData.whoFor === 'self' && true}
                   onChange={({ target }) =>
                     setFormState({
                       ...formData,
-                      whoFor: target.checked ? 'mySelf' : 'someoneElse',
+                      whoFor: target.checked ? 'self' : 'someoneElse',
                     })
                   }
                 />
-                Myself
+                My Self
               </label>
             </InputGroup>
             <InputGroup className="radio--btn__container">
               <label className="u--color__dark">
                 <RadioButton
                   type="radio"
-                  name={'airtime'}
+                  name={'whoFor'}
                   checked={formData.whoFor === 'someoneElse' && true}
                   onChange={({ target }) =>
                     setFormState({
                       ...formData,
-                      whoFor: target.checked ? 'someoneElse' : 'mySelf',
+                      whoFor: target.checked ? 'someoneElse' : 'self',
                     })
                   }
                 />
@@ -69,24 +88,32 @@ const AirTimeTopUp = () => {
             </InputGroup>
             <InputGroup>
               <select
-                placeholder={"Recipient's Number"}
-                name="airtimeType"
+                placeholder={'Network'}
+                name="networkIndex"
                 onChange={handleInput}
               >
                 <option value="volvo" disabled={true}>
                   Select Recipient's Network
                 </option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+                {dataPlans &&
+                  dataPlans.map((item, index) => (
+                    <option value={index} key={item.newort_code}>
+                      {item.network_name}
+                    </option>
+                  ))}
               </select>
             </InputGroup>
-            <InputGroup>
-              <input placeholder={"Recipient's Number"} />
-            </InputGroup>
+            {formData.whoFor !== 'self' && (
+              <InputGroup
+                placeholder={"Recipient's Number"}
+                type="tel"
+                name={'receiptNo'}
+                onChange={handleInput}
+              />
+            )}
           </div>
           <footer>
-            <Button full type="submit" rounded>
+            <Button full type="submit" rounded loading={loading}>
               Top up
             </Button>
           </footer>

@@ -55,7 +55,9 @@ export default Styled.div`
             color: #222222;
             opacity: 1;
         }
-        div.showPassword--container {
+        label.showPassword--container {
+            display: flex;
+            align-items: center;
             div.flux--radion__btn {
                 margin-right: 0.8em;
             }

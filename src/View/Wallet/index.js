@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 // import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { IoIosArrowForward } from 'react-icons/io'
+import { useDispatch } from 'react-redux'
+import { fetchAllTransactions } from '../../store/actions/User'
 import WalletItem from './WalletItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import { Button, Table } from '../../UI'
@@ -58,9 +60,13 @@ const getStatus = (index, result, section) => {
 }
 
 const Wallet = () => {
+  const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
 
+  useEffect(() => {
+    dispatch(fetchAllTransactions())
+  }, [dispatch])
   return (
     <Container>
       <DashboardHeader
@@ -76,14 +82,14 @@ const Wallet = () => {
           <div className="wallet--action">
             <Button
               rounded
-              onClick={() => history.push(`${location.pathname}/addCash`)}
+              onClick={() => history.push(`/dashboard/wallet/addCash`)}
             >
               Add Cash
             </Button>
             <Button
               rounded
               onClick={() =>
-                history.push(`${location.pathname}/withdraw`, {
+                history.push(`/dashboard/wallet/withdraw`, {
                   background: location,
                 })
               }

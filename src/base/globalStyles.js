@@ -11,8 +11,27 @@ export default createGlobalStyle`
       padding: 0px;
       margin: 0px;
       font-weight: normal;
+
       ${maxQuery('lg')} {
+        font-size: 90%;
+      }
+      ${maxQuery('sm')} {
         font-size: 80%;
+      }
+       #nprogress .bar {
+        background: ${({ theme }) => theme.primary};
+        height: 3px;
+      }
+
+      #nprogress .peg {
+        box-shadow: 0 0 10px ${({ theme }) => theme.primary}, 0 0 ${({
+  theme,
+}) => theme.primary};
+            }
+
+      #nprogress .spinner-icon {
+        border-top-color: ${({ theme }) => theme.primary};
+        border-left-color: ${({ theme }) => theme.primary};
       }
     }
     body {
@@ -122,6 +141,9 @@ export default createGlobalStyle`
       .status--container__failed {
           background: #FFE9E9!important;
           color: #FF5E5E!important;
+      }
+      .helper--text {
+        color: #AEAEAE;
       }
 }
 `
