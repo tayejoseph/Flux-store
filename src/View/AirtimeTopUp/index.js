@@ -25,7 +25,7 @@ const AirTimeTopUp = () => {
     try {
       setLoading(true)
       const { phoneNo, amount, whoFor } = formData
-      const { status, data: response } = await handleAirTimeTopUp({
+      await handleAirTimeTopUp({
         whoFor: whoFor === 'self' ? whoFor : phoneNo,
         amount,
       })

@@ -1,4 +1,4 @@
-export default [
+const BankLists = [
   {
     name: 'Access Bank',
     id: '044',
@@ -94,3 +94,5 @@ export default [
     slug: 'zenith',
   },
 ]
+
+export default BankLists

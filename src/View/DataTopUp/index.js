@@ -27,7 +27,7 @@ const DataTopUp = () => {
     try {
       setLoading(true)
       const { networkIndex, amount, whoFor, planIndex } = formData
-      const { status, data: response } = await handleDataTopUp({
+      await handleDataTopUp({
         plan_code: dataPlans[networkIndex].plans[planIndex].plan_code,
         receiver: whoFor,
         network: dataPlans[networkIndex].network_name,

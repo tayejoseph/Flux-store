@@ -38,12 +38,11 @@ const Settings = () => {
     ) {
       try {
         setLoading(true)
-        const { status } =
-          displaySec === 'accForm'
-            ? await dispatch(
-                updateUserDetails({ username: userData.username, ...formData }),
-              )
-            : dispatch(changeUserPassword(formData))
+        displaySec === 'accForm'
+          ? await dispatch(
+              updateUserDetails({ username: userData.username, ...formData }),
+            )
+          : dispatch(changeUserPassword(formData))
         setLoading(false)
       } finally {
         setLoading(false)
