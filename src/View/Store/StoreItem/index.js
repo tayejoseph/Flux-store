@@ -1,11 +1,14 @@
 import React from 'react'
-import Container from './styles'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { MdMoreVert } from 'react-icons/md'
+import { toMoney } from '../../../helpers'
 import { Button } from '../../../UI'
+import Container from './styles'
 
 const StoreItem = ({
-  productName,
-  price,
+  name,
+  amount,
+  image_url_1,
   publishStatus,
   onClick,
   showActionSheet,
@@ -14,18 +17,20 @@ const StoreItem = ({
 }) => {
   return (
     <Container
-      published={publishStatus.toLowerCase() === 'published'}
+      // published={publishStatus.toLowerCase() === 'published'}
       role={'button'}
       onClick={onClick}
     >
       <Button icon className="shop--item__btn" onClick={onActionClick}>
         <MdMoreVert />
       </Button>
-      <div className="img--container">{/* <img src="" /> */}</div>
+      <div className="img--container">
+        <LazyLoadImage src={image_url_1} alt={name} effect="blur" />
+      </div>
       <div className="text--content">
-        <p className="productName">{productName}</p>
-        <p className="price">{price}</p>
-        <p className="u--typo__normal publish--status">{publishStatus}</p>
+        <p className="productName">{name}</p>
+        <p className="price">₦{toMoney(amount)}</p>
+        {/* <p className="u--typo__normal publish--status">{publishStatus}</p> */}
       </div>
       {showActionSheet === index && (
         <div className="storeItem--action__container">

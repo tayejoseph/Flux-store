@@ -5,7 +5,7 @@ export default Styled.div`
     cursor: pointer;
     padding-bottom: 1.5em;
     position: relative;
-    /* margin-bottom: 1em; */
+    margin-bottom: 1em;
     button.shop--item__btn {
         position: absolute;
         right: 1em;
@@ -13,7 +13,7 @@ export default Styled.div`
         background: #FFFFFF;
         display: flex;
         align-items: center;
-        background: blue;
+        /* background: blue; */
         justify-content: center;
         backdrop-filter: blur(7px);
         width: 28px;
@@ -30,7 +30,12 @@ export default Styled.div`
         box-shadow: 0px 0px 2px #00000029;
         border-radius: 5px;
         opacity: 1;
-        /* background: blue; */
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     }
     div.text--content {
         p {
@@ -45,7 +50,10 @@ export default Styled.div`
             line-height: 20px;
             letter-spacing: 0px;
             color: #222222;
+            text-overflow: ellipsis;
             opacity: 0.7;
+            height: ${rem('36px')};
+            margin-bottom: 0.7em;
         }
         p.price {
             font-weight: bold; 

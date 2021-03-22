@@ -1,18 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { MdEdit } from 'react-icons/md'
 import { HiLink } from 'react-icons/hi'
 import { IoMdTrash } from 'react-icons/io'
+import { toMoney } from '../../../helpers'
 import { Modal, Button } from '../../../UI'
 import Container from './styles'
 
 const ProductDetails = () => {
+  const { catalogues } = useSelector((s) => s.user)
   const {
     params: { productId },
   } = useRouteMatch()
+  const {
+    name,
+    amount,
+    description,
+    quantity,
+    image_url_1,
+    image_url_2,
+    image_url_3,
+  } = catalogues[productId]
+  const images = [image_url_1, image_url_2, image_url_3]
+  const [activeIndex, setState] = useState(0)
   const history = useHistory()
   return (
     <Container>
+      <Helmet>
+        <title>Flux Store | {name}</title>
+      </Helmet>
       <Modal
         showModal={true}
         className="modal--size__md modal--close__relative"
@@ -20,24 +39,26 @@ const ProductDetails = () => {
         <div className="productDetails--container">
           <main className="flux--row">
             <div className="flux--col">
-              <div className="img--container"></div>
+              <div className="img--container">
+                <LazyLoadImage
+                  src={images[activeIndex]}
+                  alt={name}
+                  effect="blur"
+                />
+              </div>
             </div>
             <div className="flux--col">
               <h2 className="u--typo__title productDetails--title">
                 Product Details
               </h2>
 
-              <h3 className="u--typo__title">
-                PS4 Pro 1TB + FIFA 20 and 2 Controllers
-              </h3>
-              <p>
-                The PlayStation 4 (PS4) is an eighth-generation home video game
-                console developed by Sony Computer Entertainment. Announced as
-                the successor to the PlayStation 3 in February 2013.
-              </p>
+              <h3 className="u--typo__title">{name}</h3>
+              <p className="product--details">{description}</p>
               <div className="action--row">
                 <div className="action--label__row">
-                  <h2 className="u--typo__title product--price">₦175,499.99</h2>
+                  <h2 className="u--typo__title product--price">
+                    ₦{toMoney(amount)}
+                  </h2>
                   <span className="dot">&#8226;</span>
                   <p className="product--status">Published</p>
                 </div>
@@ -50,7 +71,7 @@ const ProductDetails = () => {
               <div className="product--summary">
                 <div className="flux--row">
                   <p>Items remaining</p>
-                  <p className="u--color__dark">34</p>
+                  <p className="u--color__dark">{quantity}</p>
                 </div>
                 <div className="flux--row">
                   <p>Delivery</p>
@@ -66,9 +87,14 @@ const ProductDetails = () => {
 
           <footer className="flux--row">
             <div className="img--container__row">
-              <div className="sm--img active" />
-              <div className="sm--img" />
-              <div className="sm--img" />
+              {[...Array(3).keys()].map((item, index) => (
+                <div
+                  className={`sm--img ${index === activeIndex ? 'active' : ''}`}
+                  onClick={() => setState(index)}
+                >
+                  <LazyLoadImage src={images[index]} alt={name} effect="blur" />
+                </div>
+              ))}
             </div>
             <div className="action--tray">
               <Button

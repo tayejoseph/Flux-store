@@ -47,6 +47,17 @@ export default Styled.div`
             opacity: 1;
             position: relative;
             border: 1px solid #E1E1E1;
+            span {
+                overflow: hidden;
+                width: 48px;
+                height: 48px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 2px #00000029;
+                border: 1px solid #E1E1E1;
+                img {
+                    object-fit: cover;
+                }
+            }
             &:nth-child(2) {
                 margin: 0 1em;
             }
@@ -61,7 +72,7 @@ export default Styled.div`
                 font-size: 1em;
                 align-items: center;
                 justify-content: center;
-                border: 5px solid #fff;
+                border: 4px solid #fff;
             }
         }
     }

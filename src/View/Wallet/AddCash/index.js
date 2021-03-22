@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
+import ModalContent from './ModalContent'
 import DashboardHeader from '../../../Layout/DashboardHeader'
-import { Button, InputGroup, RadioButton } from '../../../UI'
+import { Button, InputGroup, RadioButton, Modal } from '../../../UI'
 import Container from './styles'
 
 const AddCash = () => {
+  const [displaySection, setDisplay] = useState(false)
   const [formData, setFormState] = useState({
     amount: '',
-    paymentMethod: 'Debit Card',
+    cardNo: '',
+    paymentMethod: 'card',
   })
 
   const handleSubmit = (e) => {
@@ -15,6 +18,16 @@ const AddCash = () => {
 
   return (
     <Container>
+      <Modal
+        className="modal--size__sm modal--close__relative"
+        modalTitle={
+          formData.paymentMethod === 'card' ? 'Select Card' : 'Payment Account'
+        }
+        showModal={displaySection}
+        onClose={() => setDisplay(false)}
+      >
+        <ModalContent {...{ displaySection }} modalTitle={'Withdraw'} />
+      </Modal>
       <header>
         <DashboardHeader navType="small" />
         <div className="cash--header__container">
@@ -47,14 +60,12 @@ const AddCash = () => {
                 onChange={(e) => {
                   setFormState({
                     ...formData,
-                    paymentMethod: e.target.checked
-                      ? 'Debit Card'
-                      : 'Bank Transfer',
+                    paymentMethod: e.target.checked ? 'card' : 'transfer',
                   })
                 }}
-                checked={formData.paymentMethod === 'Debit Card'}
+                checked={formData.paymentMethod === 'card'}
               />
-              Debit Card
+              Card
             </label>
           </InputGroup>
           <InputGroup className="radio--btn__container">
@@ -65,12 +76,10 @@ const AddCash = () => {
                 onChange={(e) => {
                   setFormState({
                     ...formData,
-                    paymentMethod: e.target.checked
-                      ? 'Bank Transfer'
-                      : 'Debit Card',
+                    paymentMethod: e.target.checked ? 'transfer' : 'card',
                   })
                 }}
-                checked={formData.paymentMethod === 'Bank Transfer'}
+                checked={formData.paymentMethod === 'transfer'}
               />
               Bank Transfer
             </label>
@@ -96,7 +105,7 @@ const AddCash = () => {
             <p>₦0.00</p>
           </div>
         </div>
-        <Button type="submit" rounded>
+        <Button rounded onClick={() => setDisplay(formData.paymentMethod)}>
           Proceed
         </Button>
       </form>

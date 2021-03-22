@@ -11,8 +11,27 @@ export default createGlobalStyle`
       padding: 0px;
       margin: 0px;
       font-weight: normal;
+
       ${maxQuery('lg')} {
+        font-size: 90%;
+      }
+      ${maxQuery('sm')} {
         font-size: 80%;
+      }
+       #nprogress .bar {
+        background: ${({ theme }) => theme.primary};
+        height: 3px;
+      }
+
+      #nprogress .peg {
+        box-shadow: 0 0 10px ${({ theme }) => theme.primary}, 0 0 ${({
+  theme,
+}) => theme.primary};
+            }
+
+      #nprogress .spinner-icon {
+        border-top-color: ${({ theme }) => theme.primary};
+        border-left-color: ${({ theme }) => theme.primary};
       }
     }
     body {
@@ -37,6 +56,11 @@ export default createGlobalStyle`
         margin: 0px;
       }
 
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
       /* Typography */
       .u--typo__headline {
         font-size: ${rem('20px')};
@@ -57,7 +81,7 @@ export default createGlobalStyle`
         font-size: ${rem('16px')};
         line-height: ${rem('20px')};
       }
-      .u--typo__btn {
+      .u--typo__btn, .u--typo__normalBold {
         font-size: ${rem('14px')};
         line-height: ${rem('16px')};
         font-weight: medium;
@@ -122,6 +146,13 @@ export default createGlobalStyle`
       .status--container__failed {
           background: #FFE9E9!important;
           color: #FF5E5E!important;
+      }
+      .helper--text {
+        color: #AEAEAE;
+      }
+
+      .u--status__error {
+        color: #FF5E5E!important;
       }
 }
 `

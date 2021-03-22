@@ -66,6 +66,9 @@ export default Styled.div`
             ${maxQuery('md')} {
                 height: 34vh;
             }
+            td.transaction--type {
+                text-transform: capitalize;
+            }
             span[class^="status--container"] {
                 border-radius: 5px;
                 padding: 0.4em 0.5em;

@@ -1,7 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { IoMdSettings, IoMdArrowRoundBack } from 'react-icons/io'
 import { FaBell } from 'react-icons/fa'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Button } from '../../UI'
 import Container from './styles'
 
@@ -11,6 +12,8 @@ const DashboardHeader = ({
   middleContent,
   navType = 'full',
 }) => {
+  const { notificationData } = useSelector((s) => s.user)
+  const location = useLocation()
   const history = useHistory()
   return (
     <Container
@@ -23,10 +26,27 @@ const DashboardHeader = ({
           <div className="flux--row">
             <h2 className={'u--typo__headline'}>{title}</h2>
             <div className="btn--tray">
-              <Button icon>
+              <Button
+                icon
+                onClick={() =>
+                  history.push('/dashboard/settings', {
+                    background: location,
+                  })
+                }
+              >
                 <IoMdSettings />
               </Button>
-              <Button icon>
+              <Button
+                icon
+                className={
+                  notificationData && notificationData.count
+                    ? 'notification--badge'
+                    : ''
+                }
+                onClick={() =>
+                  history.push('/dashboard/notification/fluxWallet')
+                }
+              >
                 <FaBell />
               </Button>
             </div>
@@ -46,10 +66,25 @@ const DashboardHeader = ({
             Go Back
           </Button>
           <div className="btn--tray">
-            <Button icon>
+            <Button
+              icon
+              onClick={() =>
+                history.push('/dashboard/settings', {
+                  background: location,
+                })
+              }
+            >
               <IoMdSettings />
             </Button>
-            <Button icon>
+            <Button
+              icon
+              className={
+                notificationData && notificationData.count
+                  ? 'notification--badge'
+                  : ''
+              }
+              onClick={() => history.push('/dashboard/notification/fluxWallet')}
+            >
               <FaBell />
             </Button>
           </div>

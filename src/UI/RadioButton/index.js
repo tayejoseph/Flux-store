@@ -1,10 +1,11 @@
 import React from 'react'
 import Container from './styles'
 
-const RadioButton = ({ name, checked, onChange }) => {
+const RadioButton = ({ name, checked, onChange, ...props }) => {
   return (
     <Container className="radio__input">
       <input
+        {...props}
         type="radio"
         name={name ? name : 'radio'}
         checked={checked}

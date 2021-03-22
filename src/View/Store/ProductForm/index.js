@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom'
+import { addCatalog, updateCatalog } from '../../../store/actions/User'
+import { formValidator } from '../../../helpers'
 import { Modal, Button } from '../../../UI'
 import SideNav from './SideNav'
 import InfoForm from './InfoForm'
@@ -7,17 +10,27 @@ import UploadForm from './UploadForm'
 import Container from './styles'
 
 const ProductForm = () => {
+  const dispatch = useDispatch()
+  const { catalogues } = useSelector((s) => s.user)
+  const {
+    params: { productId },
+  } = useRouteMatch()
+  const [loading, setLoading] = useState(false)
+  const activeProduct = catalogues[productId] ? catalogues[productId] : {}
   const [formData, setFormState] = useState({
-    title: '',
+    name: '',
     description: '',
     amount: '',
     quantity: '',
     delivery: '',
+    ...activeProduct,
   })
-  const {
-    params: { productId },
-  } = useRouteMatch()
   const { state, pathname } = useLocation()
+
+  const disabled = useMemo(() => {
+    const { name, description, amount, quantity, delivery } = formData
+    return !name || !description || !amount || !quantity || !delivery
+  }, [formData])
   const history = useHistory()
 
   const handleFormInput = ({ target }) => {
@@ -25,6 +38,25 @@ const ProductForm = () => {
       ...formData,
       [target.name]: target.value,
     })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log('skdskdsdlskl')
+    if (
+      formValidator(
+        document.forms['catalog--form'].getElementsByTagName('input'),
+      )
+    ) {
+      try {
+        setLoading(true)
+        const { status, data: response } = productId
+          ? dispatch(updateCatalog(formData))
+          : dispatch(addCatalog(formData))
+      } finally {
+        setLoading(false)
+      }
+    }
   }
   return (
     <Container>
@@ -40,8 +72,13 @@ const ProductForm = () => {
             </h2>
           </header>
           <main>
-            <SideNav />
-            <form>
+            <SideNav disabled={disabled} />
+            <form
+              id={'productForm'}
+              name={'catalog--form'}
+              onSubmit={handleSubmit}
+              noValidate
+            >
               <div className={state?.section !== 'infoForm' && 'hide--section'}>
                 <InfoForm {...{ handleFormInput, formData }} />
               </div>
@@ -66,16 +103,32 @@ const ProductForm = () => {
                   >
                     Back
                   </Button>
-                  <Button rounded>Publish</Button>
+                  <Button
+                    rounded
+                    type="submit"
+                    form={'productForm'}
+                    loading={loading}
+                  >
+                    Publish
+                  </Button>
                 </div>
               </>
             ) : (
               <div className="next--container">
                 <Button
                   rounded
-                  onClick={() =>
-                    history.push(pathname, { section: 'uploadForm' })
-                  }
+                  disabled={disabled}
+                  onClick={() => {
+                    if (
+                      formValidator(
+                        document.forms['catalog--form'].getElementsByTagName(
+                          'input',
+                        ),
+                      )
+                    ) {
+                      history.push(pathname, { section: 'uploadForm' })
+                    }
+                  }}
                 >
                   Next
                 </Button>

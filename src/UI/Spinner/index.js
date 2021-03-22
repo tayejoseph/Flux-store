@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import { rem } from 'polished'
 
 const spin = keyframes`
     0% { transform: rotate(0deg); }
@@ -12,7 +13,7 @@ export default styled.div.attrs({
   border: 4px solid #f3f3f3;
   border-top: 4px solid ${({ theme }) => theme.primary};
   border-radius: 50%;
-  width: ${props => props.size || '20px'};
-  height: ${props => props.size || '20px'};
+  width: ${(props) => props.size || '20px'};
+  height: ${(props) => props.size || '20px'};
   animation: ${spin} 1.2s linear infinite;
 `

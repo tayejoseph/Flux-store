@@ -27,34 +27,34 @@ const Card = () => {
         </header>
         <div className="table--container">
           <Table
+            tableHeader={
+              <thead>
+                <tr>
+                  <th>Recipient</th>
+                  <th>Amount</th>
+                  <th className="action--cell">Action</th>
+                </tr>
+              </thead>
+            }
             tableContent={
               <>
-                <thead>
-                  <tr>
-                    <th>Recipient</th>
-                    <th>Amount</th>
-                    <th className="action--cell">Action</th>
+                {[...Array(6).keys()].map((item, index) => (
+                  <tr key={index}>
+                    <td>Jackson Doe</td>
+                    <td>FAC16</td>
+                    <td className="action--cell">
+                      <Button icon className="btn--money">
+                        <FaMoneyBillWave />
+                      </Button>
+                      <Button icon className="btn--edit">
+                        <MdEdit />
+                      </Button>
+                      <Button icon className="btn--delete">
+                        <IoMdTrash />
+                      </Button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {[...Array(6).keys()].map((item, index) => (
-                    <tr key={index}>
-                      <td>Jackson Doe</td>
-                      <td>FAC16</td>
-                      <td className="action--cell">
-                        <Button icon className="btn--money">
-                          <FaMoneyBillWave />
-                        </Button>
-                        <Button icon className="btn--edit">
-                          <MdEdit />
-                        </Button>
-                        <Button icon className="btn--delete">
-                          <IoMdTrash />
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                ))}
               </>
             }
           />

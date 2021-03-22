@@ -5,10 +5,12 @@ export default Styled.div`
     align-items: center;
     justify-content: center;
     margin-right: 1em;
+    
     input {
         opacity: 0;
         width: 0;
         height: 0;
+        position: absolute;
         margin: 0px;
         &:checked + .radio__control {
             &::after {
@@ -18,8 +20,8 @@ export default Styled.div`
     }
     .radio__control {
         display: block;
-        width: 18px;
-        height: 18px;
+        width: 18px!important;
+        height: 18px!important;
         border-radius: 50%;
         border: 1px solid #855AAF;
         position: relative;

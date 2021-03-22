@@ -6,6 +6,10 @@ export default Styled.div`
     border-radius: 10px;
     box-shadow: 0px 0px 2px #00000029;
     height: 100%;
+    div.modal--container {
+        height: ${rem('485px')};
+        width: ${rem('373px')};
+    }
     
     header {
         display: flex;

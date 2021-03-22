@@ -1,15 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
+import { fetchDataPlan, handleDataTopUp } from '../../store/actions/App'
 import Container from './styles'
 
 const DataTopUp = () => {
+  const dispatch = useDispatch()
+  const { dataPlans } = useSelector((s) => s.app)
+  const [loading, setLoading] = useState(false)
   const [formData, setFormState] = useState({
-    whoFor: 'mySelf',
+    whoFor: 'self',
+    networkIndex: '',
+    activePlanIndex: '',
     phoneNo: '',
   })
-  const handleSubmit = (e) => {
-    e.preventDefault()
+
+  const handleInput = ({ target }) => {
+    setFormState((s) => ({
+      ...s,
+      [target.name]: target.value,
+    }))
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      setLoading(true)
+      const { networkIndex, amount, whoFor, planIndex } = formData
+      const { status, data: response } = await handleDataTopUp({
+        plan_code: dataPlans[networkIndex].plans[planIndex].plan_code,
+        receiver: whoFor,
+        network: dataPlans[networkIndex].network_name,
+        amount: amount,
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+  useEffect(() => {
+    fetchDataPlan(dispatch)
+  }, [dispatch])
+
   return (
     <Container>
       <Modal
@@ -17,62 +48,88 @@ const DataTopUp = () => {
         className="modal--size__sm modal--close__relative"
         modalTitle={'Data Topup'}
       >
-        <form onSubmit={handleSubmit}>
-          <div className="form--inputs">
-            <InputGroup>
-              <select placeholder={'Network'}>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-              </select>
-              <p className="u--typo__smBody helper--text">
-                Check your balance by dialling *127*0#
-              </p>
-            </InputGroup>
-            <InputGroup>
-              <select placeholder={'Data Plans'}>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-              </select>
-              <p className="u--typo__smBody helper--text">
-                All data plans last 30days unless otherwise indicated.
-              </p>
-            </InputGroup>
-            <p className="u--typo__normal">Who is this for?</p>
-            <InputGroup className="radio--btn__container">
-              <label className="u--color__dark">
-                <RadioButton
-                  type="radio"
-                  value="Myself"
-                  name={'airtime'}
-                  checked={true}
+        {dataPlans && (
+          <form onSubmit={handleSubmit}>
+            <div className="form--inputs">
+              <InputGroup>
+                <select
+                  placeholder={'Network'}
+                  name="networkIndex"
+                  onChange={handleInput}
+                >
+                  <option disabled>Select Your Network</option>
+                  {dataPlans.map((item, index) => (
+                    <option value={index} key={item.newort_code}>
+                      {item.network_name}
+                    </option>
+                  ))}
+                </select>
+                <p className="u--typo__smBody helper--text">
+                  {formData.networkIndex !== '' &&
+                    dataPlans[formData.networkIndex].check_balance}
+                </p>
+              </InputGroup>
+              <InputGroup>
+                <select
+                  placeholder={'Data Plans'}
+                  name="activePlanIndex"
+                  onChange={handleInput}
+                >
+                  {formData.networkIndex !== '' &&
+                    dataPlans[formData.networkIndex].plans.map(
+                      (item, index) => (
+                        <option value={index} key={item.plan_code}>
+                          {item.name}
+                        </option>
+                      ),
+                    )}
+                </select>
+                <p className="u--typo__smBody helper--text">
+                  All data plans last 30days unless otherwise indicated.
+                </p>
+              </InputGroup>
+              <p className="u--typo__normal">Who is this for?</p>
+              <InputGroup className="radio--btn__container">
+                <label className="u--color__dark">
+                  <RadioButton
+                    type="radio"
+                    value="self"
+                    name={'whoFor'}
+                    onChange={handleInput}
+                    checked={formData.whoFor === 'self'}
+                  />
+                  Myself
+                </label>
+              </InputGroup>
+              <InputGroup className="radio--btn__container">
+                <label className="u--color__dark">
+                  <RadioButton
+                    type="radio"
+                    value="someoneElse"
+                    name={'whoFor'}
+                    onChange={handleInput}
+                    checked={formData.whoFor === 'someoneElse'}
+                  />
+                  Someone else
+                </label>
+              </InputGroup>
+              {formData.whoFor !== 'self' && (
+                <InputGroup
+                  type="tel"
+                  name={'phoneNumber'}
+                  value={formData.phoneNumber}
+                  onChange={handleInput}
+                  placeholder={"Recipient's Number"}
                 />
-                Myself
-              </label>
-            </InputGroup>
-            <InputGroup className="radio--btn__container">
-              <label className="u--color__dark">
-                <RadioButton
-                  type="radio"
-                  value="Someone else"
-                  name={'airtime'}
-                />
-                Someone else
-              </label>
-            </InputGroup>
-            <InputGroup>
-              <input placeholder={"Recipient's Number"} />
-            </InputGroup>
-          </div>
-          <footer>
-            <Button full type="submit" rounded>
-              Top up
-            </Button>
-          </footer>
-        </form>
+              )}
+            </div>
+            <footer>
+              <Button full type="submit" rounded loading={loading}>
+                Top up
+              </Button>
+            </footer>
+          </form>
+        )}
       </Modal>
     </Container>
   )
