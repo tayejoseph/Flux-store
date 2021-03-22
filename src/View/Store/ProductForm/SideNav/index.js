@@ -2,14 +2,15 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Container from './styles'
 
-const SideNav = () => {
+const SideNav = ({ disabled }) => {
   const { pathname, state } = useLocation()
-  console.log(useLocation())
   return (
     <Container>
       <nav>
         <Link
-          className={`${(!state || state?.section === 'infoForm') && 'active'}`}
+          className={`${
+            !state || state?.section === 'infoForm' ? 'active' : ''
+          }`}
           to={{
             pathname,
             state: { section: 'infoForm' },
@@ -20,7 +21,9 @@ const SideNav = () => {
           </span>
         </Link>
         <Link
-          className={`${state?.section === 'uploadForm' && 'active'}`}
+          className={`${state?.section === 'uploadForm' ? 'active' : ''} ${
+            disabled ? 'disable--link' : ''
+          }`}
           to={{
             pathname,
             state: { section: 'uploadForm' },

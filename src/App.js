@@ -42,7 +42,9 @@ const App = () => {
               <Auth />
             )}
           </Route>
-          {authenticated && <Route path="/dashboard" component={DashBoard} />}
+          <Route path="/dashboard">
+            {authenticated ? <DashBoard /> : <Redirect to="/" />}
+          </Route>
         </Switch>
 
         {/* Switch for modals with background routes */}

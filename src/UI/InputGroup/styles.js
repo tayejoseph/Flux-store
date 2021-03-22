@@ -26,7 +26,7 @@ export default styled.div.attrs({
       outline: none;
       border: 1.5px solid #855aaf;
     }
-    &:invalid {
+    &:invalid:not([value='']) {
       color: #222222;
       border: 1.5px solid #ff5e5e;
     }

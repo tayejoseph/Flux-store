@@ -4,8 +4,8 @@ import { rem } from 'polished'
 export default Styled.aside`
     padding-top: 1em;
     width: 100%;
-   
     nav { 
+        overflow: hidden;
         button {
             margin-left: 1em;
             letter-spacing: 0px;

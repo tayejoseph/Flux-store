@@ -21,7 +21,7 @@ server.interceptors.response.use(
   },
   (err) => {
     NProgress.done()
-    return err
+    return Promise.reject(err)
   },
 )
 

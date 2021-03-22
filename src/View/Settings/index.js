@@ -1,28 +1,54 @@
-import React, { useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Modal, Button } from '../../UI'
+import { formValidator } from '../../helpers'
+import { updateUserDetails, changeUserPassword } from '../../store/actions/User'
 import SideNav from './SideNav'
 import AccForm from './AccForm'
 import PasswordForm from './PasswordForm'
 import Container from './styles'
 
 const Settings = () => {
+  const { userData } = useSelector((s) => s.user)
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const [displaySec, setDisplay] = useState('accForm')
-  const [formData, setFormState] = useState({
-    title: '',
-    description: '',
-    amount: '',
-    quantity: '',
-    delivery: '',
-  })
-  const { state, pathname } = useLocation()
+  const [formData, setFormState] = useState({})
   const history = useHistory()
-  console.log(state)
-  const handleFormInput = ({ target }) => {
+
+  const handleInput = ({ target }) => {
     setFormState({
       ...formData,
       [target.name]: target.value,
     })
+  }
+
+  useEffect(() => {
+    setFormState({})
+  }, [displaySec])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (
+      formValidator(
+        document.forms['acc--form'].getElementsByTagName('input'),
+      ) &&
+      Object.keys(formData).length > 0
+    ) {
+      try {
+        setLoading(true)
+        const { status } =
+          displaySec === 'accForm'
+            ? await dispatch(
+                updateUserDetails({ username: userData.username, ...formData }),
+              )
+            : dispatch(changeUserPassword(formData))
+        setLoading(false)
+      } finally {
+        setLoading(false)
+      }
+    }
   }
   return (
     <Container>
@@ -37,22 +63,17 @@ const Settings = () => {
           </header>
           <main>
             <SideNav {...{ displaySec, setDisplay }} />
-            <form>
+            <form onSubmit={handleSubmit} name="acc--form" noValidate>
               {displaySec === 'accForm' ? (
-                <AccForm {...{ handleFormInput, formData }} />
+                <AccForm {...{ handleInput, userData }} />
               ) : (
-                <PasswordForm {...{ handleFormInput, formData }} />
+                <PasswordForm {...{ handleInput, userData }} />
               )}
             </form>
           </main>
           <footer>
             <div className="next--container">
-              <Button
-                rounded
-                onClick={() =>
-                  history.push(pathname, { section: 'passwordForm' })
-                }
-              >
+              <Button rounded loading={loading} onClick={handleSubmit}>
                 {displaySec === 'accForm' ? 'Update' : 'Change'}
               </Button>
             </div>

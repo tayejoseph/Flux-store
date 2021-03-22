@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputGroup } from '../../UI'
 
-const PasswordForm = ({ formData, handleInput }) => {
+const PasswordForm = ({ userData, handleInput }) => {
   return (
     <div>
       <InputGroup
@@ -9,7 +9,6 @@ const PasswordForm = ({ formData, handleInput }) => {
         placeholder={'**********'}
         name="oldPassword"
         type={'password'}
-        value={formData.oldPassword}
         onChange={handleInput}
       />
       <InputGroup
@@ -17,7 +16,6 @@ const PasswordForm = ({ formData, handleInput }) => {
         placeholder={'**********'}
         name="newPassword"
         type={'password'}
-        value={formData.newPassword}
         onChange={handleInput}
       />
       <InputGroup
@@ -25,7 +23,6 @@ const PasswordForm = ({ formData, handleInput }) => {
         placeholder={'**********'}
         name="confirmPassword"
         type={'password'}
-        value={formData.confirmPassword}
         onChange={handleInput}
       />
     </div>

@@ -4,6 +4,7 @@ import { FaGift } from 'react-icons/fa'
 import { RiArrowUpDownFill, RiArrowLeftUpLine } from 'react-icons/ri'
 import { FiArrowUpRight } from 'react-icons/fi'
 import { ImCreditCard } from 'react-icons/im'
+import { useSelector } from 'react-redux'
 import fluxLogo from '../../assets/Flux Logo@2x.png'
 import UserAvatar from '../../assets/autumn-goodman-vTL_qy03D1I-unsplash (1)@2x.png'
 import { Link, useLocation } from 'react-router-dom'
@@ -12,6 +13,9 @@ import Container from './styles'
 
 const SideNav = ({ className }) => {
   const location = useLocation()
+  const {
+    userData: { full_name, email_verified, bvn_verified },
+  } = useSelector((s) => s.user)
 
   const backgroundPathname = location.state?.background
 
@@ -30,7 +34,7 @@ const SideNav = ({ className }) => {
           </div>
         </Link>
         <p className="u--typo__normal">
-          Hi <span>Julia</span>
+          Hi <span>{full_name.split(' ')[0]}</span>
         </p>
       </header>
       <hr />
@@ -86,7 +90,11 @@ const SideNav = ({ className }) => {
                   ? 'active'
                   : ''
               }
-              to="/dashboard/store/newUser"
+              to={
+                email_verified && bvn_verified
+                  ? '/dashboard/store/'
+                  : '/dashboard/store/newUser'
+              }
             >
               <IoMdBasket />
               Flux Store

@@ -19,7 +19,7 @@ export default Styled.div`
         padding-top: 3.5em;
         border-radius: 10px;
         header {
-            div.img--container {   
+            a.img--container {   
                 position: absolute;
                 top: -25px;   
                 background: #fff;

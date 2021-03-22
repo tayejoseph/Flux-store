@@ -6,11 +6,8 @@ const altDataPlans = (data) => ({
   data,
 })
 
-export const fetchBanks = async (dispatch) => {
-  try {
-    const { status, data: response } = await axios.get('/users/banks/')
-    console.log(response, 'sjdskjskj')
-  } catch ({ response }) {}
+export const validateAccNo = async (data) => {
+  return await axios.post('/users/verify/account/', data)
 }
 
 export const fetchDataPlan = async (dispatch) => {

@@ -1,15 +1,16 @@
 import axios from '../../lib/axios'
 import Cookies from 'js-cookie'
-import { LOGIN_USER, USER_DATA } from '../type'
-
-export const initUserData = (data) => ({
-  type: USER_DATA,
-  data,
-})
+import handleError from '../../lib/handleError'
+import { LOGIN_USER, LOGOUT_USER } from '../type'
+import { initUserData } from './User'
 
 export const loginHandler = (data) => ({
   type: LOGIN_USER,
   data,
+})
+
+export const logoutUser = () => ({
+  type: LOGOUT_USER,
 })
 
 export const loginUser = (data) => async (dispatch, getState) => {
@@ -20,12 +21,12 @@ export const loginUser = (data) => async (dispatch, getState) => {
         'Authorization'
       ] = `bearer-${response.token}`
       Cookies.set('token', response.token)
-      dispatch(loginHandler(true))
       dispatch(initUserData(response.user))
+      if (response.user.full_name) dispatch(loginHandler(true))
     }
     return { status, response }
   } catch ({ response }) {
-    console.log(response.data, 'Sdjsdjk')
+    handleError(response)
   }
 }
 
@@ -43,16 +44,14 @@ export const signUpUser = ({ email, password: password1 }) => async (
         'Authorization'
       ] = `bearer-${response.token}`
       Cookies.set('token', response.token)
-      dispatch(loginHandler(true))
       dispatch(initUserData(response.user))
     }
     return { status, response }
   } catch ({ response }) {
-    console.log(response.data, 'Sdjsdjk')
+    handleError(response)
   }
 }
 
 export const logOut = () => async (dispatch) => {
-  dispatch(initUserData({}))
-  dispatch(loginHandler(false))
+  dispatch(logoutUser())
 }

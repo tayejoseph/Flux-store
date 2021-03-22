@@ -1,47 +1,93 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Button, Modal, InputGroup } from '../../../UI'
-import { fetchBanks } from '../../../store/actions/App'
-import { withdraw } from '../../../store/actions/User'
+import React, { useState, useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+import { formValidator } from '../../../helpers'
+import { Button, Modal, InputGroup, Spinner } from '../../../UI'
+import { validateAccNo } from '../../../store/actions/App'
+import { handleWithdrawal } from '../../../store/actions/User'
+import { BankLists } from '../../../Constants'
 import Container from './styles'
 
 const WithDraw = () => {
   const dispatch = useDispatch()
-  const { bankLists } = useSelector((s) => s.user)
-  const [loading, setLoading] = useState(false)
+  const [{ loading, validated, error }, setDisplay] = useState({
+    loading: false,
+    error: false,
+    validated: false,
+  })
+
+  const disabled = useMemo(() => loading || validated !== true, [
+    loading,
+    validated,
+  ])
+
   const [formData, setFormState] = useState({
     amount: '',
-    bankName: '',
-    acct_no: '',
-    acct_name: '',
+    account_no: '',
+    acct_name: 'Account Name',
+    bank_code: '',
   })
 
   const handleInput = (e) => {
+    setDisplay((s) => ({ ...s, validated: false, error: false }))
     setFormState({
       ...formData,
       [e.target.name]: e.target.value,
     })
+    if (
+      (e.target.name === 'account_no' || e.target.name === 'amount') &&
+      e.target.value.length === 10
+    ) {
+      initBankValidation()
+    }
+  }
+
+  const initBankValidation = async () => {
+    const { account_no, amount, bank_code } = formData
+    if (account_no && amount && bank_code) {
+      setDisplay((s) => ({ ...s, validated: 'validating' }))
+      const { status, data: response } = await validateAccNo({
+        account_no,
+        bank_code,
+      })
+      if (status === 200) {
+        setDisplay((s) => ({ ...s, validated: true }))
+        if (response.status === 'error') {
+          setDisplay((s) => ({ ...s, validated: true, error: true }))
+          setFormState((s) => ({
+            ...s,
+            acct_name: 'Invalid Account Number',
+          }))
+        } else {
+          setDisplay((s) => ({ ...s, validated: true }))
+          setFormState((s) => ({
+            ...s,
+            acct_name: response.data.account_name,
+          }))
+        }
+      }
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
-    try {
-      const { amount, acct_name, acct_no } = formData
-      const { status, data: response } = await dispatch(
-        withdraw({
-          amount,
-          acct_name,
-          acct_no,
-          bank_code: '058',
-        }),
+    if (
+      formValidator(
+        document.forms['withdraw--form'].getElementsByTagName('input'),
       )
-    } catch {}
+    ) {
+      try {
+        setDisplay((s) => ({ ...s, loading: true }))
+        const { status, data: response } = await dispatch(
+          handleWithdrawal(formData),
+        )
+        if (status === 200) {
+          setDisplay((s) => ({ ...s, loading: false }))
+        }
+      } finally {
+        setDisplay((s) => ({ ...s, loading: false }))
+      }
+    }
   }
-
-  useEffect(() => {
-    fetchBanks(dispatch)
-  }, [dispatch])
 
   return (
     <Container>
@@ -50,7 +96,7 @@ const WithDraw = () => {
         className="modal--size__sm modal--close__relative"
         modalTitle={'Withdraw'}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} name="withdraw--form" noValidate>
           <div className="form--inputs">
             <p className="intro--txt">
               Enter the amount and account you wish to withdraw
@@ -58,37 +104,54 @@ const WithDraw = () => {
             <InputGroup
               placeholder={'₦0.00'}
               name="amount"
+              onBlur={initBankValidation}
               onChange={handleInput}
               value={formData.amount}
             />
-            {/* <InputGroup>
+            <InputGroup>
               <select
                 placeholder={'Network'}
-                name="bankName"
+                name="bank_code"
                 onChange={handleInput}
               >
-                <option value="volvo" disabled={true}>
+                <option value="" disabled={true}>
                   Select Recipient's Network
                 </option>
-                {bankLists.map((item, index) => (
-                  <option value={index} key={item.newort_code}>
-                    {item.network_name}
+                {BankLists.map((item, index) => (
+                  <option value={item.id} key={item.id}>
+                    {item.name}
                   </option>
                 ))}
               </select>
-            </InputGroup> */}
+            </InputGroup>
             <InputGroup
               placeholder={'Account Number'}
-              name="acct_no"
+              name="account_no"
+              type="number"
               onChange={handleInput}
-              value={formData.acct_no}
+              onBlur={initBankValidation}
+              value={formData.account_no}
             />
-            <div className="account--name">
-              <p>Balogun Darius Olanrewaju</p>
-            </div>
+            {validated && (
+              <div className="account--name">
+                {validated === 'validating' ? (
+                  <Spinner />
+                ) : (
+                  <p className={error ? 'u--status__error' : ''}>
+                    {formData.acct_name}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
           <footer>
-            <Button full type="submit" rounded loading={loading}>
+            <Button
+              full
+              rounded
+              loading={loading}
+              disabled={disabled}
+              type="submit"
+            >
               Withdraw
             </Button>
           </footer>

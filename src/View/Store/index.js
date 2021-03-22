@@ -1,26 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { IoMdAdd, IoIosArrowDown } from 'react-icons/io'
 import { useHistory } from 'react-router-dom'
-import { Button } from '../../UI'
+import { Helmet } from 'react-helmet'
+import { Button, Spinner } from '../../UI'
 import StoreItem from './StoreItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { trackWindowScroll } from 'react-lazy-load-image-component'
+import { fetchCatalog } from '../../store/actions/User'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import Container from './styles'
 
-const content = {
-  productName: 'PS4 Pro 1TB + FIFA 20 and 2 Controllers',
-  price: '₦175,499.99',
-  publishStatus: 'Published',
-  imgSrc: '',
-  productDetail:
-    'The PlayStation 4 (PS4) is an eighth-generation home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013.',
-  qtyAvailable: '34',
-  delivery: 'Nationwide Delivery',
-  sales: '345 Sold (₦175,499,234)',
-}
-
 const Store = () => {
+  const dispatch = useDispatch()
+  const { catalogues } = useSelector((s) => s.user)
   const [showActionSheet, setDisplay] = useState(null)
   const history = useHistory()
+
+  useEffect(() => {
+    dispatch(fetchCatalog())
+  }, [dispatch])
 
   const handleBodyClick = useCallback(
     (e) => {
@@ -50,6 +48,9 @@ const Store = () => {
   }, [handleBodyClick])
   return (
     <Container>
+      <Helmet>
+        <title>Flux Store</title>
+      </Helmet>
       <DashboardHeader
         title={'Flux Store'}
         sectionAction={
@@ -78,17 +79,23 @@ const Store = () => {
       />
       <div className="store--container">
         <div className="store--content">
-          {[...Array(40).keys()].map((item, index) => (
-            <StoreItem
-              key={index}
-              {...{ ...content, showActionSheet, index }}
-              onActionClick={(e) => {
-                e.stopPropagation()
-                setDisplay(index)
-              }}
-              onClick={() => history.push(`/dashboard/store/${index}/details`)}
-            />
-          ))}
+          {catalogues === '' ? (
+            <Spinner />
+          ) : (
+            catalogues.map((item, index) => (
+              <StoreItem
+                key={index}
+                {...{ ...item, showActionSheet, index }}
+                onActionClick={(e) => {
+                  e.stopPropagation()
+                  setDisplay(index)
+                }}
+                onClick={() =>
+                  history.push(`/dashboard/store/${index}/details`)
+                }
+              />
+            ))
+          )}
         </div>
         <footer />
       </div>
@@ -96,4 +103,4 @@ const Store = () => {
   )
 }
 
-export default Store
+export default trackWindowScroll(Store)

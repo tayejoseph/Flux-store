@@ -17,6 +17,7 @@ export default Styled.aside`
         a {
             text-decoration: none;
             display: flex;
+            user-select: none;
             position: relative;
             ${maxQuery('md')} {
                 align-items: center;
@@ -67,6 +68,12 @@ export default Styled.aside`
                 &:before {
                     background: ${({ theme }) => theme.primary};
                     border: 3px solid #fff;
+                }
+            }
+            &.disable--link {
+                pointer-events: none;
+                cursor: no-drop;
+                opacity: 0.5;
                 }
             }
         }

@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useLocation, useHistory } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 // import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { IoIosArrowForward } from 'react-icons/io'
 import { useDispatch } from 'react-redux'
+import { getCurrency, toMoney } from '../../helpers'
 import { fetchAllTransactions } from '../../store/actions/User'
 import WalletItem from './WalletItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import { Button, Table } from '../../UI'
 import Container from './styles'
-import wallet1 from '../../assets/wallet1.png'
-import wallet2 from '../../assets/wallet2.svg'
-import wallet3 from '../../assets/wallet3.svg'
 
-const wallets = [
+const wallets = (userData) => [
   {
-    balance: '₦48,995.00',
+    balance: `₦4${toMoney(userData.balance)}`,
     walletType: 'Flux Wallet',
-    title: 'F96B9',
+    title: userData.flux_id,
     background: 'rgb(135,168,192)',
     gradient:
       'linear-gradient(211deg, rgba(135,168,192,1) 20%, rgba(123,34,159,1) 70%)',
-    imgSrc: wallet1,
   },
   {
     balance: '₦48,995.00',
@@ -29,7 +28,6 @@ const wallets = [
     background: 'rgb(135,168,192)',
     gradient:
       'linear-gradient(17deg, rgba(135,168,192,1) 20%, rgba(122,55,164,1) 70%)',
-    imgSrc: wallet2,
   },
   {
     balance: '₦238,395.67',
@@ -38,42 +36,30 @@ const wallets = [
     gradient:
       'linear-gradient(342deg, rgba(142,16,149,1) 20%, rgba(222,97,142,1) 70%)',
     title: 'SALES BALANCE',
-    imgSrc: wallet3,
   },
 ]
 
-const getStatus = (index, result, section) => {
-  switch (result) {
-    case 'className':
-      return index % 2 === 0
-        ? `status--${section}__success`
-        : index % 3 === 0
-        ? `status--${section}__pending`
-        : `status--${section}__failed`
-    case 'status':
-      return index % 2 === 0
-        ? 'Success'
-        : index % 3 === 0
-        ? 'Pending'
-        : 'Failed'
-  }
-}
-
 const Wallet = () => {
+  const { transactionLists, userData } = useSelector((s) => s.user)
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
+  console.log(transactionLists.length)
 
   useEffect(() => {
     dispatch(fetchAllTransactions())
   }, [dispatch])
+
   return (
     <Container>
+      <Helmet>
+        <title>Flux Wallet</title>
+      </Helmet>
       <DashboardHeader
         title={'Wallet'}
         middleContent={
           <div className="wallet--middle__content">
-            {wallets.map((item) => (
+            {wallets(userData).map((item) => (
               <WalletItem key={item.walletType} {...item} />
             ))}
           </div>
@@ -115,53 +101,54 @@ const Wallet = () => {
         </header>
         <div className="table--container">
           <Table
+            data={transactionLists}
+            emptyMessage="Oop, no transaction lists at this time"
+            tableHeader={
+              <thead>
+                <tr>
+                  <th>Amount</th>
+                  <th>Recipient</th>
+                  <th>Date</th>
+                  <th>Transaction Type</th>
+                  <th className="u--typo__center">Status</th>
+                </tr>
+              </thead>
+            }
             tableContent={
               <>
-                <thead>
-                  <tr>
-                    <th>Amount</th>
-                    <th>Recipient</th>
-                    <th>Date</th>
-                    <th>Transaction Type</th>
-                    <th className="u--typo__center">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...Array(10).keys()].map((item, index) => (
+                {transactionLists &&
+                  transactionLists.length > 0 &&
+                  transactionLists.map((item, index) => (
                     <tr key={`table-${index}`}>
-                      <td className={getStatus(index, 'className', 'txt')}>
-                        ₦48,995.00
+                      <td
+                        className={`status--txt__${item.status.toLowerCase()}`}
+                      >
+                        {getCurrency(item.currency)}
+                        {item.amount}
                       </td>
-                      <td>Julia Bradley</td>
-                      <td>Jun 20, 2020 4:55 AM</td>
-                      <td>Transfer</td>
+                      <td>{item.receiver_name}</td>
+                      <td>
+                        {new Date(item.updated_at).toLocaleDateString('en-US', {
+                          weekday: 'short',
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </td>
+                      <td className={'transaction--type'}>
+                        {item.action.replace('_', ' ')}
+                      </td>
                       <td className={'u--typo__center'}>
                         <span
-                          className={`status--container ${getStatus(
-                            index,
-                            'className',
-                            'container',
-                          )}`}
+                          className={`status--container status--container__${item.status.toLowerCase()}`}
                         >
-                          {getStatus(index, 'status')}
+                          {item.status}
                         </span>
                       </td>
                     </tr>
                   ))}
-                </tbody>
               </>
             }
-            // tableFooter={
-            //   <div className="table--nav">
-            //     <Button icon>
-            //       <MdKeyboardArrowLeft />
-            //     </Button>
-            //     <div className="nav--text__container">1/3</div>
-            //     <Button icon>
-            //       <MdKeyboardArrowRight />
-            //     </Button>
-            //   </div>
-            // }
           />
         </div>
       </div>

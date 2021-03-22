@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Route, useRouteMatch, Switch } from 'react-router'
+import { useDispatch } from 'react-redux'
 import { IoMdMenu } from 'react-icons/io'
 import { Button } from '../../UI'
+import { getUserDetails, getUserNotifications } from '../../store/actions/User'
 import DashboardSideNav from '../DashboardSideNav'
 import {
   Wallet,
@@ -20,6 +22,7 @@ import {
 import Container from './styles'
 
 const DashBoard = () => {
+  const dispatch = useDispatch()
   const [showMenu, setDisplay] = useState(false)
   const { path } = useRouteMatch()
 
@@ -28,6 +31,10 @@ const DashBoard = () => {
     setDisplay(false)
   }
 
+  useEffect(() => {
+    dispatch(getUserDetails())
+    dispatch(getUserNotifications())
+  }, [dispatch])
   useEffect(() => {
     const handleResize = () => {
       setDisplay(false)

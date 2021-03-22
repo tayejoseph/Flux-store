@@ -32,25 +32,25 @@ const SendMoney = () => {
         </header>
         <div className="transaction--table__container">
           <Table
+            tableHeader={
+              <thead>
+                <tr>
+                  <th>Recipient</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+            }
             tableContent={
-              <>
-                <thead>
-                  <tr>
-                    <th>Recipient</th>
-                    <th>Description</th>
-                    <th>Amount</th>
+              <tbody>
+                {[...Array(10).keys()].map((item, index) => (
+                  <tr key={`table-${index}`}>
+                    <td>Jackson Doe</td>
+                    <td>Shopping List for Jason's</td>
+                    <td>₦ 4,354,955.23</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {[...Array(10).keys()].map((item, index) => (
-                    <tr key={`table-${index}`}>
-                      <td>Jackson Doe</td>
-                      <td>Shopping List for Jason's</td>
-                      <td>₦ 4,354,955.23</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </>
+                ))}
+              </tbody>
             }
           />
         </div>

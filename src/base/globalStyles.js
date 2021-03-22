@@ -56,6 +56,11 @@ export default createGlobalStyle`
         margin: 0px;
       }
 
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
       /* Typography */
       .u--typo__headline {
         font-size: ${rem('20px')};
@@ -144,6 +149,10 @@ export default createGlobalStyle`
       }
       .helper--text {
         color: #AEAEAE;
+      }
+
+      .u--status__error {
+        color: #FF5E5E!important;
       }
 }
 `

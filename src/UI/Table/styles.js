@@ -5,6 +5,13 @@ export default Styled.div`
     table.flux--table {
         width: 100%;
         background: #fff;
+        div.spinner--container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         thead {
             background: #FFFFFF 0% 0% no-repeat padding-box;
             box-shadow: 0px 0px 2px #00000029;
@@ -22,6 +29,10 @@ export default Styled.div`
             /* box-shadow: 0px 0px 2px #00000029; */
             display: block;
             overflow: auto;
+        }
+        p.error--msg {
+            margin-top: 3em;
+            text-align: center;
         }
         thead tr, tbody tr {
             display: table;

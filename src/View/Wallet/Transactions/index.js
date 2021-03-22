@@ -1,28 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import DashboardHeader from '../../../Layout/DashboardHeader'
 import { TiFilter } from 'react-icons/ti'
+import { getCurrency } from '../../../helpers'
 // import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { Button, InputGroup, Table } from '../../../UI'
 import Container from './styles'
 
-const getStatus = (index, result, section) => {
-  switch (result) {
-    case 'className':
-      return index % 2 === 0
-        ? `status--${section}__success`
-        : index % 3 === 0
-        ? `status--${section}__pending`
-        : `status--${section}__failed`
-    case 'status':
-      return index % 2 === 0
-        ? 'Success'
-        : index % 3 === 0
-        ? 'Pending'
-        : 'Failed'
-  }
-}
-
 const Transactions = () => {
+  const { transactionLists } = useSelector((s) => s.user)
+
   return (
     <Container>
       <header>
@@ -44,40 +31,47 @@ const Transactions = () => {
       <div className="transaction--container">
         <div className="table--container">
           <Table
+            data={transactionLists}
+            tableHeader={
+              <thead>
+                <tr>
+                  <th>Amount</th>
+                  <th>Recipient</th>
+                  <th>Date</th>
+                  <th>Transaction Type</th>
+                  <th className="u--typo__center">Status</th>
+                </tr>
+              </thead>
+            }
             tableContent={
               <>
-                <thead>
-                  <tr>
-                    <th>Amount</th>
-                    <th>Recipient</th>
-                    <th>Date</th>
-                    <th>Transaction type</th>
-                    <th className={'u--typo__center'}>Status</th>
+                {transactionLists.map((item, index) => (
+                  <tr key={`table-${index}`}>
+                    <td className={`status--txt__${item.status.toLowerCase()}`}>
+                      {getCurrency(item.currency)}
+                      {item.amount}
+                    </td>
+                    <td>{item.receiver_name}</td>
+                    <td>
+                      {new Date(item.updated_at).toLocaleDateString('en-US', {
+                        weekday: 'short',
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </td>
+                    <td className={'transaction--type'}>
+                      {item.action.replace('_', ' ')}
+                    </td>
+                    <td className={'u--typo__center'}>
+                      <span
+                        className={`status--container status--container__${item.status.toLowerCase()}`}
+                      >
+                        {item.status}
+                      </span>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {[...Array(50).keys()].map((item, index) => (
-                    <tr key={index}>
-                      <td className={getStatus(index, 'className', 'txt')}>
-                        ₦48,995.00
-                      </td>
-                      <td>Julia Bradley</td>
-                      <td>Jun 20, 2020 4:55 AM</td>
-                      <td>Transfer</td>
-                      <td className={'u--typo__center'}>
-                        <span
-                          className={`status--container ${getStatus(
-                            index,
-                            'className',
-                            'container',
-                          )}`}
-                        >
-                          {getStatus(index, 'status')}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                ))}
               </>
             }
             // tableFooter={

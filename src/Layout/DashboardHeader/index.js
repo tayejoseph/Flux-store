@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { IoMdSettings, IoMdArrowRoundBack } from 'react-icons/io'
 import { FaBell } from 'react-icons/fa'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -11,6 +12,7 @@ const DashboardHeader = ({
   middleContent,
   navType = 'full',
 }) => {
+  const { notificationData } = useSelector((s) => s.user)
   const location = useLocation()
   const history = useHistory()
   return (
@@ -36,6 +38,11 @@ const DashboardHeader = ({
               </Button>
               <Button
                 icon
+                className={
+                  notificationData && notificationData.count
+                    ? 'notification--badge'
+                    : ''
+                }
                 onClick={() =>
                   history.push('/dashboard/notification/fluxWallet')
                 }
@@ -71,6 +78,11 @@ const DashboardHeader = ({
             </Button>
             <Button
               icon
+              className={
+                notificationData && notificationData.count
+                  ? 'notification--badge'
+                  : ''
+              }
               onClick={() => history.push('/dashboard/notification/fluxWallet')}
             >
               <FaBell />

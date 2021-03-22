@@ -22,6 +22,7 @@ export default Styled.div`
             box-shadow: 0px 0px 3px #00000029;
             border-radius: 10px 10px 0px 0px;
             opacity: 1;
+            user-select: none;
         }
         main { 
             display: flex;

@@ -1,38 +1,42 @@
 import React from 'react'
 import { InputGroup } from '../../UI'
 
-const AccForm = ({ formData, handleInput }) => {
+const AccForm = ({ userData, handleInput }) => {
   return (
     <div>
       <InputGroup
         label={'Full Name'}
         placeholder={'e.g Jackson Doe'}
-        name="Full Name"
-        value={formData.title}
+        name="full_name"
+        defaultValue={userData.full_name}
         onChange={handleInput}
+        required
       />
       <InputGroup
         label={'Phone Number'}
         placeholder={'08453453407'}
-        name={'phoneNo'}
+        name={'phone'}
         type={'tel'}
-        value={formData.phoneNo}
+        defaultValue={userData.phone}
         onChange={handleInput}
+        required
       />
       <InputGroup
         label="Date of Birth"
         placeholder={'YYYY-MM-DD'}
-        name="dateOfBirth"
+        name="dob"
         type="date"
-        value={formData.dateOfBirth}
+        defaultValue={userData.dob}
         onChange={handleInput}
+        required
       />
       <InputGroup
         label="Bank Verification Number(BVN)"
         placeholder={'457779894'}
-        name="delivery"
-        value={formData.delivery}
+        name="bvn"
+        defaultValue={userData.bvn}
         onChange={handleInput}
+        required
       />
     </div>
   )

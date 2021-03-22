@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -10,6 +12,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import 'nprogress/nprogress.css'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import reducers from './store/index'
 
@@ -35,6 +38,7 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <App />
+          <ToastContainer />
         </BrowserRouter>
       </PersistGate>
     </Provider>

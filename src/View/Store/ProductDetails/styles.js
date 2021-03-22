@@ -32,15 +32,33 @@ export default Styled.div`
                         width: ${rem('317px')};
                         height: ${rem('333px')};
                         box-shadow: 0px 0px 2px #00000029;
-                        border-radius: 10px;
+                        border-radius: 10px; 
+                        overflow: hidden;
+                        span {
+                            width: 100%;
+                            height: 100%;
+                            img {
+                                object-fit: cover;
+                            }
+                        }
                     }
                     ${maxQuery('md')} {
                         margin-bottom: 2em;
                     }
                 }
                 &:last-child {
+                    width: 100%;
                     h2.productDetails--title {
                         margin-bottom: 1em;
+                        width: 100%;
+                        text-overflow: ellipsis;
+                        height: ${rem('18px')};
+                    }
+                    p.product--details {
+                        height: ${rem('76px')};
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
                     }
                     p.product--status {
                         color: #47C479;
@@ -109,6 +127,16 @@ export default Styled.div`
                     height: ${rem('48px')};
                     box-shadow: 0px 0px 2px #00000029;
                     border-radius: 10px;
+                    span {     
+                        width: ${rem('48px')};
+                        height: ${rem('48px')};
+                        overflow: hidden;
+                        box-shadow: 0px 0px 2px #00000029;
+                        border-radius: 10px;
+                        img {
+                            object-fit: cover;
+                        }
+                    }
                     &:nth-child(2) {
                         margin: 0 1em;
                          ${maxQuery('md')} {

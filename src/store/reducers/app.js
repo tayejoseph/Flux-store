@@ -12,11 +12,6 @@ const AppReducer = (state = initState, action) => {
         ...state,
         dataPlans: data,
       }
-    case 'ALT_BANK_LISTS':
-      return {
-        ...state,
-        bankLists: data,
-      }
     default:
       return state
   }

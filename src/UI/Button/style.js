@@ -136,7 +136,21 @@ export default styled.button`
             color: #855AAF;
         }
     }
-  
+  /* notification */
+  &.notification--badge {
+    position: relative;
+    &:after {
+      content: "";
+      top: -2px;
+      right: 0%;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FF5E5E;
+      border: 1.6px solid #fff;
 
+    }
+  }
     `}
 `
