@@ -1,4 +1,4 @@
-export default [
+const ProductCategories = [
   'Food and Drinks',
   'Beauty',
   'Fashion Clothing and shoes',
@@ -11,3 +11,5 @@ export default [
   'Computers and Gadgets',
   'IT services',
 ]
+
+export default ProductCategories

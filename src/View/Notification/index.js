@@ -1,17 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import DashboardHeader from '../../Layout/DashboardHeader'
-import { TiFilter } from 'react-icons/ti'
-import { Button, InputGroup } from '../../UI'
 import Container from './styles'
-
-const notifications = {
-  type: 'Receipt',
-  data: '23/08/2020',
-  fluxID: 'FB6CD',
-  details: 'Sent you a total of',
-  value: '0.2341BTC',
-}
 
 const Transactions = () => {
   return (

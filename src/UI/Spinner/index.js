@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components'
-import { rem } from 'polished'
 
 const spin = keyframes`
     0% { transform: rotate(0deg); }
