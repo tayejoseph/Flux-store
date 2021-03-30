@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { IoMdAdd, IoMdTrash } from 'react-icons/io'
 import { Helmet } from 'react-helmet'
 import { Button, Table, TabNav } from '../../UI'
@@ -9,7 +9,6 @@ import Container from './styles'
 
 const Gift = () => {
   const dispatch = useDispatch()
-  const { giftLists } = useSelector((s) => s.user)
 
   useEffect(() => {
     dispatch(getGiftLists())

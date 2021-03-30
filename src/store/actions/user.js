@@ -183,9 +183,9 @@ export const changeUserType = (data) => async () => {
 
 // Store
 export const fetchCatalog = () => async (dispatch, getState) => {
-  const {
-    userData: { sub_account_id },
-  } = getState().user
+  // const {
+  //   userData: { sub_account_id },
+  // } = getState().user
   try {
     const { status, data: response } = await axios.get(`/catalogs/v1/`)
     // const { status, data: response } = await axios.get(
@@ -212,9 +212,9 @@ export const updateCatalog = (data) => async (dispatch, getState) => {
 }
 
 export const addCatalog = (data) => async (dispatch, getState) => {
-  const {
-    userData: { sub_account_id },
-  } = getState().user
+  // const {
+  //   userData: { sub_account_id },
+  // } = getState().user
   console.log(data, 'sdsjkdsdksdkj')
   try {
     const { status, data: response } = await axios.post('/catalogs/v1/', data)

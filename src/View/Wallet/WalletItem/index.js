@@ -6,7 +6,6 @@ const WalletItem = ({ balance, gradient, background, walletType, title }) => {
     <Container
       className="wallet--item"
       style={{
-        background: background,
         background: gradient,
       }}
     >
