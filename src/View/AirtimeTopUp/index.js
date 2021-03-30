@@ -98,7 +98,7 @@ const AirTimeTopUp = () => {
                 {dataPlans &&
                   dataPlans.map((item, index) => (
                     <option value={index} key={item.newort_code}>
-                      {item.network_name}
+                      {item.network_name.toUpperCase()}
                     </option>
                   ))}
               </select>

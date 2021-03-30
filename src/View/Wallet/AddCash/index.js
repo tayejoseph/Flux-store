@@ -1,114 +1,53 @@
-import React, { useState } from 'react'
-import ModalContent from './ModalContent'
-import DashboardHeader from '../../../Layout/DashboardHeader'
-import { Button, InputGroup, RadioButton, Modal } from '../../../UI'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { Modal, Spinner, Button } from '../../../UI'
 import Container from './styles'
 
 const AddCash = () => {
-  const [displaySection, setDisplay] = useState(false)
-  const [formData, setFormState] = useState({
-    amount: '',
-    cardNo: '',
-    paymentMethod: 'card',
-  })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+  const history = useHistory()
+  const { personalBankInfo } = useSelector((state) => state.user)
 
   return (
     <Container>
       <Modal
         className="modal--size__sm modal--close__relative"
-        modalTitle={
-          formData.paymentMethod === 'card' ? 'Select Card' : 'Payment Account'
-        }
-        showModal={displaySection}
-        onClose={() => setDisplay(false)}
+        modalTitle={'Payment Account'}
+        showModal={true}
       >
-        <ModalContent {...{ displaySection }} modalTitle={'Withdraw'} />
+        <div className="addCash--container">
+          <div className="accNo--container">
+            {personalBankInfo ? (
+              <>
+                <h2 className="instruction">
+                  Please pay into this bank account
+                </h2>
+                <h3 className="u--typo__headline">
+                  {personalBankInfo.account_no}
+                </h3>
+                <div className="bankInfo">
+                  <h4 className="u--typo__normalBold">
+                    {personalBankInfo.bank_name} Bank
+                  </h4>
+                  <h4 className="u--typo__normalBold">
+                    {personalBankInfo.account_name}
+                  </h4>
+                </div>
+              </>
+            ) : (
+              <div className="spinner--container">
+                <Spinner />
+              </div>
+            )}
+          </div>
+          <footer>
+            <hr />
+            <Button rounded full onClick={() => history.goBack()}>
+              I've paid
+            </Button>
+          </footer>
+        </div>
       </Modal>
-      <header>
-        <DashboardHeader navType="small" />
-        <div className="cash--header__container">
-          <h1 className="u--typo__headline">Add Cash</h1>
-          <p className="u--typo__normal u--color__lighter">
-            Flux Wallet > <span className="u--color__dark">Add Cash</span>
-          </p>
-        </div>
-      </header>
-      <hr />
-      <form onSubmit={handleSubmit}>
-        <InputGroup>
-          <label>Enter amount to add?</label>
-          <input
-            type="text"
-            placeholder="₦0.00"
-            value={formData.amount}
-            onChange={({ target }) =>
-              setFormState((s) => ({ ...s, amount: target.value }))
-            }
-          />
-        </InputGroup>
-        <hr />
-        <div className="payment--method__container">
-          <p>Select Payment method</p>
-          <InputGroup className="radio--btn__container">
-            <label className="u--color__dark ">
-              <RadioButton
-                type="radio"
-                onChange={(e) => {
-                  setFormState({
-                    ...formData,
-                    paymentMethod: e.target.checked ? 'card' : 'transfer',
-                  })
-                }}
-                checked={formData.paymentMethod === 'card'}
-              />
-              Card
-            </label>
-          </InputGroup>
-          <InputGroup className="radio--btn__container">
-            <label className="u--color__dark ">
-              <RadioButton
-                type="radio"
-                name={'paymentMethod'}
-                onChange={(e) => {
-                  setFormState({
-                    ...formData,
-                    paymentMethod: e.target.checked ? 'transfer' : 'card',
-                  })
-                }}
-                checked={formData.paymentMethod === 'transfer'}
-              />
-              Bank Transfer
-            </label>
-          </InputGroup>
-        </div>
-        <hr />
-
-        <div className="account--summary">
-          <div className="flux--row">
-            <p>Amount</p>
-            <p>₦0.00</p>
-          </div>
-          <div className="flux--row">
-            <p>Processing Fee</p>
-            <p>₦35.00</p>
-          </div>
-        </div>
-        <hr />
-
-        <div className="total--container flux-row">
-          <div className="flux--row">
-            <p>Total</p>
-            <p>₦0.00</p>
-          </div>
-        </div>
-        <Button rounded onClick={() => setDisplay(formData.paymentMethod)}>
-          Proceed
-        </Button>
-      </form>
     </Container>
   )
 }

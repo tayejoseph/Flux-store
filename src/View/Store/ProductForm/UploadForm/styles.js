@@ -17,6 +17,7 @@ export default Styled.div`
     label.upload-container {
         height: 161px;
         display: flex;
+        user-select: none;
         justify-content: center;
         flex-direction: column;
         align-items: center;

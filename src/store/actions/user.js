@@ -8,10 +8,17 @@ import {
   ALT_REQUEST_LISTS,
   ALT_CATELOG,
   ALT_GIFT_LISTS,
+  ALT_CARDLISTS,
+  ALT_PERSONALBANK_INFO,
 } from '../type'
 
 const altTransactionLists = (data) => ({
   type: ALT_TRANSACTION_LISTS,
+  data,
+})
+
+const altPersonalBankInfo = (data) => ({
+  type: ALT_PERSONALBANK_INFO,
   data,
 })
 
@@ -37,6 +44,11 @@ export const altGiftLists = (data) => ({
 
 export const altRequestLists = (data) => ({
   type: ALT_REQUEST_LISTS,
+  data,
+})
+
+export const altCardLists = (data) => ({
+  type: ALT_CARDLISTS,
   data,
 })
 
@@ -102,6 +114,30 @@ export const handleWithdrawal = (data) => async (dispatch, getState) => {
   }
 }
 
+export const fetchCards = () => async (dispatch) => {
+  try {
+    const { status, data: response } = await axios.get('/users/cards/')
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+      dispatch(altCardLists(response.results))
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const getPersonalBankInfo = () => async (dispatch) => {
+  try {
+    const { status, data: response } = await axios.get('/users/bank_account/')
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+      dispatch(altPersonalBankInfo(response))
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
 export const fetchAllTransactions = () => async (dispatch) => {
   try {
     const { status, data: response } = await axios.get('/transactions/v2/list/')
@@ -127,13 +163,34 @@ export const withdraw = (data) => async () => {
   }
 }
 
+export const changeUserType = (data) => async () => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/users/account_change/',
+      data,
+    )
+    console.log(response, 'sdjsdksjdskj')
+    if (status === 200) {
+      // altCatalog(response.results)
+    }
+    console.log({ status, response }, 'sdskdjsdkj')
+  } catch ({ response }) {
+    console.log(data, 'Sdjksdjk')
+    console.log(response, 'djskdjsdkj')
+    handleError(response)
+  }
+}
+
 // Store
 export const fetchCatalog = () => async (dispatch, getState) => {
   const {
-    userData: { pk },
+    userData: { sub_account_id },
   } = getState().user
   try {
-    const { status, data: response } = await axios.get(`/catalogs/v1/${pk}/`)
+    const { status, data: response } = await axios.get(`/catalogs/v1/`)
+    // const { status, data: response } = await axios.get(
+    //   `/catalogs/v1/${sub_account_id}/`,
+    // )
     if (status === 200) {
       dispatch(altCatalog(response.results))
     }
@@ -141,14 +198,23 @@ export const fetchCatalog = () => async (dispatch, getState) => {
   } catch ({ response }) {}
 }
 
-export const updateCatalog = (data) => async (dispatch) => {
+export const updateCatalog = (data) => async (dispatch, getState) => {
+  const {
+    userData: { sub_account_id },
+  } = getState().user
   try {
-    const { status, data: response } = await axios.post('/catalogs/v1/7/', data)
+    const { status, data: response } = await axios.post(
+      `/catalogs/v1/${sub_account_id}/1`,
+      data,
+    )
     console.log({ status, response }, 'sdskdjsdkj')
   } catch ({ response }) {}
 }
 
-export const addCatalog = (data) => async (dispatch) => {
+export const addCatalog = (data) => async (dispatch, getState) => {
+  const {
+    userData: { sub_account_id },
+  } = getState().user
   console.log(data, 'sdsjkdsdksdkj')
   try {
     const { status, data: response } = await axios.post('/catalogs/v1/', data)

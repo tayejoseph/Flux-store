@@ -8,6 +8,12 @@ export default Styled.div`
     height: 27.5rem;
     div.content--container{
         flex: 1;
+            div.spinner--container {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               height: 100%;
+           }
        div.card--container {
            display: flex;
            padding-top: 2em;

@@ -17,9 +17,6 @@ export const loginUser = (data) => async (dispatch, getState) => {
   try {
     const { status, data: response } = await axios.post('/auth/login/', data)
     if (status === 200) {
-      axios.defaults.headers.common[
-        'Authorization'
-      ] = `bearer-${response.token}`
       Cookies.set('token', response.token)
       dispatch(initUserData(response.user))
       if (response.user.full_name) dispatch(loginHandler(true))
@@ -40,9 +37,6 @@ export const signUpUser = ({ email, password: password1 }) => async (
       password1,
     })
     if (status === 201) {
-      axios.defaults.headers.common[
-        'Authorization'
-      ] = `bearer-${response.token}`
       Cookies.set('token', response.token)
       dispatch(initUserData(response.user))
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5'
+import { compress } from 'image-conversion'
 import { MdFileUpload } from 'react-icons/md'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Button } from '../../../../UI'
@@ -10,7 +11,13 @@ const SmImg = ({ imgSrc, alt, onClick }) => {
     <div className="smImg--container">
       {imgSrc && (
         <>
-          <LazyLoadImage src={imgSrc} alt={alt} effect="blur" />
+          <LazyLoadImage
+            src={
+              typeof imgSrc === 'string' ? imgSrc : URL.createObjectURL(imgSrc)
+            }
+            alt={alt}
+            effect="blur"
+          />
           <Button type="button" icon onClick={onClick}>
             <IoClose />
           </Button>
@@ -23,37 +30,42 @@ const SmImg = ({ imgSrc, alt, onClick }) => {
 const UploadForm = ({
   formData: { image_url_1, image_url_2, image_url_3 },
 }) => {
-  const [images, setImg] = useState([image_url_1, image_url_2, image_url_3])
-
+  const [images, setImg] = useState(() => {
+    if (image_url_1 && image_url_2 && image_url_3) {
+      return [image_url_1, image_url_2, image_url_3]
+    } else {
+      return []
+    }
+  })
+  console.log(images, 'Sjdsdjk')
   const handleAddImg = ({ target }) => {
     const files = Array.from(target.files).splice(0, 3)
     if (!files.length === 0) return
 
-    // files.map((file) => {
-    //   return compress(file, {
-    //     type: file.type,
-    //     width: 200,
-    //     height: 200,
-    //     orientation: 2,
-    //     scale: 0.5,
-    //     quality: 0.6,
-    //   }).then((blobFile) => {
-    //     const bf = blobFile
-    //     bf.lastModifiedDate = new Date()
-    //     bf.name = file.name
+    files.map((file) => {
+      return compress(file, {
+        type: file.type,
+        width: 200,
+        height: 200,
+        orientation: 2,
+        scale: 0.5,
+        quality: 0.6,
+      }).then((blobFile) => {
+        const bf = blobFile
+        bf.lastModifiedDate = new Date()
+        bf.name = file.name
 
-    //     setFormState((s) => {
-    //       const { images } = s
-    //       if (images.length < 3) {
-    //         return { ...s, images: [...images, bf] }
-    //       } else {
-    //         return {
-    //           ...s,
-    //         }
-    //       }
-    //     })
-    //   })
-    // })
+        setImg((images) => {
+          if (images.length < 3) {
+            return [...images, bf]
+          } else {
+            return {
+              ...images,
+            }
+          }
+        })
+      })
+    })
   }
   return (
     <Container>
@@ -64,7 +76,7 @@ const UploadForm = ({
           onChange={handleAddImg}
           disabled={images.length === 3 ? true : false}
           multiple
-        />{' '}
+        />
         <MdFileUpload />
         <p>Upload Image. Max 2MB</p>
       </label>
@@ -78,7 +90,7 @@ const UploadForm = ({
               setImg((s) => {
                 const imgs = [...images]
                 imgs.splice(index, 1, '')
-                return imgs
+                return imgs.filter(Boolean)
               })
             }
           />

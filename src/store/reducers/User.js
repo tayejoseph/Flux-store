@@ -6,6 +6,8 @@ const initState = {
   catalogues: '',
   giftLists: '',
   requestLists: '',
+  cardLists: '',
+  personalBankInfo: '',
 }
 
 const UserReducer = (state = initState, action) => {
@@ -28,6 +30,11 @@ const UserReducer = (state = initState, action) => {
       return { ...state, requestLists: data }
     case 'ALT_GIFT_LISTS':
       return { ...state, giftLists: data }
+    case 'ALT_CARDLISTS':
+      return { ...state, cardLists: data }
+    case 'ALT_PERSONALBANK_INFO':
+      return { ...state, personalBankInfo: data }
+
     default:
       return state
   }
