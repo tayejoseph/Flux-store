@@ -11,8 +11,17 @@ export default Styled.div`
             justify-content: space-between;
             div.flux--row {
                 display: flex;
+                ${maxQuery('sm')} {
+                    flex: 1;
+                    justify-content: space-between;
+                }
                 button:not(:last-child) {
                     margin-right: 1em;
+                }
+            }
+            button.viewall--btn {
+                    ${maxQuery('sm')} {
+                        display: none
                 }
             }
         }

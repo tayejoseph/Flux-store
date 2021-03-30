@@ -70,7 +70,7 @@ const Store = () => {
                 Get Store Link
               </Button>
             </div>
-            <Button rounded iconLeft secondary>
+            <Button rounded iconLeft secondary className="viewall--btn">
               All
               <IoIosArrowDown />
             </Button>

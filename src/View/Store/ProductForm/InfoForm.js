@@ -6,7 +6,7 @@ const InfoForm = ({ formData, handleFormInput }) => {
   return (
     <div>
       <InputGroup
-        lable="Enter Product Title"
+        label="Enter Product Title"
         placeholder={'e.g PS4 Slim 500GB'}
         name="name"
         value={formData.name}

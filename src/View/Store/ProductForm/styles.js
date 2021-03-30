@@ -46,6 +46,7 @@ export default Styled.div`
                 padding: 1.5em 2em;
                 ${maxQuery('md')} {
                     width: 100%;
+                    padding-top: 5em;
                     height: 75vh;
                     overflow-y: auto;
                     display: flex;

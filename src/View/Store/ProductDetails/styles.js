@@ -11,6 +11,7 @@ export default Styled.div`
         }
     }
     div.productDetails--container {
+        
         padding: 2.5em;
         p {
             font-weight: normal; 
@@ -23,6 +24,7 @@ export default Styled.div`
         main.flux--row {
             display: flex;
             ${maxQuery('md')} {
+                padding-top: 2em;
                 flex-direction: column;
             }
             div.flux--col {

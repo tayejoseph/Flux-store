@@ -38,6 +38,7 @@ export default Styled.div`
         }
     }
     div.text--content {
+        margin-top: 1em;
         p {
             margin: 0px;
             &:not(:last-child) {
@@ -46,20 +47,22 @@ export default Styled.div`
         }
         p.productName {
             font-weight: normal; 
-            font-size: 14px;
-            line-height: 20px;
-            letter-spacing: 0px;
+            font-size: ${rem('14px')};
             color: #222222;
             text-overflow: ellipsis;
             opacity: 0.7;
-            height: ${rem('36px')};
             margin-bottom: 0.7em;
+            line-height: 1.5em;
+            height: 3em;      
+            overflow: hidden; 
         }
         p.price {
             font-weight: bold; 
             font-size: ${rem('14px')},
             line-height: ${rem('16px')};
             letter-spacing: 0px;
+                        overflow: hidden;
+
             color: #222222;
             opacity: 1;
         }
