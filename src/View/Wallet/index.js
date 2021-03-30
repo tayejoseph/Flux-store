@@ -9,7 +9,7 @@ import { getCurrency, toMoney } from '../../helpers'
 import {
   fetchAllTransactions,
   getPersonalBankInfo,
-} from '../../store/actions/User'
+} from '../../store/actions/user'
 import WalletItem from './WalletItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import { Button, Table } from '../../UI'

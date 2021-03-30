@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom'
-import { addCatalog, updateCatalog } from '../../../store/actions/User'
+import { addCatalog, updateCatalog } from '../../../store/actions/user'
 import { formValidator } from '../../../helpers'
 import { Modal, Button } from '../../../UI'
 import SideNav from './SideNav'

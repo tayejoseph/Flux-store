@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ModalContent from './ModalContent'
 import DashboardHeader from '../../../Layout/DashboardHeader'
-import { fetchCards } from '../../../store/actions/User'
+import { fetchCards } from '../../../store/actions/user'
 import { Button, InputGroup, RadioButton, Modal } from '../../../UI'
 import Container from './styles'
 
