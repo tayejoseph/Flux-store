@@ -43,7 +43,11 @@ const Modal = ({
   )
 
   return showModal ? (
-    <Container ref={containerRef} onClick={handleClose}>
+    <Container
+      ref={containerRef}
+      onClick={handleClose}
+      className="modal--backDrop"
+    >
       <div
         className={`modal--container ${className ? className : ''}`}
         role="dialog"

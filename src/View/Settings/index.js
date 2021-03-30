@@ -3,10 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Modal, Button } from '../../UI'
 import { formValidator } from '../../helpers'
-import { updateUserDetails, changeUserPassword } from '../../store/actions/User'
+import {
+  updateUserDetails,
+  changeUserPassword,
+  changeUserType,
+} from '../../store/actions/User'
 import SideNav from './SideNav'
 import AccForm from './AccForm'
 import PasswordForm from './PasswordForm'
+import UserTypeForm from './UserTypeForm'
 import Container from './styles'
 
 const Settings = () => {
@@ -25,27 +30,51 @@ const Settings = () => {
   }
 
   useEffect(() => {
-    setFormState({})
-  }, [displaySec])
+    if (displaySec === 'userType') {
+      setFormState({
+        name: '',
+        account_type: userData.business ? 'business' : 'normal',
+      })
+    } else {
+      setFormState({})
+    }
+  }, [displaySec, userData.business])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (
-      formValidator(
-        document.forms['acc--form'].getElementsByTagName('input'),
-      ) &&
-      Object.keys(formData).length > 0
-    ) {
-      try {
-        setLoading(true)
-        displaySec === 'accForm'
-          ? await dispatch(
-              updateUserDetails({ username: userData.username, ...formData }),
-            )
-          : dispatch(changeUserPassword(formData))
-        setLoading(false)
-      } finally {
-        setLoading(false)
+    if (displaySec !== 'userType') {
+      if (
+        formValidator(
+          document.forms['acc--form'].getElementsByTagName('input'),
+        ) &&
+        Object.keys(formData).length > 0
+      ) {
+        try {
+          setLoading(true)
+          displaySec === 'accForm'
+            ? await dispatch(
+                updateUserDetails({ username: userData.username, ...formData }),
+              )
+            : dispatch(changeUserPassword(formData))
+          setLoading(false)
+        } finally {
+          setLoading(false)
+        }
+      }
+    } else {
+      if (
+        formValidator(
+          document.forms['acc--form'].getElementsByTagName('input'),
+        ) &&
+        Object.keys(formData).length > 0
+      ) {
+        try {
+          setLoading(true)
+          dispatch(changeUserType({ ...formData }))
+          setLoading(false)
+        } finally {
+          setLoading(false)
+        }
       }
     }
   }
@@ -63,9 +92,13 @@ const Settings = () => {
           <main>
             <SideNav {...{ displaySec, setDisplay }} />
             <form onSubmit={handleSubmit} name="acc--form" noValidate>
-              {displaySec === 'accForm' ? (
+              {displaySec === 'accForm' && (
                 <AccForm {...{ handleInput, userData }} />
-              ) : (
+              )}
+              {displaySec === 'userType' && (
+                <UserTypeForm {...{ handleInput, formData }} />
+              )}
+              {displaySec === 'passwordForm' && (
                 <PasswordForm {...{ handleInput, userData }} />
               )}
             </form>

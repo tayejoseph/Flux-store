@@ -15,6 +15,7 @@ export const fetchDataPlan = async (dispatch) => {
     const { status, data: response } = await axios.get('/others/v2/data_plans/')
     console.log(status, response)
     if (status === 200) {
+      console.log(response.message.details, 'sskdjskdj')
       dispatch(altDataPlans(response.message.details))
     }
   } catch ({ response }) {}

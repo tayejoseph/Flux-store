@@ -20,6 +20,14 @@ const SideNav = ({ setDisplay, displaySec }) => {
           Account Verification
         </Button>
         <Button
+          tertiary
+          full
+          className={displaySec === 'userType' && 'active'}
+          onClick={() => setDisplay('userType')}
+        >
+          User Type
+        </Button>
+        <Button
           full
           className={displaySec === 'passwordForm' && 'active'}
           tertiary

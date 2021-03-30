@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
-import { fetchDataPlan, handleDataTopUp } from '../../store/actions/App'
+import { handleDataTopUp } from '../../store/actions/App'
+import { dataPlans } from '../../Constants'
 import Container from './styles'
 
 const DataTopUp = () => {
-  const dispatch = useDispatch()
-  const { dataPlans } = useSelector((s) => s.app)
   const [loading, setLoading] = useState(false)
   const [formData, setFormState] = useState({
     whoFor: 'self',
-    networkIndex: '',
-    activePlanIndex: '',
+    networkIndex: 0,
+    activePlanIndex: 0,
     phoneNo: '',
   })
 
@@ -37,9 +35,6 @@ const DataTopUp = () => {
       setLoading(false)
     }
   }
-  useEffect(() => {
-    fetchDataPlan(dispatch)
-  }, [dispatch])
 
   return (
     <Container>
@@ -60,7 +55,7 @@ const DataTopUp = () => {
                   <option disabled>Select Your Network</option>
                   {dataPlans.map((item, index) => (
                     <option value={index} key={item.newort_code}>
-                      {item.network_name}
+                      {item.network_name.toUpperCase()}
                     </option>
                   ))}
                 </select>

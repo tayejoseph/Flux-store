@@ -6,7 +6,10 @@ import { Helmet } from 'react-helmet'
 import { IoIosArrowForward } from 'react-icons/io'
 import { useDispatch } from 'react-redux'
 import { getCurrency, toMoney } from '../../helpers'
-import { fetchAllTransactions } from '../../store/actions/User'
+import {
+  fetchAllTransactions,
+  getPersonalBankInfo,
+} from '../../store/actions/User'
 import WalletItem from './WalletItem'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import { Button, Table } from '../../UI'
@@ -48,6 +51,7 @@ const Wallet = () => {
 
   useEffect(() => {
     dispatch(fetchAllTransactions())
+    dispatch(getPersonalBankInfo())
   }, [dispatch])
 
   return (
@@ -124,7 +128,7 @@ const Wallet = () => {
                         className={`status--txt__${item.status.toLowerCase()}`}
                       >
                         {getCurrency(item.currency)}
-                        {item.amount}
+                        {toMoney(item.amount)}
                       </td>
                       <td>{item.receiver_name}</td>
                       <td>

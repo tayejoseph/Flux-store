@@ -21,15 +21,15 @@ const ProductForm = () => {
     name: '',
     description: '',
     amount: '',
-    quantity: '',
+    quantity: 0,
     delivery: '',
     ...activeProduct,
   })
   const { state, pathname } = useLocation()
 
   const disabled = useMemo(() => {
-    const { name, description, amount, quantity, delivery } = formData
-    return !name || !description || !amount || !quantity || !delivery
+    const { name, description, amount, quantity } = formData
+    return !name || !description || !amount || quantity === ''
   }, [formData])
   const history = useHistory()
 
@@ -42,7 +42,6 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('skdskdsdlskl')
     if (
       formValidator(
         document.forms['catalog--form'].getElementsByTagName('input'),

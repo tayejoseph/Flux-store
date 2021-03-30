@@ -37,7 +37,10 @@ export default Styled.div`
             align-content: flex-start;
             justify-content: center;
             grid-column-gap: 1.5em;
-            grid-template-columns: repeat(3, 1fr);    
+            grid-template-columns: repeat(3, 1fr); 
+            ${minQuery('1300px')} {
+                grid-template-columns: repeat(5, 1fr);
+            }   
             ${maxQuery('lg')} {
                 grid-template-columns: repeat(4, 1fr);
             }
@@ -46,9 +49,6 @@ export default Styled.div`
             }
             ${maxQuery('sm')} {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            ${minQuery('xl')} {
-                grid-template-columns: repeat(5, 1fr);
             }
         }
         footer {

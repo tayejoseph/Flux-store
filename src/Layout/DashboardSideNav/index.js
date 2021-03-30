@@ -54,7 +54,7 @@ const SideNav = ({ className }) => {
               Wallet
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               to="/dashboard/cards"
               className={
@@ -67,7 +67,7 @@ const SideNav = ({ className }) => {
               <ImCreditCard />
               Cards
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/dashboard/gifts?tab=created"
