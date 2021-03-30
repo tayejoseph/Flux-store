@@ -23,20 +23,14 @@ export const fetchDataPlan = async (dispatch) => {
 
 export const handleDataTopUp = (data) => async () => {
   try {
-    const { status, data: response } = await axios.post(
-      '/others/v2/data/',
-      data,
-    )
+    const { data: response } = await axios.post('/others/v2/data/', data)
     console.log(response, 'sdjksdksj')
   } catch ({ response }) {}
 }
 
 export const handleAirTimeTopUp = (data) => async () => {
   try {
-    const { status, data: response } = await axios.post(
-      '/others/v2/airtime/',
-      data,
-    )
+    const { data: response } = await axios.post('/others/v2/airtime/', data)
     console.log(response)
   } catch ({ response }) {}
 }

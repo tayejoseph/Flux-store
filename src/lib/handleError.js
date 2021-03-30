@@ -1,10 +1,6 @@
 /** @flow */
 import { toast } from 'react-toastify'
 
-type arg = {
-  data: Object,
-}
-
 const handleError = (error) => {
   let errorMessage = ''
   if (error) {

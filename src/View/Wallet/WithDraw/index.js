@@ -77,9 +77,7 @@ const WithDraw = () => {
     ) {
       try {
         setDisplay((s) => ({ ...s, loading: true }))
-        const { status, data: response } = await dispatch(
-          handleWithdrawal(formData),
-        )
+        const { status } = await dispatch(handleWithdrawal(formData))
         if (status === 200) {
           setDisplay((s) => ({ ...s, loading: false }))
         }

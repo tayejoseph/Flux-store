@@ -49,7 +49,7 @@ const ProductForm = () => {
     ) {
       try {
         setLoading(true)
-        const { status, data: response } = productId
+        productId
           ? dispatch(updateCatalog(formData))
           : dispatch(addCatalog(formData))
       } finally {
