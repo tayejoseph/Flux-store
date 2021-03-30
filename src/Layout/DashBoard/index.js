@@ -3,7 +3,7 @@ import { Route, useRouteMatch, Switch } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { IoMdMenu } from 'react-icons/io'
 import { Button } from '../../UI'
-import { getUserDetails, getUserNotifications } from '../../store/actions/User'
+import { getUserDetails, getUserNotifications } from '../../store/actions/user'
 import DashboardSideNav from '../DashboardSideNav'
 import {
   Wallet,

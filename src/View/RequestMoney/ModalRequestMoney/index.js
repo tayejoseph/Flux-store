@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { sendRequest, getUserByFluxId } from '../../../store/actions/User'
+import { sendRequest, getUserByFluxId } from '../../../store/actions/user'
 import { formValidator } from '../../../helpers'
 import { Button, Modal, InputGroup } from '../../../UI'
 import Container from './styles'

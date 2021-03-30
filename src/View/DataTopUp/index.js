@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
-import { handleDataTopUp } from '../../store/actions/App'
+import { handleDataTopUp } from '../../store/actions/app'
 import { dataPlans } from '../../Constants'
 import Container from './styles'
 

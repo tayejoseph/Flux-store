@@ -2,7 +2,7 @@ import axios from '../../lib/axios'
 import Cookies from 'js-cookie'
 import handleError from '../../lib/handleError'
 import { LOGIN_USER, LOGOUT_USER } from '../type'
-import { initUserData } from './User'
+import { initUserData } from './user'
 
 export const loginHandler = (data) => ({
   type: LOGIN_USER,

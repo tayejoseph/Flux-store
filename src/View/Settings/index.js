@@ -7,7 +7,7 @@ import {
   updateUserDetails,
   changeUserPassword,
   changeUserType,
-} from '../../store/actions/User'
+} from '../../store/actions/user'
 import SideNav from './SideNav'
 import AccForm from './AccForm'
 import PasswordForm from './PasswordForm'

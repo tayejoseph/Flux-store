@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
-import { fetchDataPlan, handleAirTimeTopUp } from '../../store/actions/App'
+import { fetchDataPlan, handleAirTimeTopUp } from '../../store/actions/app'
 import Container from './styles'
 
 const AirTimeTopUp = () => {
