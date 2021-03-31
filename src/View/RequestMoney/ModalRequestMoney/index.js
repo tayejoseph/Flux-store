@@ -1,19 +1,29 @@
 import React, { useState, useMemo } from 'react'
-import { sendRequest, getUserByFluxId } from '../../../store/actions/user'
+import { sendRequest, validateFluxId } from '../../../store/actions/user'
 import { formValidator } from '../../../helpers'
-import { Button, Modal, InputGroup } from '../../../UI'
+import { Button, Modal, InputGroup, Spinner } from '../../../UI'
 import Container from './styles'
 
+const initState = {
+  loading: false,
+  error: false,
+  validated: false,
+}
 const ModalRequestMoney = () => {
-  const [loading, setLoading] = useState(false)
+  const [{ loading, validated, error }, setDisplay] = useState(initState)
   const [formData, setFormState] = useState({
     amount: '',
     description: '',
     receiver: '',
+    receiverName: '',
   })
 
   const disabled = useMemo(
-    () => !formData.description || !formData.amount || loading,
+    () =>
+      !formData.description ||
+      !formData.amount ||
+      !formData.receiverName ||
+      loading,
     [formData, loading],
   )
   const handleInput = ({ target }) => {
@@ -23,11 +33,22 @@ const ModalRequestMoney = () => {
     }))
   }
 
-  const getUserDetails = async ({ target }) => {
-    try {
-      const { status, data: response } = await getUserByFluxId(target.value)
-      console.log({ status, response }, 'sdjsdsdkj')
-    } catch (data) {}
+  const handleValidateTag = async () => {
+    if (formData.receiver) {
+      setDisplay((s) => ({ ...s, validated: 'validating' }))
+      const response = await validateFluxId(formData.receiver)
+      if (response) {
+        if (response.status === 200) {
+          setDisplay((s) => ({ ...s, validated: true }))
+          setFormState((s) => ({
+            ...s,
+            receiverName: response.response.full_name,
+          }))
+        }
+      } else {
+        setDisplay(initState)
+      }
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -38,11 +59,11 @@ const ModalRequestMoney = () => {
       )
     ) {
       try {
-        setLoading(true)
+        setDisplay((s) => ({ ...s, loading: true }))
         const { state, data: response } = await sendRequest(formData)
         console.log({ state, response }, 'sdjsdjsdksj')
       } finally {
-        setLoading(false)
+        setDisplay((s) => ({ ...s, loading: false }))
       }
     }
   }
@@ -65,25 +86,41 @@ const ModalRequestMoney = () => {
               name="amount"
               value={formData.amount}
               onChange={handleInput}
-              required
+              required={true}
             />
             <InputGroup
               name="receiver"
               placeholder={'Flux ID'}
               value={formData.receiver}
-              onChange={handleInput}
-              required
-              onBlur={getUserDetails}
+              onChange={(e) => {
+                setFormState((s) => ({ ...s, receiverName: '' }))
+                handleInput(e)
+              }}
+              required={true}
+              onBlur={handleValidateTag}
             />
-            <div className="recipiantName--container">
-              <p className="u--typo__normal">Recipient Name</p>
-            </div>
+
+            {validated ? (
+              <div className="recipiantName--container">
+                {validated === 'validating' ? (
+                  <Spinner />
+                ) : (
+                  <p className={error ? 'u--status__error' : ''}>
+                    {formData.receiverName}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div className="recipiantName--container">
+                <p className="u--typo__normal">Recipient Name</p>
+              </div>
+            )}
             <InputGroup
               name="description"
               value={formData.description}
               placeholder={'Description'}
               onChange={handleInput}
-              required
+              required={true}
             />
           </div>
           <footer>

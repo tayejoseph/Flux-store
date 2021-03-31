@@ -37,7 +37,6 @@ const UploadForm = ({
       return []
     }
   })
-  console.log(images, 'Sjdsdjk')
   const handleAddImg = ({ target }) => {
     const files = Array.from(target.files).splice(0, 3)
     if (!files.length === 0) return

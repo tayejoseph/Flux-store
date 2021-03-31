@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Route } from 'react-router-dom'
 import { Modal, Button } from '../../UI'
 import { formValidator } from '../../helpers'
 import {
@@ -92,15 +92,15 @@ const Settings = () => {
           <main>
             <SideNav {...{ displaySec, setDisplay }} />
             <form onSubmit={handleSubmit} name="acc--form" noValidate>
-              {displaySec === 'accForm' && (
-                <AccForm {...{ handleInput, userData }} />
-              )}
-              {displaySec === 'userType' && (
-                <UserTypeForm {...{ handleInput, formData }} />
-              )}
-              {displaySec === 'passwordForm' && (
+              <Route path={`/dashboard/settings/changePassword`} exact={true}>
                 <PasswordForm {...{ handleInput, userData }} />
-              )}
+              </Route>
+              <Route path={`/dashboard/settings/accVerification`} exact={true}>
+                <AccForm {...{ handleInput, userData }} />
+              </Route>
+              <Route path={`/dashboard/settings/userType`} exact={true}>
+                <UserTypeForm {...{ handleInput, formData }} />
+              </Route>
             </form>
           </main>
           <footer>

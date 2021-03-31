@@ -10,6 +10,7 @@ const DashboardHeader = ({
   title,
   sectionAction,
   middleContent,
+  children,
   navType = 'full',
 }) => {
   const { notificationData } = useSelector((s) => s.user)

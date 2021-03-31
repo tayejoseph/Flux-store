@@ -5,7 +5,14 @@ import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import DashBoard from './Layout/DashBoard'
 // import { ProtectedRoute } from './Components'
-import { AirtimeTopUp, DataTopUp, WithDraw, Auth, Settings } from './View'
+import {
+  AirtimeTopUp,
+  DataTopUp,
+  SendMoney,
+  WithDraw,
+  Auth,
+  Settings,
+} from './View'
 import theme from './base/theme'
 import GlobalStyle from './base/globalStyles'
 
@@ -22,6 +29,7 @@ const App = () => {
         : false,
     },
   }
+  console.log(location, 'dksjdk')
 
   return (
     <ThemeProvider theme={theme()}>
@@ -50,6 +58,7 @@ const App = () => {
         {/* Switch for modals with background routes */}
         <Switch>
           <Route path={`/dashboard/airTimeTopUp`} component={AirtimeTopUp} />
+          <Route path={`/dashboard/sendMoney`} component={SendMoney} />
           <Route path={`/dashboard/dataTopUp`} component={DataTopUp} />
           <Route path={`/dashboard/settings`} component={Settings} />
           <Route path={`/dashboard/wallet/withdraw`} component={WithDraw} />

@@ -12,7 +12,7 @@ const initState = {
 
 const UserReducer = (state = initState, action) => {
   const { type, data } = action
-  console.log(action)
+  console.log(action, 'jdfjdkfjd')
   switch (type) {
     case 'LOGIN_USER':
       return { ...state, authenticated: data }

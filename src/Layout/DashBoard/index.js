@@ -12,12 +12,12 @@ import {
   Store,
   RequestMoney,
   AddCash,
-  SendMoney,
   NewUser,
   ProductDetails,
   ProductForm,
   Transactions,
   Notification,
+  VirtualCard,
 } from '../../View'
 import Container from './styles'
 
@@ -58,6 +58,7 @@ const DashBoard = () => {
       >
         <DashboardSideNav />
       </aside>
+
       <main className="dashboard--main">
         <Route path={`${path}/notification`} component={Notification} />
         <Route path={`${path}/wallet/summary`} component={Wallet} />
@@ -65,6 +66,7 @@ const DashBoard = () => {
         <Route path={`${path}/wallet/transactions`} component={Transactions} />
         <Route path={`${path}/cards`} component={Cards} />
         <Route path={`${path}/gifts`} component={Gifts} />
+        <Route path={`${path}/virtualCard`} component={VirtualCard} />
         <Route path={`${path}/store`} component={Store} />
         <Route path={`${path}/store/add`} component={ProductForm} />
         <Route path={`${path}/store/:productId/:action`}>
@@ -81,7 +83,6 @@ const DashBoard = () => {
         </Route>
         <Route path={`${path}/store/newUser`} component={NewUser} />
         <Route path={`${path}/requestMoney`} component={RequestMoney} />
-        <Route path={`${path}/sendMoney`} component={SendMoney} />
       </main>
     </Container>
   )

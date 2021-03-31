@@ -1,4 +1,6 @@
 import axios from '../../lib/axios'
+import { toast } from 'react-toastify'
+import handleError from '../../lib/handleError'
 import { ALT_DATA_PLAN } from '../type'
 
 const altDataPlans = (data) => ({
@@ -18,19 +20,30 @@ export const fetchDataPlan = async (dispatch) => {
       console.log(response.message.details, 'sskdjskdj')
       dispatch(altDataPlans(response.message.details))
     }
-  } catch ({ response }) {}
+  } catch ({ response }) {
+    handleError(response)
+  }
 }
 
-export const handleDataTopUp = (data) => async () => {
+export const handleDataTopUp = async (data) => {
   try {
     const { data: response } = await axios.post('/others/v2/data/', data)
     console.log(response, 'sdjksdksj')
+    if (response.error) {
+      toast.error(response.message)
+    }
   } catch ({ response }) {}
 }
 
-export const handleAirTimeTopUp = (data) => async () => {
+export const handleAirTimeTopUp = async (data) => {
   try {
     const { data: response } = await axios.post('/others/v2/airtime/', data)
     console.log(response)
-  } catch ({ response }) {}
+    if (response.error) {
+      toast.error(response.message)
+    }
+    return response
+  } catch ({ response }) {
+    handleError(response)
+  }
 }

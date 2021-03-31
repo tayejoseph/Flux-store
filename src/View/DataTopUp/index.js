@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
 import { handleDataTopUp } from '../../store/actions/app'
 import { dataPlans } from '../../Constants'
+import { formValidator } from '../../helpers'
 import Container from './styles'
 
 const DataTopUp = () => {
@@ -10,7 +12,7 @@ const DataTopUp = () => {
     whoFor: 'self',
     networkIndex: 0,
     activePlanIndex: 0,
-    phoneNo: '',
+    phoneNumber: '',
   })
 
   const handleInput = ({ target }) => {
@@ -22,29 +24,38 @@ const DataTopUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      setLoading(true)
-      const { networkIndex, amount, whoFor, planIndex } = formData
-      await handleDataTopUp({
-        plan_code: dataPlans[networkIndex].plans[planIndex].plan_code,
-        receiver: whoFor,
-        network: dataPlans[networkIndex].network_name,
-        amount: amount,
-      })
-    } finally {
-      setLoading(false)
+    if (
+      formValidator(
+        document.forms['airtimeTopUp--form'].getElementsByTagName('input'),
+      )
+    ) {
+      try {
+        setLoading(true)
+        const { networkIndex, whoFor, phoneNumber, activePlanIndex } = formData
+        await handleDataTopUp({
+          plan_code: dataPlans[networkIndex].plans[activePlanIndex].plan_code,
+          receiver: whoFor !== 'self' ? phoneNumber : whoFor,
+          network: dataPlans[networkIndex].network_name,
+          amount: dataPlans[networkIndex].plans[activePlanIndex].amount,
+        })
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
   return (
     <Container>
+      <Helmet>
+        <title>Flux | Data TopUp</title>
+      </Helmet>
       <Modal
         showModal={true}
         className="modal--size__sm modal--close__relative"
         modalTitle={'Data Topup'}
       >
         {dataPlans && (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} name="airtimeTopUp--form" noValidate>
             <div className="form--inputs">
               <InputGroup>
                 <select
@@ -85,11 +96,12 @@ const DataTopUp = () => {
               </InputGroup>
               <p className="u--typo__normal">Who is this for?</p>
               <InputGroup className="radio--btn__container">
-                <label className="u--color__dark">
+                <label className="u--color__dark" for={'self'}>
                   <RadioButton
                     type="radio"
                     value="self"
                     name={'whoFor'}
+                    id="self"
                     onChange={handleInput}
                     checked={formData.whoFor === 'self'}
                   />
@@ -97,11 +109,12 @@ const DataTopUp = () => {
                 </label>
               </InputGroup>
               <InputGroup className="radio--btn__container">
-                <label className="u--color__dark">
+                <label className="u--color__dark" for={'someone'}>
                   <RadioButton
                     type="radio"
                     value="someoneElse"
                     name={'whoFor'}
+                    id="someone"
                     onChange={handleInput}
                     checked={formData.whoFor === 'someoneElse'}
                   />
@@ -114,6 +127,7 @@ const DataTopUp = () => {
                   name={'phoneNumber'}
                   value={formData.phoneNumber}
                   onChange={handleInput}
+                  required={true}
                   placeholder={"Recipient's Number"}
                 />
               )}

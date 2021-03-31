@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { formValidator } from '../../../helpers'
 import { Button, Modal, InputGroup, Spinner } from '../../../UI'
@@ -7,17 +7,19 @@ import { handleWithdrawal } from '../../../store/actions/user'
 import { BankLists } from '../../../Constants'
 import Container from './styles'
 
+const initState = {
+  loading: false,
+  error: false,
+  validated: false,
+}
 const WithDraw = () => {
   const dispatch = useDispatch()
-  const [{ loading, validated, error }, setDisplay] = useState({
-    loading: false,
-    error: false,
-    validated: false,
-  })
+  const [{ loading, validated, error }, setDisplay] = useState(initState)
 
-  const disabled = useMemo(() => loading || validated !== true, [
+  const disabled = useMemo(() => loading || validated !== true || error, [
     loading,
     validated,
+    error,
   ])
 
   const [formData, setFormState] = useState({
@@ -27,45 +29,55 @@ const WithDraw = () => {
     bank_code: '',
   })
 
-  const handleInput = (e) => {
-    setDisplay((s) => ({ ...s, validated: false, error: false }))
-    setFormState({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-    if (
-      (e.target.name === 'account_no' || e.target.name === 'amount') &&
-      e.target.value.length === 10
-    ) {
-      initBankValidation()
-    }
-  }
-
-  const initBankValidation = async () => {
+  const initBankValidation = useCallback(async () => {
     const { account_no, amount, bank_code } = formData
     if (account_no && amount && bank_code) {
-      setDisplay((s) => ({ ...s, validated: 'validating' }))
-      const { status, data: response } = await validateAccNo({
-        account_no,
-        bank_code,
-      })
-      if (status === 200) {
-        setDisplay((s) => ({ ...s, validated: true }))
-        if (response.status === 'error') {
+      try {
+        setDisplay((s) => ({ ...s, validated: 'validating' }))
+        const { status, data: response } = await validateAccNo({
+          account_no,
+          bank_code,
+        })
+        if (status === 200) {
+          setDisplay((s) => ({ ...s, validated: true }))
+          if (response.status === 'error') {
+            setDisplay((s) => ({ ...s, validated: true, error: true }))
+            setFormState((s) => ({
+              ...s,
+              acct_name: 'Invalid Account Number',
+            }))
+          } else {
+            setDisplay((s) => ({ ...s, validated: true }))
+            setFormState((s) => ({
+              ...s,
+              acct_name: response.data.account_name,
+            }))
+          }
+        }
+      } catch {
+        setTimeout(() => {
           setDisplay((s) => ({ ...s, validated: true, error: true }))
           setFormState((s) => ({
             ...s,
-            acct_name: 'Invalid Account Number',
+            acct_name: 'Not internet connection',
           }))
-        } else {
-          setDisplay((s) => ({ ...s, validated: true }))
-          setFormState((s) => ({
-            ...s,
-            acct_name: response.data.account_name,
-          }))
-        }
+        }, 100)
       }
     }
+  }, [formData])
+
+  useEffect(() => {
+    if (formData.amount && formData.account_no.length === 10 && !validated) {
+      initBankValidation()
+    }
+  }, [formData, initBankValidation, validated])
+
+  const handleInput = ({ target }) => {
+    setDisplay((s) => ({ ...s, validated: false, error: false }))
+    setFormState({
+      ...formData,
+      [target.name]: target.value,
+    })
   }
 
   const handleSubmit = async (e) => {

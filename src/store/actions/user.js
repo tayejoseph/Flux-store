@@ -94,7 +94,7 @@ export const getUserNotifications = () => async (dispatch) => {
   try {
     const { status, data: response } = await axios.get('/notifications/')
     if (status === 200) {
-      dispatch(altNotification(response))
+      dispatch(altNotification(response.results))
     }
     console.log({ status, response }, 'Sdjksdjkjsdksjd')
   } catch ({ response }) {}
@@ -183,14 +183,14 @@ export const changeUserType = (data) => async () => {
 
 // Store
 export const fetchCatalog = () => async (dispatch, getState) => {
-  // const {
-  //   userData: { sub_account_id },
-  // } = getState().user
+  const {
+    userData: { business },
+  } = getState().user
   try {
-    const { status, data: response } = await axios.get(`/catalogs/v1/`)
-    // const { status, data: response } = await axios.get(
-    //   `/catalogs/v1/${sub_account_id}/`,
-    // )
+    const { status, data: response } = await axios.get(
+      `/catalogs/v1/?business=${business.id}`,
+    )
+    console.log(response, 'SDksdsdkj')
     if (status === 200) {
       dispatch(altCatalog(response.results))
     }
@@ -198,13 +198,17 @@ export const fetchCatalog = () => async (dispatch, getState) => {
   } catch ({ response }) {}
 }
 
-export const updateCatalog = (data) => async (dispatch, getState) => {
+export const updateCatalog = (data, productId) => async (
+  dispatch,
+  getState,
+) => {
   const {
-    userData: { sub_account_id },
+    userData: { business },
   } = getState().user
   try {
+    console.log(getState().user.userData, 'sdjskdsjkdk')
     const { status, data: response } = await axios.post(
-      `/catalogs/v1/${sub_account_id}/1`,
+      `/catalogs/v1/${business.id}/${productId}`,
       data,
     )
     console.log({ status, response }, 'sdskdjsdkj')
@@ -212,13 +216,10 @@ export const updateCatalog = (data) => async (dispatch, getState) => {
 }
 
 export const addCatalog = (data) => async (dispatch, getState) => {
-  // const {
-  //   userData: { sub_account_id },
-  // } = getState().user
   console.log(data, 'sdsjkdsdksdkj')
   try {
     const { status, data: response } = await axios.post('/catalogs/v1/', data)
-    console.log({ status, response })
+    console.log({ status, response }, 'SDsdjsdjkdjs')
   } catch ({ response }) {
     handleError(response)
   }
@@ -251,6 +252,30 @@ export const getUserByFluxId = (id) => {
 export const sendRequest = async (data) => {
   try {
     const { status, data: response } = await axios.post('/requests/v2/', data)
+    console.log({ status, response }, 'Sdjsksjdskj')
+    return { status, response }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const validateFluxId = async (id) => {
+  try {
+    const { status, data: response } = await axios.get(
+      `/users/details/?flux_tag=${id}`,
+    )
+    return { status, response }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const sendMoney = async (data) => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/transactions/v2/',
+      data,
+    )
     console.log({ status, response }, 'Sdjsksjdskj')
     return { status, response }
   } catch ({ response }) {
