@@ -30,7 +30,7 @@ const DashboardHeader = ({
               <Button
                 icon
                 onClick={() =>
-                  history.push('/dashboard/settings', {
+                  history.push('/dashboard/settings/accVerification', {
                     background: location,
                   })
                 }
@@ -70,7 +70,7 @@ const DashboardHeader = ({
             <Button
               icon
               onClick={() =>
-                history.push('/dashboard/settings', {
+                history.push('/dashboard/settings/accVerification', {
                   background: location,
                 })
               }

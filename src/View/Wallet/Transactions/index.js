@@ -1,17 +1,26 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import DashboardHeader from '../../../Layout/DashboardHeader'
+import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
+import { useSelector, useDispatch } from 'react-redux'
 import { TiFilter } from 'react-icons/ti'
-import { getCurrency } from '../../../helpers'
-// import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+import DashboardHeader from '../../../Layout/DashboardHeader'
+import { fetchAllTransactions } from '../../../store/actions/user'
+import { getCurrency, toMoney } from '../../../helpers'
 import { Button, InputGroup, Table } from '../../../UI'
 import Container from './styles'
 
 const Transactions = () => {
+  const dispatch = useDispatch()
   const { transactionLists } = useSelector((s) => s.user)
+
+  useEffect(() => {
+    dispatch(fetchAllTransactions())
+  }, [dispatch])
 
   return (
     <Container>
+      <Helmet>
+        <title>Flux | Transactions</title>
+      </Helmet>
       <header>
         <DashboardHeader navType="small" />
         <div className="transaction--header__row">
@@ -47,9 +56,13 @@ const Transactions = () => {
               <>
                 {transactionLists.map((item, index) => (
                   <tr key={`table-${index}`}>
-                    <td className={`status--txt__${item.status.toLowerCase()}`}>
+                    <td
+                      className={`status--txt__${item.action
+                        .replace('_', '')
+                        .toLowerCase()} u--color__${item.status}`}
+                    >
                       {getCurrency(item.currency)}
-                      {item.amount}
+                      {toMoney(item.amount)}
                     </td>
                     <td>{item.receiver_name}</td>
                     <td>
@@ -74,17 +87,6 @@ const Transactions = () => {
                 ))}
               </>
             }
-            // tableFooter={
-            //   <div className="table--nav">
-            //     <Button icon>
-            //       <MdKeyboardArrowLeft />
-            //     </Button>
-            //     <div className="nav--text__container">1/3</div>
-            //     <Button icon>
-            //       <MdKeyboardArrowRight />
-            //     </Button>
-            //   </div>
-            // }
           />
         </div>
       </div>

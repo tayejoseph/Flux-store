@@ -14,6 +14,7 @@ const DataTopUp = () => {
     activePlanIndex: 0,
     phoneNumber: '',
   })
+  console.log(dataPlans, 'SDjdskjdk')
 
   const handleInput = ({ target }) => {
     setFormState((s) => ({
@@ -54,91 +55,87 @@ const DataTopUp = () => {
         className="modal--size__sm modal--close__relative"
         modalTitle={'Data Topup'}
       >
-        {dataPlans && (
-          <form onSubmit={handleSubmit} name="airtimeTopUp--form" noValidate>
-            <div className="form--inputs">
-              <InputGroup>
-                <select
-                  placeholder={'Network'}
-                  name="networkIndex"
-                  onChange={handleInput}
-                >
-                  <option disabled>Select Your Network</option>
-                  {dataPlans.map((item, index) => (
-                    <option value={index} key={item.newort_code}>
-                      {item.network_name.toUpperCase()}
+        <form onSubmit={handleSubmit} name="airtimeTopUp--form" noValidate>
+          <div className="form--inputs">
+            <InputGroup>
+              <select
+                placeholder={'Network'}
+                name="networkIndex"
+                onChange={handleInput}
+              >
+                <option disabled>Select Your Network</option>
+                {dataPlans.map((item, index) => (
+                  <option value={index} key={item.newort_code}>
+                    {item.network_name.toUpperCase()}
+                  </option>
+                ))}
+              </select>
+              <p className="u--typo__smBody helper--text">
+                {formData.networkIndex !== '' &&
+                  dataPlans[formData.networkIndex].check_balance}
+              </p>
+            </InputGroup>
+            <InputGroup>
+              <select
+                placeholder={'Data Plans'}
+                name="activePlanIndex"
+                onChange={handleInput}
+              >
+                {formData.networkIndex !== '' &&
+                  dataPlans[formData.networkIndex].plans.map((item, index) => (
+                    <option value={index} key={item.plan_code}>
+                      {item.name}
                     </option>
                   ))}
-                </select>
-                <p className="u--typo__smBody helper--text">
-                  {formData.networkIndex !== '' &&
-                    dataPlans[formData.networkIndex].check_balance}
-                </p>
-              </InputGroup>
-              <InputGroup>
-                <select
-                  placeholder={'Data Plans'}
-                  name="activePlanIndex"
+              </select>
+              <p className="u--typo__smBody helper--text">
+                All data plans last 30days unless otherwise indicated.
+              </p>
+            </InputGroup>
+            <p className="u--typo__normal">Who is this for?</p>
+            <InputGroup className="radio--btn__container">
+              <label className="u--color__dark" for={'self'}>
+                <RadioButton
+                  type="radio"
+                  value="self"
+                  name={'whoFor'}
+                  id="self"
                   onChange={handleInput}
-                >
-                  {formData.networkIndex !== '' &&
-                    dataPlans[formData.networkIndex].plans.map(
-                      (item, index) => (
-                        <option value={index} key={item.plan_code}>
-                          {item.name}
-                        </option>
-                      ),
-                    )}
-                </select>
-                <p className="u--typo__smBody helper--text">
-                  All data plans last 30days unless otherwise indicated.
-                </p>
-              </InputGroup>
-              <p className="u--typo__normal">Who is this for?</p>
-              <InputGroup className="radio--btn__container">
-                <label className="u--color__dark" for={'self'}>
-                  <RadioButton
-                    type="radio"
-                    value="self"
-                    name={'whoFor'}
-                    id="self"
-                    onChange={handleInput}
-                    checked={formData.whoFor === 'self'}
-                  />
-                  Myself
-                </label>
-              </InputGroup>
-              <InputGroup className="radio--btn__container">
-                <label className="u--color__dark" for={'someone'}>
-                  <RadioButton
-                    type="radio"
-                    value="someoneElse"
-                    name={'whoFor'}
-                    id="someone"
-                    onChange={handleInput}
-                    checked={formData.whoFor === 'someoneElse'}
-                  />
-                  Someone else
-                </label>
-              </InputGroup>
-              {formData.whoFor !== 'self' && (
-                <InputGroup
-                  type="tel"
-                  name={'phoneNumber'}
-                  value={formData.phoneNumber}
-                  onChange={handleInput}
-                  required={true}
-                  placeholder={"Recipient's Number"}
+                  checked={formData.whoFor === 'self'}
                 />
-              )}
-            </div>
-            <footer>
-              <Button full type="submit" rounded loading={loading}>
-                Top up
-              </Button>
-            </footer>
-          </form>
-        )}
+                Myself
+              </label>
+            </InputGroup>
+            <InputGroup className="radio--btn__container">
+              <label className="u--color__dark" for={'someone'}>
+                <RadioButton
+                  type="radio"
+                  value="someoneElse"
+                  name={'whoFor'}
+                  id="someone"
+                  onChange={handleInput}
+                  checked={formData.whoFor === 'someoneElse'}
+                />
+                Someone else
+              </label>
+            </InputGroup>
+            {formData.whoFor !== 'self' && (
+              <InputGroup
+                type="tel"
+                name={'phoneNumber'}
+                value={formData.phoneNumber}
+                onChange={handleInput}
+                required={true}
+                placeholder={"Recipient's Number"}
+              />
+            )}
+          </div>
+          <footer>
+            <Button full type="submit" rounded loading={loading}>
+              Top up
+            </Button>
+          </footer>
+        </form>
       </Modal>
     </Container>
   )

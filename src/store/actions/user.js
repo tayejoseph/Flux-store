@@ -103,12 +103,15 @@ export const getUserNotifications = () => async (dispatch) => {
 export const handleWithdrawal = (data) => async (dispatch, getState) => {
   try {
     console.log(data, 'sdjskdksdksj')
-    // const { status, data: response } = await axios.post(
-    //   '/wallet/v2/withdraw/',
-    //   data,
-    // )
-    // return { status, response }
-    return {}
+    const { status, data: response } = await axios.post(
+      '/wallet/v2/withdraw/',
+      data,
+    )
+    // const transactionLists = await dispatch(fetchAllTransactions())
+    // if (transactionLists.status === 200) {
+    return { status, response }
+    // }
+    // console.log(transactionLists, 'sdjksdjk')
   } catch ({ response }) {
     handleError(response)
   }
@@ -144,6 +147,7 @@ export const fetchAllTransactions = () => async (dispatch) => {
     console.log({ status, response }, 'Sdjsdsjks')
     if (status === 200) {
       dispatch(altTransactionLists(response.results))
+      return { status, data: response }
     }
   } catch ({ response }) {
     dispatch(altTransactionLists([]))
@@ -270,12 +274,13 @@ export const validateFluxId = async (id) => {
   }
 }
 
-export const sendMoney = async (data) => {
+export const sendMoney = (data) => async (dispatch, getState) => {
+  const { pk } = getState().user.userData
   try {
-    const { status, data: response } = await axios.post(
-      '/transactions/v2/',
-      data,
-    )
+    const { status, data: response } = await axios.post('/transactions/v2/', {
+      ...data,
+      receiver: pk,
+    })
     console.log({ status, response }, 'Sdjsksjdskj')
     return { status, response }
   } catch ({ response }) {

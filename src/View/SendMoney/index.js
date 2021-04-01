@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button, Modal, InputGroup, Spinner } from '../../UI'
 import { sendMoney, validateFluxId } from '../../store/actions/user'
 import { formValidator } from '../../helpers'
@@ -10,9 +11,10 @@ const initState = {
   validated: false,
 }
 const SendMoney = () => {
+  const dispatch = useDispatch()
   const [{ loading, validated, error }, setDisplay] = useState(initState)
   const [formData, setState] = useState({
-    amount: 0,
+    amount: '',
     receiver: '',
     receiveName: '',
     description: '',
@@ -27,13 +29,14 @@ const SendMoney = () => {
       setDisplay((s) => ({ ...s, validated: 'validating' }))
 
       try {
-        const response = await validateFluxId(formData.receiver)
-        // if (status === 200) {
-        //   setDisplay((s) => ({ ...s, validated: true }))
-        // }
+        const { response, status } = await validateFluxId(formData.receiver)
+        if (status === 200) {
+          setDisplay((s) => ({ ...s, validated: true }))
+          setState((s) => ({ ...s, receiveName: response.full_name }))
+        }
         console.log(response, 'sdjksjskj')
-      } finally {
-        // setDisplay((s) => ({ ...s, loading: false }))
+      } catch {
+        setDisplay((s) => ({ ...s, validated: false }))
       }
     }
   }
@@ -41,12 +44,16 @@ const SendMoney = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (
-      formValidator(document.forms['auth--form'].getElementsByTagName('input'))
+      formValidator(
+        document.forms['sendMoney--form'].getElementsByTagName('input'),
+      )
     ) {
       try {
         setDisplay((s) => ({ ...s, loading: true }))
-        const { receiveName, ...rest } = formData
-        const response = await sendMoney(rest)
+        const { receiveName, amount, ...rest } = formData
+        const response = await dispatch(
+          sendMoney({ amount: Number(amount), ...rest }),
+        )
         console.log(response, 'dksdslk')
       } finally {
         setDisplay((s) => ({ ...s, loading: false }))
@@ -58,6 +65,7 @@ const SendMoney = () => {
       setDisplay(initState)
     }
     setState((s) => ({
+      ...s,
       [target.name]: target.value,
     }))
   }
@@ -69,18 +77,20 @@ const SendMoney = () => {
         className="modal--size__sm modal--close__relative"
         modalTitle={'Send Money'}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} name="sendMoney--form" noValidate>
           <div className="form--inputs">
             <InputGroup
               placeholder={'Amount to send'}
               type="number"
               name="amount"
+              value={formData.amount}
               onChange={handleInput}
             />
             <InputGroup
               placeholder={'Flux ID or Flux tag (e.g @snapdragon)'}
               name="receiver"
               onChange={handleInput}
+              value={formData.receiver}
               onBlur={handleValidateTag}
             />
             {validated && (
@@ -89,7 +99,7 @@ const SendMoney = () => {
                   <Spinner />
                 ) : (
                   <p className={error ? 'u--status__error' : ''}>
-                    {formData.acct_name}
+                    {formData.receiveName}
                   </p>
                 )}
               </div>
@@ -97,6 +107,7 @@ const SendMoney = () => {
             <InputGroup
               placeholder={'Description'}
               name="description"
+              value={formData.description}
               onChange={handleInput}
             />
           </div>
