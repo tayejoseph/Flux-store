@@ -125,7 +125,9 @@ const Wallet = () => {
                   transactionLists.map((item, index) => (
                     <tr key={`table-${index}`}>
                       <td
-                        className={`status--txt__${item.status.toLowerCase()}`}
+                        className={`status--txt__${item.action
+                          .replace('_', '')
+                          .toLowerCase()} u--color__${item.status}`}
                       >
                         {getCurrency(item.currency)}
                         {toMoney(item.amount)}

@@ -40,8 +40,7 @@ const ProductForm = () => {
     })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     if (
       formValidator(
         document.forms['catalog--form'].getElementsByTagName('input'),
@@ -49,9 +48,11 @@ const ProductForm = () => {
     ) {
       try {
         setLoading(true)
-        productId
-          ? dispatch(updateCatalog(formData))
-          : dispatch(addCatalog(formData))
+        const response = productId
+          ? await dispatch(updateCatalog(formData, productId))
+          : await dispatch(addCatalog(formData))
+
+        console.log(response, 'ssjkdjfdkj')
       } finally {
         setLoading(false)
       }
@@ -75,7 +76,10 @@ const ProductForm = () => {
             <form
               id={'productForm'}
               name={'catalog--form'}
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                e.preventDefault()
+                handleSubmit()
+              }}
               noValidate
             >
               <div className={state?.section !== 'infoForm' && 'hide--section'}>
@@ -102,12 +106,7 @@ const ProductForm = () => {
                   >
                     Back
                   </Button>
-                  <Button
-                    rounded
-                    type="submit"
-                    form={'productForm'}
-                    loading={loading}
-                  >
+                  <Button rounded onClick={handleSubmit} loading={loading}>
                     Publish
                   </Button>
                 </div>

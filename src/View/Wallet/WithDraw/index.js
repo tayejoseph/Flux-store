@@ -1,5 +1,7 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { formValidator } from '../../../helpers'
 import { Button, Modal, InputGroup, Spinner } from '../../../UI'
 import { validateAccNo } from '../../../store/actions/app'
@@ -7,65 +9,81 @@ import { handleWithdrawal } from '../../../store/actions/user'
 import { BankLists } from '../../../Constants'
 import Container from './styles'
 
+const initState = {
+  loading: false,
+  error: false,
+  validated: false,
+}
 const WithDraw = () => {
   const dispatch = useDispatch()
-  const [{ loading, validated, error }, setDisplay] = useState({
-    loading: false,
-    error: false,
-    validated: false,
-  })
+  const history = useHistory()
+  const [{ loading, validated, error }, setDisplay] = useState(initState)
 
-  const disabled = useMemo(() => loading || validated !== true, [
+  const disabled = useMemo(() => loading || validated !== true || error, [
     loading,
     validated,
+    error,
   ])
 
   const [formData, setFormState] = useState({
     amount: '',
-    account_no: '',
+    acct_no: '',
     acct_name: 'Account Name',
     bank_code: '',
   })
 
-  const handleInput = (e) => {
-    setDisplay((s) => ({ ...s, validated: false, error: false }))
-    setFormState({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-    if (
-      (e.target.name === 'account_no' || e.target.name === 'amount') &&
-      e.target.value.length === 10
-    ) {
-      initBankValidation()
-    }
-  }
-
-  const initBankValidation = async () => {
-    const { account_no, amount, bank_code } = formData
-    if (account_no && amount && bank_code) {
-      setDisplay((s) => ({ ...s, validated: 'validating' }))
-      const { status, data: response } = await validateAccNo({
-        account_no,
-        bank_code,
-      })
-      if (status === 200) {
-        setDisplay((s) => ({ ...s, validated: true }))
-        if (response.status === 'error') {
+  const initBankValidation = useCallback(async () => {
+    const { acct_no, amount, bank_code } = formData
+    if (acct_no && amount && bank_code) {
+      try {
+        setDisplay((s) => ({ ...s, validated: 'validating' }))
+        const { status, data: response } = await validateAccNo({
+          account_no: acct_no,
+          bank_code,
+        })
+        if (status === 200) {
+          setDisplay((s) => ({ ...s, validated: true }))
+          if (response.status === 'error') {
+            setDisplay((s) => ({ ...s, validated: true, error: true }))
+            setFormState((s) => ({
+              ...s,
+              acct_name: 'Invalid Account Number',
+            }))
+          } else {
+            setDisplay((s) => ({ ...s, validated: true }))
+            setFormState((s) => ({
+              ...s,
+              acct_name: response.data.account_name,
+            }))
+          }
+        }
+      } catch ({ response }) {
+        console.log(response, 'sdjkdsjkj')
+        setTimeout(() => {
           setDisplay((s) => ({ ...s, validated: true, error: true }))
           setFormState((s) => ({
             ...s,
-            acct_name: 'Invalid Account Number',
+            acct_name: 'No internet connection',
           }))
-        } else {
-          setDisplay((s) => ({ ...s, validated: true }))
-          setFormState((s) => ({
-            ...s,
-            acct_name: response.data.account_name,
-          }))
-        }
+        }, 100)
       }
     }
+  }, [formData])
+
+  useEffect(() => {
+    if (formData.acct_no.length === 10 && !validated) {
+      initBankValidation()
+    }
+  }, [formData.acct_no, initBankValidation, validated])
+
+  const handleInput = ({ target }) => {
+    if (target.name === 'acct_no' && target.value.length === 10) {
+      setDisplay((s) => ({ ...s, validated: false, error: false }))
+    }
+    setFormState((s) => ({
+      ...s,
+      [target.name]: target.value,
+    }))
   }
 
   const handleSubmit = async (e) => {
@@ -79,7 +97,10 @@ const WithDraw = () => {
         setDisplay((s) => ({ ...s, loading: true }))
         const { status } = await dispatch(handleWithdrawal(formData))
         if (status === 200) {
-          setDisplay((s) => ({ ...s, loading: false }))
+          toast.success('Withdraw Successfull')
+          setTimeout(() => {
+            history.push('/dashboard/wallet/summary')
+          }, 500)
         }
       } finally {
         setDisplay((s) => ({ ...s, loading: false }))
@@ -102,7 +123,7 @@ const WithDraw = () => {
             <InputGroup
               placeholder={'₦0.00'}
               name="amount"
-              onBlur={initBankValidation}
+              type="number"
               onChange={handleInput}
               value={formData.amount}
             />
@@ -124,11 +145,10 @@ const WithDraw = () => {
             </InputGroup>
             <InputGroup
               placeholder={'Account Number'}
-              name="account_no"
+              name="acct_no"
               type="number"
               onChange={handleInput}
-              onBlur={initBankValidation}
-              value={formData.account_no}
+              value={formData.acct_no}
             />
             {validated && (
               <div className="account--name">

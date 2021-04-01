@@ -45,11 +45,11 @@ export default Styled.div`
                 padding: 1.5em 2em;
                 ${maxQuery('md')} {
                     width: 100%;
-                    height: 75vh;
+                    height: 77.5vh;
                     overflow-y: auto;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
+                    padding-top: 3em;
                     div.input--group {
                         margin-bottom: 2.5em;
                     }

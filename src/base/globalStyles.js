@@ -120,17 +120,28 @@ export default createGlobalStyle`
             content: "+"
           }
       }
-      .status--txt__success {
-          color: #47C479!important;
+      .status--txt__debit, .status--txt__fund  {
+          /* color: #47C479!important; */
           &:before {
             content: "+"
           }
       }
-      .status--txt__failed {
-          color: #FF5E5E!important;
+      .status--txt__withdraw, .status--txt__fluxtransfer, .status--txt__airtime, .status--txt__buycrypto {
+          /* color: #FF5E5E!important; */
           &:before {
             content: "-"
           }
+      }
+      .u--color__success {
+          color: #47C479!important;
+      }
+
+       .u--color__failed {
+          color: #FF5E5E!important;
+      }
+
+      .u--color__pending {
+          color: #FFCC00!important;
       }
       .status--txt__failed2 {
           color: #FF5E5E!important;

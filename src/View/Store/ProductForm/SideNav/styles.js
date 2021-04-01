@@ -55,7 +55,7 @@ export default Styled.aside`
                         height: 2.5px;
                         background: ${({ theme }) => theme.primary};
                         top: 5px;
-                        width: 100%;
+                        width: 93.3%;
                         left: 50%;
                     }
                 }

@@ -3,7 +3,7 @@ import { IoMdWallet, IoMdBasket, IoMdCall } from 'react-icons/io'
 import { FaGift } from 'react-icons/fa'
 import { RiArrowUpDownFill, RiArrowLeftUpLine } from 'react-icons/ri'
 import { FiArrowUpRight } from 'react-icons/fi'
-// import { ImCreditCard } from 'react-icons/im'
+import { ImCreditCard } from 'react-icons/im'
 import { useSelector } from 'react-redux'
 import fluxLogo from '../../assets/Flux Logo@2x.png'
 import UserAvatar from '../../assets/autumn-goodman-vTL_qy03D1I-unsplash (1)@2x.png'
@@ -54,6 +54,21 @@ const SideNav = ({ className }) => {
               Wallet
             </Link>
           </li>
+
+          {/* <li>
+            <Link
+              to="/dashboard/virtualCard"
+              className={
+                doesRouteMatch('virtualCard', location.pathname) &&
+                !backgroundPathname
+                  ? 'active'
+                  : ''
+              }
+            >
+              <ImCreditCard />
+              Virtual Cards
+            </Link>
+          </li> */}
           {/* <li>
             <Link
               to="/dashboard/cards"
@@ -68,7 +83,7 @@ const SideNav = ({ className }) => {
               Cards
             </Link>
           </li> */}
-          <li>
+          {/* <li>
             <Link
               to="/dashboard/gifts?tab=created"
               className={
@@ -81,7 +96,7 @@ const SideNav = ({ className }) => {
               <FaGift />
               Gifts
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               className={
@@ -117,13 +132,11 @@ const SideNav = ({ className }) => {
           <hr />
           <li>
             <Link
-              to="/dashboard/sendMoney?tab=sent"
-              className={
-                doesRouteMatch('sendMoney', location.pathname) &&
-                !backgroundPathname
-                  ? 'active'
-                  : ''
-              }
+              to={{
+                pathname: '/dashboard/sendMoney',
+                state: { background: location },
+              }}
+              className={backgroundPathname === 'sendMoney' ? 'active' : ''}
             >
               <FiArrowUpRight />
               Send Money

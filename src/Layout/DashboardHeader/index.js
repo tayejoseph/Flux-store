@@ -10,6 +10,7 @@ const DashboardHeader = ({
   title,
   sectionAction,
   middleContent,
+  children,
   navType = 'full',
 }) => {
   const { notificationData } = useSelector((s) => s.user)
@@ -29,7 +30,7 @@ const DashboardHeader = ({
               <Button
                 icon
                 onClick={() =>
-                  history.push('/dashboard/settings', {
+                  history.push('/dashboard/settings/accVerification', {
                     background: location,
                   })
                 }
@@ -69,7 +70,7 @@ const DashboardHeader = ({
             <Button
               icon
               onClick={() =>
-                history.push('/dashboard/settings', {
+                history.push('/dashboard/settings/accVerification', {
                   background: location,
                 })
               }

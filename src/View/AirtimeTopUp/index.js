@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useMemo } from 'react'
+import { Helmet } from 'react-helmet'
+import { formValidator } from '../../helpers'
 import { Button, RadioButton, Modal, InputGroup } from '../../UI'
-import { fetchDataPlan, handleAirTimeTopUp } from '../../store/actions/app'
+import { handleAirTimeTopUp } from '../../store/actions/app'
+import { dataPlans } from '../../Constants'
 import Container from './styles'
 
 const AirTimeTopUp = () => {
-  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const { dataPlans } = useSelector((s) => s.app)
   const [formData, setFormState] = useState({
     amount: '',
     whoFor: 'self',
     receiptNo: '',
   })
+
+  const disabled = useMemo(() => !formData.amount || loading, [
+    formData,
+    loading,
+  ])
   const handleInput = ({ target }) => {
     setFormState({
       ...formData,
@@ -22,43 +27,50 @@ const AirTimeTopUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      setLoading(true)
-      const { phoneNo, amount, whoFor } = formData
-      await handleAirTimeTopUp({
-        whoFor: whoFor === 'self' ? whoFor : phoneNo,
-        amount,
-      })
-    } finally {
-      setLoading(false)
+    if (
+      formValidator(
+        document.forms['airtime--form'].getElementsByTagName('input'),
+      )
+    ) {
+      try {
+        setLoading(true)
+        const { receiptNo, amount, whoFor } = formData
+        await handleAirTimeTopUp({
+          receiver: whoFor === 'self' ? whoFor : receiptNo,
+          amount,
+        })
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
-  useEffect(() => {
-    fetchDataPlan(dispatch)
-  }, [dispatch])
   return (
     <Container>
+      <Helmet>
+        <title>Flux | Airtime TopUp</title>
+      </Helmet>
       <Modal
         showModal={true}
         className="modal--size__sm modal--close__relative"
         modalTitle={'Airtime Topup'}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} name="airtime--form" noValidate>
           <div className="form--inputs">
-            <InputGroup>
-              <input
-                placeholder={'Amount of Airtime'}
-                name="amount"
-                onChange={handleInput}
-              />
-            </InputGroup>
+            <InputGroup
+              placeholder={'Amount of Airtime'}
+              name="amount"
+              value={formData.amount}
+              required={true}
+              onChange={handleInput}
+            />
             <p className="u--typo__normal u--color__light">Who is this for?</p>
             <InputGroup className="radio--btn__container">
-              <label className="u--color__dark">
+              <label className="u--color__dark" for={'self'}>
                 <RadioButton
                   type="radio"
                   name={'whoFor'}
+                  id="self"
                   checked={formData.whoFor === 'self' && true}
                   onChange={({ target }) =>
                     setFormState({
@@ -71,10 +83,11 @@ const AirTimeTopUp = () => {
               </label>
             </InputGroup>
             <InputGroup className="radio--btn__container">
-              <label className="u--color__dark">
+              <label className="u--color__dark" for={'someone'}>
                 <RadioButton
                   type="radio"
                   name={'whoFor'}
+                  id="someone"
                   checked={formData.whoFor === 'someoneElse' && true}
                   onChange={({ target }) =>
                     setFormState({
@@ -108,12 +121,20 @@ const AirTimeTopUp = () => {
                 placeholder={"Recipient's Number"}
                 type="tel"
                 name={'receiptNo'}
+                value={formData.receiptNo}
                 onChange={handleInput}
+                required={true}
               />
             )}
           </div>
           <footer>
-            <Button full type="submit" rounded loading={loading}>
+            <Button
+              full
+              type="submit"
+              rounded
+              loading={loading}
+              disabled={disabled}
+            >
               Top up
             </Button>
           </footer>

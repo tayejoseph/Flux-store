@@ -3,7 +3,7 @@ import { rem } from 'polished'
 
 export default Styled.div`    
     &.full--nav {    
-        height: ${rem('142px')};
+        min-height: ${rem('142px')};
         background: #FFFFFF;
         display: flex;
         flex-direction: column;
