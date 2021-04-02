@@ -1,5 +1,5 @@
 /** @flow */
-import { toast } from 'react-toastify'
+import { notify } from 'react-notify-toast'
 
 const handleError = (error) => {
   let errorMessage = ''
@@ -17,7 +17,7 @@ const handleError = (error) => {
   } else {
     errorMessage = 'An error occurred, check your internet connection'
   }
-  toast.error(errorMessage)
+  notify.show(errorMessage, 'error')
 }
 
 export default handleError

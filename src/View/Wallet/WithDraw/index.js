@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { notify } from 'react-notify-toast'
 import { formValidator } from '../../../helpers'
 import { Button, Modal, InputGroup, Spinner } from '../../../UI'
 import { validateAccNo } from '../../../store/actions/app'
@@ -97,7 +97,7 @@ const WithDraw = () => {
         setDisplay((s) => ({ ...s, loading: true }))
         const { status } = await dispatch(handleWithdrawal(formData))
         if (status === 200) {
-          toast.success('Withdraw Successfull')
+          notify.show('Withdraw Successfull', 'success')
           setTimeout(() => {
             history.push('/dashboard/wallet/summary')
           }, 500)

@@ -55,7 +55,7 @@ const SideNav = ({ className }) => {
             </Link>
           </li>
 
-          {/* <li>
+          <li>
             <Link
               to="/dashboard/virtualCard"
               className={
@@ -68,7 +68,7 @@ const SideNav = ({ className }) => {
               <ImCreditCard />
               Virtual Cards
             </Link>
-          </li> */}
+          </li>
           {/* <li>
             <Link
               to="/dashboard/cards"

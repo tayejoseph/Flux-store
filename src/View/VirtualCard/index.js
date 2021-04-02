@@ -1,29 +1,55 @@
-import React, { useState } from 'react'
-import { Route, useHistory, useRouteMatch, Switch } from 'react-router'
-import { IoMdTrash } from 'react-icons/io'
-import { RiAddLine } from 'react-icons/ri'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Route, useHistory, useRouteMatch } from 'react-router'
 import { MdAdd } from 'react-icons/md'
 import cardImg from '../../assets/card.png'
 import cardIllust from '../../assets/cardIllust.svg'
-import { MdEdit } from 'react-icons/md'
-import { FaMoneyBillWave } from 'react-icons/fa'
-import { Button, Table, Modal } from '../../UI'
+import { Button } from '../../UI'
 import DashboardHeader from '../../Layout/DashboardHeader'
 import Container from './styles'
 import CardIntro from './CardIntro'
 import CardForm from './CardForm'
+import CardView from './CardView'
+import { createVirtualCard, fetchVirtualCards } from '../../store/actions/user'
 
 const VirtualCard = () => {
+  const dispatch = useDispatch()
+  const { virtualCards } = useSelector((state) => state.user)
   const history = useHistory()
   const { path } = useRouteMatch()
+  const [formData, setState] = useState({
+    currency: 'NGN',
+    amount: '',
+    loading: false,
+    card_style: 0,
+  })
+  const handleInput = ({ target }) => {
+    setState((s) => ({
+      ...s,
+      [target.name]: target.value,
+    }))
+  }
+
+  const handleCreateCard = async () => {
+    try {
+      setState((s) => ({ ...s, loading: true }))
+      const { loading, ...rest } = formData
+      const { status, response } = await dispatch(createVirtualCard(rest))
+    } catch {
+      setState((s) => ({ ...s, loading: false }))
+    }
+  }
+
+  useEffect(() => {
+    dispatch(fetchVirtualCards())
+  }, [])
 
   return (
     <Container>
       <DashboardHeader
-        // title={'Flux Cards'}
         middleContent={
           <div>
-            <div className="cad">
+            <div className="card">
               <img src={cardImg} alt="card" className="cardImg" />
               <img
                 src={cardIllust}
@@ -49,8 +75,15 @@ const VirtualCard = () => {
           </div>
         }
       />
-      <Route path={`${path}/cardIntro`} component={CardIntro} />
-      <Route path={`${path}/cardForm`} component={CardForm} />
+      <Route path={`${path}/cardIntro`}>
+        <CardIntro {...{ handleInput, formData, setState }} />
+      </Route>
+      <Route path={`${path}/cardForm`}>
+        <CardForm {...{ handleInput, formData }} />
+      </Route>
+      <Route path={`${path}/cardView`}>
+        <CardView {...{ handleInput, formData, handleCreateCard }} />
+      </Route>
     </Container>
   )
 }

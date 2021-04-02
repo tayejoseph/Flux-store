@@ -4,6 +4,8 @@ import { IconContext } from 'react-icons'
 import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import DashBoard from './Layout/DashBoard'
+import Notifications from 'react-notify-toast'
+
 // import { ProtectedRoute } from './Components'
 import {
   AirtimeTopUp,
@@ -29,11 +31,11 @@ const App = () => {
         : false,
     },
   }
-  console.log(location, 'dksjdk')
 
   return (
     <ThemeProvider theme={theme()}>
       <GlobalStyle />
+      <Notifications />
       <IconContext.Provider value={{ className: 'icon' }}>
         <Switch location={background || location}>
           <Route path="/" exact={true}>

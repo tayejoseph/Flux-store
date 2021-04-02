@@ -1,12 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import card1 from '../../../assets/card1.png'
-import card2 from '../../../assets/card2.png'
-import card3 from '../../../assets/card3.png'
-import { RadioButton, Button, Modal, InputGroup } from '../../../UI'
+import { toMoney } from '../../../helpers'
+import { Button, Modal, InputGroup } from '../../../UI'
 import Container from './styles'
 
-const CardForm = ({ showModal, hideModal }) => {
+const CardForm = ({ handleInput, formData }) => {
+  const { userData } = useSelector((s) => s.user)
+
   const history = useHistory()
   return (
     <Container>
@@ -14,19 +15,30 @@ const CardForm = ({ showModal, hideModal }) => {
         className="modal--size__sm modal--close__relative"
         modalTitle={'Create a New Card'}
         showModal={true}
-        onClose={hideModal}
+        onClose={() => history.push('/dashboard/virtualCard/')}
       >
         <div className="content--container">
           <section>
+            <div className="top--section">
+              <p className="u--typo__lgBody u--color__lighter">
+                Wallet Balance
+              </p>
+              <hr />
+              <p className="u--typo__lgBody">{`₦4${toMoney(
+                userData.balance,
+              )}`}</p>
+            </div>
             <p className="u--typo__lgBody u--color__light">
               How much would you like to fund your card with?
             </p>
             <InputGroup
               name="amount"
+              type="number"
+              value={formData.amount}
               placeholder="Enter Amount"
-              value=""
               required={true}
               autoFocus={true}
+              onChange={handleInput}
             />
           </section>
 
@@ -42,7 +54,13 @@ const CardForm = ({ showModal, hideModal }) => {
             </div>
           </section>
           <section>
-            <Button full>Next</Button>
+            <Button
+              full
+              disabled={!formData.amount ? true : false}
+              onClick={() => history.push('/dashboard/virtualCard/cardView')}
+            >
+              Next
+            </Button>
           </section>
         </div>
       </Modal>

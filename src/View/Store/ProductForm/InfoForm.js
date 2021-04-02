@@ -30,13 +30,10 @@ const InfoForm = ({ formData, handleFormInput }) => {
       <InputGroup>
         <label>Product Categories</label>
         <select
-          placeholder={'Network'}
-          name="networkIndex"
+          placeholder={'Product Categorie'}
+          name="category"
           onChange={handleFormInput}
         >
-          <option value="volvo" disabled={true}>
-            Select Recipient's Network
-          </option>
           {ProductCategories.map((category) => (
             <option value={category} key={category}>
               {category}

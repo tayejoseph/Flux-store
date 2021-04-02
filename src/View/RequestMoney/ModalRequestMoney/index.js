@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { sendRequest, validateFluxId } from '../../../store/actions/user'
 import { formValidator } from '../../../helpers'
-import { toast } from 'react-toastify'
+import { notify } from 'react-notify-toast'
 import { useHistory } from 'react-router-dom'
 import { Button, Modal, InputGroup, Spinner } from '../../../UI'
 import Container from './styles'
@@ -68,7 +68,7 @@ const ModalRequestMoney = () => {
         setDisplay((s) => ({ ...s, loading: true }))
         const { status } = await sendRequest(rest)
         if (status === 200) {
-          toast.success('Successfully sent request')
+          notify.show('Successfully sent request', 'error')
           setTimeout(() => {
             history.goBack()
           }, 500)
