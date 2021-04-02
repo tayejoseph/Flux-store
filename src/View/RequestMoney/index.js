@@ -19,6 +19,8 @@ const RequestMoney = () => {
     dispatch(getRequestLists())
   }, [dispatch])
 
+  console.log(requestLists, 'Sdjskdjsdkj')
+
   return (
     <Container>
       <DashboardHeader

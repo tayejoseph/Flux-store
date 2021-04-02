@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react'
 import { sendRequest, validateFluxId } from '../../../store/actions/user'
 import { formValidator } from '../../../helpers'
+import { toast } from 'react-toastify'
+import { useHistory } from 'react-router-dom'
 import { Button, Modal, InputGroup, Spinner } from '../../../UI'
 import Container from './styles'
 
@@ -10,6 +12,7 @@ const initState = {
   validated: false,
 }
 const ModalRequestMoney = () => {
+  const history = useHistory()
   const [{ loading, validated, error }, setDisplay] = useState(initState)
   const [formData, setFormState] = useState({
     amount: '',
@@ -43,6 +46,7 @@ const ModalRequestMoney = () => {
           setFormState((s) => ({
             ...s,
             receiverName: response.response.full_name,
+            receiver: response.response.pk,
           }))
         }
       } else {
@@ -53,6 +57,8 @@ const ModalRequestMoney = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const { receiverName, ...rest } = formData
+
     if (
       formValidator(
         document.forms['request--form'].getElementsByTagName('input'),
@@ -60,9 +66,14 @@ const ModalRequestMoney = () => {
     ) {
       try {
         setDisplay((s) => ({ ...s, loading: true }))
-        const { state, data: response } = await sendRequest(formData)
-        console.log({ state, response }, 'sdjsdjsdksj')
-      } finally {
+        const { status } = await sendRequest(rest)
+        if (status === 200) {
+          toast.success('Successfully sent request')
+          setTimeout(() => {
+            history.goBack()
+          }, 500)
+        }
+      } catch {
         setDisplay((s) => ({ ...s, loading: false }))
       }
     }

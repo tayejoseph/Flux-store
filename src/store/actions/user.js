@@ -243,7 +243,7 @@ export const getRequestLists = () => async (dispatch) => {
   try {
     const { status, data: response } = await axios.get('/requests/v2/')
     if (status === 200) {
-      dispatch(altRequestLists(response))
+      dispatch(altRequestLists(response.result))
     }
     console.log({ status, response }, 'sdksdlskdsldk')
   } catch ({ response }) {}
