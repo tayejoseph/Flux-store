@@ -1,11 +1,15 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { maxQuery } from '../../../helpers'
 
 export default Styled.div`
 div.modal--backDrop {
     background-color: #fff;
     div.modal--container {
         width: ${rem('450px')};
+             ${maxQuery('sm')} {
+        width: ${rem('400px')};
+                }
     }
 }
 div.addCash--container {

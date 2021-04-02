@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { IoMdAdd, IoIosArrowDown } from 'react-icons/io'
 import { useHistory } from 'react-router-dom'
+import { notify } from 'react-notify-toast'
 import { Helmet } from 'react-helmet'
 import { Button, Spinner } from '../../UI'
 import StoreItem from './StoreItem'
@@ -12,7 +13,7 @@ import Container from './styles'
 
 const Store = () => {
   const dispatch = useDispatch()
-  const { catalogues } = useSelector((s) => s.user)
+  const { catalogues, userData } = useSelector((s) => s.user)
   const [showActionSheet, setDisplay] = useState(null)
   const history = useHistory()
 
@@ -32,6 +33,17 @@ const Store = () => {
     },
     [showActionSheet],
   )
+
+  const copyTextToClip = () => {
+    const link = `https://iflux.store/store/${userData.business.name_slug}/`
+    const elem = document.createElement('textarea')
+    elem.value = link
+    document.body.appendChild(elem)
+    elem.select()
+    document.execCommand('copy')
+    document.body.removeChild(elem)
+    notify.show(`Copied Link`, 'success')
+  }
 
   useEffect(() => {
     const handleKeyPress = (e) => {}
@@ -66,7 +78,7 @@ const Store = () => {
                 <IoMdAdd />
                 Add Product
               </Button>
-              <Button rounded secondary>
+              <Button rounded secondary onClick={copyTextToClip}>
                 Get Store Link
               </Button>
             </div>
@@ -82,10 +94,10 @@ const Store = () => {
           {catalogues === '' ? (
             <Spinner />
           ) : (
-            catalogues.map((item, index) => (
+            catalogues.map(({ ref, ...item }, index) => (
               <StoreItem
                 key={index}
-                {...{ ...item, showActionSheet, index }}
+                {...{ ...item, showActionSheet, index, cataloguesRef: ref }}
                 onActionClick={(e) => {
                   e.stopPropagation()
                   setDisplay(index)

@@ -56,7 +56,7 @@ const RequestMoney = () => {
               </thead>
             }
             tableContent={
-              <tbody>
+              <>
                 {[...Array(10).keys()].map((item, index) => (
                   <tr key={index}>
                     <td>Jackson Doe</td>
@@ -64,7 +64,7 @@ const RequestMoney = () => {
                     <td>₦ 4,354,955.23</td>
                   </tr>
                 ))}
-              </tbody>
+              </>
             }
           />
         </div>

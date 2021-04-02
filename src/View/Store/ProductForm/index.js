@@ -2,8 +2,10 @@ import React, { useState, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouteMatch, useHistory, useLocation } from 'react-router-dom'
 import { addCatalog, updateCatalog } from '../../../store/actions/user'
+import { notify } from 'react-notify-toast'
 import { formValidator } from '../../../helpers'
 import { Modal, Button } from '../../../UI'
+import { ProductCategories } from '../../../Constants'
 import SideNav from './SideNav'
 import InfoForm from './InfoForm'
 import UploadForm from './UploadForm'
@@ -22,6 +24,7 @@ const ProductForm = () => {
     description: '',
     amount: '',
     quantity: 0,
+    category: ProductCategories[0],
     delivery: '',
     ...activeProduct,
   })
@@ -48,12 +51,25 @@ const ProductForm = () => {
     ) {
       try {
         setLoading(true)
-        const response = productId
-          ? await dispatch(updateCatalog(formData, productId))
-          : await dispatch(addCatalog(formData))
-
-        console.log(response, 'ssjkdjfdkj')
-      } finally {
+        console.log(productId, 'fddjkfdfkj')
+        const { status } = productId
+          ? await dispatch(
+              updateCatalog(
+                { ...formData, kind: 'PHYSICAL', ref: activeProduct.ref },
+                productId,
+              ),
+            )
+          : await dispatch(addCatalog({ ...formData, kind: 'PHYSICAL' }))
+        if (status === 201 || status === 200) {
+          notify.show(
+            `Successfully ${productId ? 'updated' : 'added'} product`,
+            'success',
+          )
+          setTimeout(() => {
+            history.push('/dashboard/store/')
+          }, 500)
+        }
+      } catch {
         setLoading(false)
       }
     }

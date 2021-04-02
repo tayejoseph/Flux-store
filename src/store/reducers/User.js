@@ -6,13 +6,13 @@ const initState = {
   catalogues: '',
   giftLists: '',
   requestLists: '',
+  virtualCardLists: '',
   cardLists: '',
   personalBankInfo: '',
 }
 
 const UserReducer = (state = initState, action) => {
   const { type, data } = action
-  console.log(action, 'jdfjdkfjd')
   switch (type) {
     case 'LOGIN_USER':
       return { ...state, authenticated: data }
@@ -32,6 +32,8 @@ const UserReducer = (state = initState, action) => {
       return { ...state, giftLists: data }
     case 'ALT_CARDLISTS':
       return { ...state, cardLists: data }
+    case 'ALT_VIRTUAL_CARDS_LISTS':
+      return { ...state, virtualCardLists: data }
     case 'ALT_PERSONALBANK_INFO':
       return { ...state, personalBankInfo: data }
 

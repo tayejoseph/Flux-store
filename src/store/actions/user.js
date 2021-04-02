@@ -1,5 +1,5 @@
 import axios from '../../lib/axios'
-import { toast } from 'react-toastify'
+import { notify } from 'react-notify-toast'
 import handleError from '../../lib/handleError'
 import {
   ALT_TRANSACTION_LISTS,
@@ -8,6 +8,7 @@ import {
   ALT_REQUEST_LISTS,
   ALT_CATELOG,
   ALT_GIFT_LISTS,
+  ALT_VIRTUAL_CARDS_LISTS,
   ALT_CARDLISTS,
   ALT_PERSONALBANK_INFO,
 } from '../type'
@@ -29,6 +30,11 @@ export const initUserData = (data) => ({
 
 export const altNotification = (data) => ({
   type: ALT_NOTIFICATION,
+  data,
+})
+
+export const altVirtualCardLists = (data) => ({
+  type: ALT_VIRTUAL_CARDS_LISTS,
   data,
 })
 
@@ -69,7 +75,7 @@ export const updateUserDetails = (data) => async (dispatch) => {
     const { status, data: response } = await axios.put('/auth/user/', data)
     console.log(status, response, 'sdskksjdkj')
     if (status === 200) {
-      toast.success('Successfully update account information')
+      notify.show('Successfully update account information', 'success')
       dispatch(initUserData(response))
     }
     return { status, response }
@@ -82,7 +88,7 @@ export const changeUserPassword = (data) => async () => {
   try {
     const { status } = await axios.post('/auth/password/change/', data)
     if (status === 200) {
-      toast.success('Successfully changed user password')
+      notify.show('Successfully changed user password', 'success')
     }
     return { status }
   } catch ({ response }) {
@@ -179,51 +185,43 @@ export const changeUserType = (data) => async () => {
     }
     console.log({ status, response }, 'sdskdjsdkj')
   } catch ({ response }) {
-    console.log(data, 'Sdjksdjk')
-    console.log(response, 'djskdjsdkj')
     handleError(response)
   }
 }
 
 // Store
 export const fetchCatalog = () => async (dispatch, getState) => {
-  const {
-    userData: { business },
-  } = getState().user
   try {
-    const { status, data: response } = await axios.get(
-      `/catalogs/v1/?business=${business.id}`,
-    )
-    console.log(response, 'SDksdsdkj')
+    const { status, data: response } = await axios.get(`/catalogs/v1/`)
     if (status === 200) {
       dispatch(altCatalog(response.results))
     }
-    console.log({ status, response }, 'sdskdjsdkj')
-  } catch ({ response }) {}
+  } catch ({ response }) {
+    handleError(response)
+  }
 }
 
-export const updateCatalog = (data, productId) => async (
-  dispatch,
-  getState,
-) => {
-  const {
-    userData: { business },
-  } = getState().user
+export const updateCatalog = (data) => async (dispatch, getState) => {
+  const { business_info, ref, ...rest } = data
+  const { catalogues } = getState().user
   try {
-    console.log(getState().user.userData, 'sdjskdsjkdk')
-    const { status, data: response } = await axios.post(
-      `/catalogs/v1/${business.id}/${productId}`,
-      data,
-    )
-    console.log({ status, response }, 'sdskdjsdkj')
-  } catch ({ response }) {}
+    const { status, data: response } = await axios.put(`/catalogs/v1/${ref}/`, {
+      ...rest,
+    })
+    if (status === 200) {
+      const index = catalogues.findIndex((item) => item.ref === ref)
+      catalogues.splice(index, 1, data)
+    }
+    return { status, response }
+  } catch ({ response }) {
+    handleError(response)
+  }
 }
 
 export const addCatalog = (data) => async (dispatch, getState) => {
-  console.log(data, 'sdsjkdsdksdkj')
   try {
     const { status, data: response } = await axios.post('/catalogs/v1/', data)
-    console.log({ status, response }, 'SDsdjsdjkdjs')
+    return { status, response }
   } catch ({ response }) {
     handleError(response)
   }
@@ -251,6 +249,88 @@ export const getRequestLists = () => async (dispatch) => {
 
 export const getUserByFluxId = (id) => {
   return axios.get(`/users/details/?flux_tag=${id}`)
+}
+
+export const fetchVirtualCards = () => async (dispatch) => {
+  try {
+    const { status, data: response } = await axios.get('/virtual_cards/')
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+      dispatch(altVirtualCardLists(response.results))
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const fundVirtualCards = (data) => async (dispatch) => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/virtual_cards/fund/',
+      data,
+    )
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const withdrawVirtualCards = (data) => async () => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/virtual_cards/withdraw/',
+      data,
+    )
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const blockUnblockVirtualCards = (data) => async () => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/virtual_cards/status/',
+      data,
+    )
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const terminateVirtualCards = (data) => async (dispatch) => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/virtual_cards/terminate/',
+      data,
+    )
+    console.log({ status, response }, 'Sdjsdsjks')
+    if (status === 200) {
+    }
+  } catch ({ response }) {
+    handleError(response)
+  }
+}
+
+export const createVirtualCard = (data) => async (dispatch) => {
+  try {
+    const { status, data: response } = await axios.post(
+      '/virtual_cards/create/',
+      data,
+    )
+    if (status === 200) {
+    }
+    console.log({ status, response }, 'sdksdlskdsldk')
+  } catch ({ response }) {
+    handleError(response)
+  }
 }
 
 export const sendRequest = async (data) => {

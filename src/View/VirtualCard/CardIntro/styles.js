@@ -64,9 +64,27 @@ export default Styled.div`
                 display: flex;
                 padding-bottom: 1em;
                 justify-content: space-between;
-                img {                    
-                    width: ${rem('83px')};
-                    height: ${rem('56px')};
+                div.card--container {
+                    position: relative;
+                    img {                    
+                        width: ${rem('83px')};
+                        height: ${rem('56px')};
+                    }
+                    &.active {
+                        .icon {
+                            display: block;
+                        }
+                    }
+                    .icon {
+                        display: none;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        border-radius: 50%;
+                        font-size: 1.2rem;
+                        background: #fff;
+                        transform: translate(-50%, -50%);
+                    }
                 }
             }
         }

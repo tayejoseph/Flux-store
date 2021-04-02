@@ -4,7 +4,7 @@ import { rem } from 'polished'
 export default Styled.div`    
     flex: 1;
     height: 100%;
-    div.cad {
+    div.card {
         width: ${rem('343px')};
         height: ${rem('197px')};
         position: relative;
