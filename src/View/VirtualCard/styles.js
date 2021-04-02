@@ -1,10 +1,14 @@
 import Styled from 'styled-components'
 import { rem } from 'polished'
+import { maxQuery } from '../../helpers'
 
 export default Styled.div`    
     flex: 1;
     height: 100%;
     div.card {
+        ${maxQuery('415px')} {
+        margin-top: 1.5em;
+        }
         width: ${rem('343px')};
         height: ${rem('197px')};
         position: relative;
