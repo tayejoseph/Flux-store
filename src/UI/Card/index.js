@@ -1,10 +1,10 @@
 import React from 'react'
 import Container from './styles'
-import card1 from '../../assets/card1.png'
-import card2 from '../../assets/card2.png'
-import card3 from '../../assets/card3.png'
+import card1 from '../../assets/card1.webp'
+import card2 from '../../assets/card2.webp'
+import card3 from '../../assets/card3.webp'
 import masterCard from '../../assets/masterCard.svg'
-import fluxlogo from '../../assets/fluxlogo3.png'
+import fluxlogo from '../../assets/fluxlogo3.webp'
 
 const Card = ({ card_style, title }) => {
   const cards = [card1, card2, card3]
