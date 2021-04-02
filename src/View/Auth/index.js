@@ -6,7 +6,7 @@ import { signUpUser, loginUser, loginHandler } from '../../store/actions/Auth'
 import { updateUserDetails } from '../../store/actions/user'
 import { InputGroup, Button, Checkbox } from '../../UI'
 import { formValidator } from '../../helpers'
-import fluxLogo from '../../assets/Flux Logo@2x.png'
+import fluxLogo from '../../assets/Flux Logo@2x.webp'
 import Container from './styles'
 
 const Auth = () => {
