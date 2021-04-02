@@ -82,7 +82,7 @@ const Settings = () => {
     <Container>
       <Modal
         showModal={true}
-        onClose={() => history.push('/dashboard/store')}
+        onClose={() => history.goBack()}
         className="modal--size__md modal--close__relative"
       >
         <div className="productForm--container">
