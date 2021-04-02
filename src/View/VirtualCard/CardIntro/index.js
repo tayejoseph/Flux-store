@@ -41,6 +41,7 @@ const CardIntro = ({ formData, handleInput, setState }) => {
                   name="currency"
                   value="NGN"
                   checked={formData.currency === 'NGN'}
+                  onClick={handleInput}
                 />
               </div>
             </label>
@@ -59,6 +60,7 @@ const CardIntro = ({ formData, handleInput, setState }) => {
                   name="currency"
                   value="dollar"
                   checked={formData.currency === 'dollar'}
+                  onClick={handleInput}
                 />
               </div>
             </label>
