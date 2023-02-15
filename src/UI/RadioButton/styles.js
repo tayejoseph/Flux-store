@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled from "styled-components";
 
 export default Styled.div`
     display: flex;
@@ -12,13 +12,13 @@ export default Styled.div`
         height: 0;
         position: absolute;
         margin: 0px;
-        &:checked + .radio__control {
+        &:checked + .radio_control {
             &::after {
                 background: ${({ theme }) => theme.primary};
             }
         }
     }
-    .radio__control {
+    .radio_control {
         display: block;
         width: 18px!important;
         height: 18px!important;
@@ -39,4 +39,4 @@ export default Styled.div`
         }
     }
 
-`
+`;

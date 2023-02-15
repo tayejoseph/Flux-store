@@ -1,26 +1,26 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
-    div.modal--container {
+    div.modal-container {
         p {
-            font-size: ${rem('14px')};
+            font-size: ${rem("14px")};
             letter-spacing: 0px;
             color: #222222;
             opacity: 0.7;
         }
         form {
-            div.form--inputs {
+            div.form-inputs {
                 padding: 1em 1.5em;  
                 padding-top: 2em;          
             }
-            p.instruction--txt {
+            p.instruction-txt {
                 margin: 0px;
                 margin-bottom: 1em;
             }
-            div.recipiantName--container {                                
-                width: ${rem('221px')};
-                height: ${rem('40px')};           
+            div.recipiantName-container {                                
+                width: ${rem("221px")};
+                height: ${rem("40px")};           
                 border: 1px solid #AEAEAE;
                 border-radius: 4px;
                 margin-bottom: 1.5em;
@@ -46,4 +46,4 @@ export default Styled.div`
             }
         }
     }
-`
+`;

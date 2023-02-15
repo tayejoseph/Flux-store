@@ -1,47 +1,47 @@
 export const isEmail = (email) => {
   return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    email,
-  )
-}
+    email
+  );
+};
 
 const formValidator = (inputs) => {
-  let validated = true
-  Array.from(inputs).map((input) => {
-    const { type, value, name, required } = input
+  let validated = true;
+  Array.from(inputs).forEach((input) => {
+    const { type, value, name, required } = input;
     if (required) {
       if (value) {
-        input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-          ''
+        input.parentElement.getElementsByClassName("error-msg")[0].innerHTML =
+          "";
       } else {
-        validated = false
+        validated = false;
         input.parentElement.getElementsByClassName(
-          'error-msg',
-        )[0].innerHTML = `${name} cannot be blank`
+          "error-msg"
+        )[0].innerHTML = `${name} cannot be blank`;
       }
     }
 
-    if (type === 'email') {
+    if (type === "email") {
       if (isEmail(value)) {
-        input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-          ''
+        input.parentElement.getElementsByClassName("error-msg")[0].innerHTML =
+          "";
       } else {
-        validated = false
-        input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-          'Invalid Email Address'
+        validated = false;
+        input.parentElement.getElementsByClassName("error-msg")[0].innerHTML =
+          "Invalid Email Address";
       }
     }
 
-    if (type === 'password') {
+    if (type === "password") {
       if (value) {
-        input.parentElement.getElementsByClassName('error-msg')[0].innerHTML =
-          ''
+        input.parentElement.getElementsByClassName("error-msg")[0].innerHTML =
+          "";
       } else
         input.parentElement.getElementsByClassName(
-          'error-msg',
-        )[0].innerHTML = `Password cannot be blank`
+          "error-msg"
+        )[0].innerHTML = `Password cannot be blank`;
     }
-  })
-  return validated
-}
+  });
+  return validated;
+};
 
-export default formValidator
+export default formValidator;

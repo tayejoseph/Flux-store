@@ -1,15 +1,15 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
-    div.modal--container {
-        width: ${rem('375px')};
+    div.modal-container {
+        width: ${rem("375px")};
         display: flex;
         flex-direction: column;
         align-items: center;
         background: #F9F9F9;
     }
-    div.content--container {
+    div.content-container {
         margin-top: 1.8em;
         section {
             background: #FFFFFF;
@@ -26,4 +26,4 @@ export default Styled.div`
             margin-bottom: 1.8em;
         }
     }
-`
+`;

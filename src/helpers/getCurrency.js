@@ -1,12 +1,12 @@
 const getCurrency = (currency, type) => {
-  if (type === 'symbol') {
+  if (type === "symbol") {
     switch (currency.toLowerCase()) {
-      case 'ngn':
-        return '₦'
+      case "ngn":
+        return "₦";
       default:
-        break
+        break;
     }
   }
-}
+};
 
-export default getCurrency
+export default getCurrency;

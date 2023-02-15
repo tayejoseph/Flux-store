@@ -1,80 +1,80 @@
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef } from "react";
 
 const useExternalFocus = ({ onClose, escapeOnClose }) => {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    if (containerRef && containerRef.current) containerRef.current.focus()
-  }, [])
+    if (containerRef && containerRef.current) containerRef.current.focus();
+  }, []);
 
   const handleKeyDown = useCallback(
     (e) => {
       if (containerRef && containerRef.current) {
-        const TAB_CODE = 9
-        const ESC_CODE = 27
+        const TAB_CODE = 9;
+        const ESC_CODE = 27;
 
         const focusable = containerRef.current.querySelectorAll(
-          '[href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        )
-        const firstElement = focusable[0]
-        const lastElement = focusable[focusable.length - 1]
+          '[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusable[0];
+        const lastElement = focusable[focusable.length - 1];
 
-        if (document.activeElement.classList.contains('ql-editor')) return
+        if (document.activeElement.classList.contains("ql-editor")) return;
 
         const activeNodeIndex = Array.from(focusable).findIndex((node) =>
-          node.isSameNode(document.activeElement),
-        )
-        if (activeNodeIndex === -1 && firstElement) firstElement.focus()
+          node.isSameNode(document.activeElement)
+        );
+        if (activeNodeIndex === -1 && firstElement) firstElement.focus();
 
         const handleForwardTab = () => {
           if (document.activeElement.isSameNode(lastElement)) {
-            e.preventDefault()
-            firstElement.focus()
+            e.preventDefault();
+            firstElement.focus();
           }
-        }
+        };
 
         const handleBackwardTab = () => {
           if (document.activeElement.isSameNode(firstElement)) {
-            e.preventDefault()
-            lastElement.focus()
+            e.preventDefault();
+            lastElement.focus();
           }
-        }
+        };
         switch (e.keyCode) {
           case TAB_CODE:
             if (focusable.length === 1) {
-              e.preventDefault()
-              break
+              e.preventDefault();
+              break;
             }
 
             if (e.shiftkey) {
-              handleBackwardTab()
+              handleBackwardTab();
             } else {
-              handleForwardTab()
+              handleForwardTab();
             }
-            break
+            break;
           case ESC_CODE:
             if (
-              typeof onClose === 'function' &&
+              typeof onClose === "function" &&
               escapeOnClose &&
-              document.activeElement.nodeName !== 'INPUT'
+              document.activeElement.nodeName !== "INPUT"
             )
-              onClose(e)
-            break
+              onClose(e);
+            break;
           default:
         }
       }
     },
-    [onClose, escapeOnClose],
-  )
+    [onClose, escapeOnClose]
+  );
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [handleKeyDown])
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
-  return { containerRef }
-}
+  return { containerRef };
+};
 
-export default useExternalFocus
+export default useExternalFocus;

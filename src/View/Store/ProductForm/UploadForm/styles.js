@@ -1,9 +1,9 @@
-import Styled from 'styled-components'
-import { maxQuery } from '../../../../helpers'
+import Styled from "styled-components";
+import { maxQuery } from "../../../../helpers";
 
 export default Styled.div`
     padding: 0 1em;
-    ${maxQuery('md')} {
+    ${maxQuery("md")} {
         height: 60vh;
     }
     p {
@@ -23,7 +23,7 @@ export default Styled.div`
         align-items: center;
         border: 2px dashed ${({ theme }) => theme.primary};
         border-radius: 10px;
-        ${maxQuery('md')} {
+        ${maxQuery("md")} {
             margin: 4em 0px;
         }
          input {
@@ -37,11 +37,11 @@ export default Styled.div`
             font-size: 12px;
         }
     }
-    div.smImg--row {
+    div.smImg-row {
         display: flex;
         margin: 1.5em 0px;
         margin-bottom: 2em;
-        div.smImg--container {            
+        div.smImg-container {            
             width: 48px;
             height: 48px;
             border-radius: 10px;
@@ -77,11 +77,11 @@ export default Styled.div`
             }
         }
     }
-    p.upload--instruction {
+    p.upload-instruction {
        margin: 0px; 
         opacity: 0.5;
         text-align: center;
 
     }
 
-`
+`;

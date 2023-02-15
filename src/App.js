@@ -1,12 +1,11 @@
-import React from 'react'
-import { Switch, Route, useLocation, Redirect } from 'react-router-dom'
-import { IconContext } from 'react-icons'
-import { useSelector } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
-import DashBoard from './Layout/DashBoard'
-import Notifications from 'react-notify-toast'
+import React, { useMemo } from "react";
+import { Switch, Route, useLocation, Redirect } from "react-router-dom";
+import { IconContext } from "react-icons";
+import { useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import DashBoard from "./Layout/DashBoard";
+import Notifications from "react-notify-toast";
 
-// import { ProtectedRoute } from './Components'
 import {
   AirtimeTopUp,
   DataTopUp,
@@ -14,29 +13,36 @@ import {
   WithDraw,
   Auth,
   Settings,
-} from './View'
-import theme from './base/theme'
-import GlobalStyle from './base/globalStyles'
+} from "./View";
+import theme from "./base/theme";
+import GlobalStyle from "./base/globalStyles";
 
 const App = () => {
   const {
     user: { authenticated },
-  } = useSelector((s) => s)
-  const location = useLocation()
-  const background = location.state?.background && {
-    ...location.state.background,
-    state: {
-      background: location?.state.background
-        ? location.pathname.split('/')[location.pathname.split('/').length - 1]
-        : false,
-    },
-  }
+  } = useSelector((s) => s);
+  const location = useLocation();
+
+  const background = useMemo(
+    () =>
+      location.state?.background && {
+        ...location.state.background,
+        state: {
+          background: location?.state.background
+            ? location.pathname.split("/")[
+                location.pathname.split("/").length - 1
+              ]
+            : false,
+        },
+      },
+    [location]
+  );
 
   return (
     <ThemeProvider theme={theme()}>
       <GlobalStyle />
       <Notifications />
-      <IconContext.Provider value={{ className: 'icon' }}>
+      <IconContext.Provider value={{ className: "icon" }}>
         <Switch location={background || location}>
           <Route path="/" exact={true}>
             {authenticated ? (
@@ -67,7 +73,7 @@ const App = () => {
         </Switch>
       </IconContext.Provider>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

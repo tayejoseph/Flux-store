@@ -1,33 +1,33 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
     display: flex;
     flex-direction: column;
     align-items: space-between;
     height: 27.5rem;
-    div.content--container{
+    div.content-container{
         flex: 1;
-            div.spinner--container {
+            div.spinner-container {
                display: flex;
                justify-content: center;
                align-items: center;
                height: 100%;
            }
-       div.card--container {
+       div.card-container {
            display: flex;
            padding-top: 2em;
            padding-bottom: 2em;
            flex-direction: column;
            align-items: center;
-               div.card--item {
+               div.card-item {
                 border: 1px solid ${({ theme }) => theme.primary};
                 border-radius: 4px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                width: ${rem('313px')};
-                height: ${rem('56px')};
+                width: ${rem("313px")};
+                height: ${rem("56px")};
                 padding: 0px 1em;
                 div:first-child {
                     flex: 0.2;
@@ -55,7 +55,7 @@ export default Styled.div`
                     justify-content: center;
 
                 }
-                button.remove--btn {
+                button.remove-btn {
                     color: #FF5E5E;
                     .icon {
                         font-size: 1.2rem;
@@ -66,7 +66,7 @@ export default Styled.div`
                 }
             }
        }
-       div.addCard--btn__container {
+       div.addCard-btn_container {
             display: flex;
             justify-content: center;
             align-items:center;
@@ -78,15 +78,15 @@ export default Styled.div`
                 }
             }
     }
-   div.transfer--container {
+   div.transfer-container {
         flex: 1;
         display: flex;
         flex-direction: column;
         padding-top: 1.5em;
         align-items:center;
-        div.accNo--container {
-                width: ${rem('313px')};
-                height: ${rem('143px')};
+        div.accNo-container {
+                width: ${rem("313px")};
+                height: ${rem("143px")};
                 border: 1px solid ${({ theme }) => theme.primary};
                 border-radius: 4px;
                 display: flex;
@@ -101,23 +101,23 @@ export default Styled.div`
     }
 }
     footer {
-        div.summary--container {
+        div.summary-container {
             display: flex;
             justify-content: space-between;
             padding: 0px 2em;
             padding-bottom: 0.5em;
         }
-        div.btn--container {
-            height: ${rem('81px')};
+        div.btn-container {
+            height: ${rem("81px")};
             display: flex;
             justify-content: center;
             align-items: center;
             box-shadow: 0px 0px 1px #00000029;
             border-radius: 0px 0px 10px 10px;
                     button {
-                width: ${rem('316px')};
+                width: ${rem("316px")};
             }
         }
     }
    }
-`
+`;

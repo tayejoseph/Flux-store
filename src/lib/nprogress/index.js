@@ -1,16 +1,18 @@
 //@flow
-import NProgress from 'nprogress'
+import NProgress from "nprogress";
 
-export default {
+const Ngroke = {
   start: () => {
-    NProgress.start()
-    const progress: HTMLDivElement = document.getElementById('nprogress')
-    const spinner: HTMLDivElement = progress.querySelector('.spinner')
+    NProgress.start();
+    const progress = document.getElementById("nprogress");
+    const spinner = progress.querySelector(".spinner");
 
-    progress.setAttribute('aria-busy', true)
-    spinner.setAttribute('role', 'progressbar')
+    progress.setAttribute("aria-busy", true);
+    spinner.setAttribute("role", "progressbar");
   },
   done: () => NProgress.done(),
-  inc: (value: number) => NProgress.inc(value),
+  inc: (value) => NProgress.inc(value),
   configure: NProgress.configure,
-}
+};
+
+export default Ngroke;

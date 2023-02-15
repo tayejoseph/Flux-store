@@ -1,10 +1,10 @@
-import React, { useRef } from 'react'
-import Container from './styles'
+import React, { useRef } from "react";
+import Container from "./styles";
 
 const InputGroup = ({ children, onChange, label, type, ...props }) => {
-  const errorRef = useRef(null)
+  const errorRef = useRef(null);
   return (
-    <Container className="input--group">
+    <Container className="input-group">
       {children ? (
         children
       ) : (
@@ -12,17 +12,17 @@ const InputGroup = ({ children, onChange, label, type, ...props }) => {
           {label && <label>{label}</label>}
           <input
             {...props}
-            type={type ? type : 'text'}
+            type={type ? type : "text"}
             onChange={(e) => {
-              errorRef.current.innerHTML = ''
-              if (typeof onChange === 'function') onChange(e)
+              errorRef.current.innerHTML = "";
+              if (typeof onChange === "function") onChange(e);
             }}
           />
         </>
       )}
       <p className="error-msg" ref={errorRef} />
     </Container>
-  )
-}
+  );
+};
 
-export default InputGroup
+export default InputGroup;

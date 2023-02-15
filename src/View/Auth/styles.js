@@ -1,5 +1,5 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
     display: flex;
@@ -10,7 +10,7 @@ export default Styled.div`
     background: ${({ theme }) => theme.primary};
     form {    
         position: relative;
-        width: ${rem('394px')};
+        width: ${rem("394px")};
         box-shadow: 0px 0px 42px #00000029;
         background: #fff;
         text-align: center;
@@ -19,7 +19,7 @@ export default Styled.div`
         padding-top: 3.5em;
         border-radius: 10px;
         header {
-            a.img--container {   
+            a.img-container {   
                 position: absolute;
                 top: -25px;   
                 background: #fff;
@@ -28,8 +28,8 @@ export default Styled.div`
                 padding: 0.8em;
                 transform: translateX(-50%);  
                 img {        
-                    width: ${rem('58px')};
-                    height: ${rem('58px')};
+                    width: ${rem("58px")};
+                    height: ${rem("58px")};
                 }
             }
             p {
@@ -47,25 +47,25 @@ export default Styled.div`
                 transform: translateX(-50%);
             }
         }
-        div.input--group {
+        div.input-group {
             margin-bottom: 1.2em;
         }
         label {
-            font-size: ${rem('14px')};
+            font-size: ${rem("14px")};
             color: #222222;
             opacity: 1;
         }
-        label.showPassword--container {
+        label.showPassword-container {
             display: flex;
             align-items: center;
-            div.flux--radion__btn {
+            div.flux-radion_btn {
                 margin-right: 0.8em;
             }
         } 
-        button.aut--btn {
+        button.aut-btn {
             margin-top: 2em;
         }
-        button.forgotPassword--btn {
+        button.forgotPassword-btn {
             margin-top: 1em;
         }
     }
@@ -78,4 +78,4 @@ export default Styled.div`
         }
     }
 
-`
+`;

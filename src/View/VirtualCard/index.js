@@ -1,48 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Route, useHistory, useRouteMatch } from 'react-router'
-import { MdAdd } from 'react-icons/md'
-import cardImg from '../../assets/card.webp'
-import cardIllust from '../../assets/cardIllust.svg'
-import { Button } from '../../UI'
-import DashboardHeader from '../../Layout/DashboardHeader'
-import Container from './styles'
-import CardIntro from './CardIntro'
-import CardForm from './CardForm'
-import CardView from './CardView'
-import { createVirtualCard, fetchVirtualCards } from '../../store/actions/user'
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Route, useHistory, useRouteMatch } from "react-router";
+import { MdAdd } from "react-icons/md";
+import cardImg from "../../assets/card.webp";
+import cardIllust from "../../assets/cardIllust.svg";
+import { Button } from "../../UI";
+import DashboardHeader from "../../Layout/DashboardHeader";
+import Container from "./styles";
+import CardIntro from "./CardIntro";
+import CardForm from "./CardForm";
+import CardView from "./CardView";
+import { createVirtualCard, fetchVirtualCards } from "../../store/actions/user";
 
 const VirtualCard = () => {
-  const dispatch = useDispatch()
-  const { virtualCards } = useSelector((state) => state.user)
-  const history = useHistory()
-  const { path } = useRouteMatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { path } = useRouteMatch();
+  const [loading, setLoading] = useState(false);
   const [formData, setState] = useState({
-    currency: 'NGN',
-    amount: '',
-    loading: false,
+    currency: "NGN",
+    amount: "",
     card_style: 0,
-  })
+  });
   const handleInput = ({ target }) => {
     setState((s) => ({
       ...s,
       [target.name]: target.value,
-    }))
-  }
+    }));
+  };
 
-  const handleCreateCard = async () => {
-    try {
-      setState((s) => ({ ...s, loading: true }))
-      const { loading, ...rest } = formData
-      const { status, response } = await dispatch(createVirtualCard(rest))
-    } catch {
-      setState((s) => ({ ...s, loading: false }))
-    }
-  }
+  const handleCreateCard = () => {
+    setLoading(true);
+    dispatch(createVirtualCard(formData)).finally(() => {
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
-    dispatch(fetchVirtualCards())
-  }, [])
+    dispatch(fetchVirtualCards());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -56,11 +52,11 @@ const VirtualCard = () => {
                 alt="cardIllustration"
                 className="illustration"
               />
-              <div className="card--content">
+              <div className="card-content">
                 <h2 className="title">
                   Flux Cards<span>.</span>
                 </h2>
-                <p className="u--typo__lgBody">
+                <p className="u-typo_lgBody">
                   Set up your own Naira or Dollar <br />
                   cards.
                 </p>
@@ -82,10 +78,10 @@ const VirtualCard = () => {
         <CardForm {...{ handleInput, formData }} />
       </Route>
       <Route path={`${path}/cardView`}>
-        <CardView {...{ handleInput, formData, handleCreateCard }} />
+        <CardView {...{ handleInput, loading, formData, handleCreateCard }} />
       </Route>
     </Container>
-  )
-}
+  );
+};
 
-export default VirtualCard
+export default VirtualCard;
