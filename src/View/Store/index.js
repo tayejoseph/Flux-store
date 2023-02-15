@@ -8,7 +8,7 @@ import StoreItem from "./StoreItem";
 import { useDispatch, useSelector } from "react-redux";
 import { trackWindowScroll } from "react-lazy-load-image-component";
 import { fetchCatalog } from "../../store/actions/user";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import Container from "./styles";
 
 const Store = () => {

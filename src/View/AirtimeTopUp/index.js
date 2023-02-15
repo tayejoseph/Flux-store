@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { formValidator } from "../../helpers";
 import { Button, RadioButton, Modal, InputGroup } from "../../UI";
 import { handleAirTimeTopUp } from "../../store/actions/app";
-import { dataPlans } from "../../Constants";
+import { dataPlans } from "../../constants";
 import Container from "./styles";
 
 const AirTimeTopUp = () => {

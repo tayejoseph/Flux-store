@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRequestLists } from "../../store/actions/user";
 import { Button, TabNav, Table } from "../../UI";
 import { useQuery } from "../../hooks";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import ModalRequestMoney from "./ModalRequestMoney";
 import Container from "./styles";
 
@@ -18,8 +18,6 @@ const RequestMoney = () => {
   useEffect(() => {
     dispatch(getRequestLists());
   }, [dispatch]);
-
-  console.log(requestLists, "Sdjskdjsdkj");
 
   return (
     <Container>

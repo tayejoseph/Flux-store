@@ -6,7 +6,7 @@ import { formValidator } from "../../../helpers";
 import { Button, Modal, InputGroup, Spinner } from "../../../UI";
 import { validateAccNo } from "../../../store/actions/app";
 import { handleWithdrawal } from "../../../store/actions/user";
-import { BankLists } from "../../../Constants";
+import { BankLists } from "../../../constants";
 import Container from "./styles";
 
 const initState = {
@@ -57,7 +57,6 @@ const WithDraw = () => {
           }
         }
       } catch ({ response }) {
-        console.log(response, "sdjkdsjkj");
         setTimeout(() => {
           setDisplay((s) => ({ ...s, validated: true, error: true }));
           setFormState((s) => ({

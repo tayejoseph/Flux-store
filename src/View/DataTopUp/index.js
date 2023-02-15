@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Button, RadioButton, Modal, InputGroup } from "../../UI";
 import { handleDataTopUp } from "../../store/actions/app";
-import { dataPlans } from "../../Constants";
+import { dataPlans } from "../../constants";
 import { formValidator } from "../../helpers";
 import Container from "./styles";
 

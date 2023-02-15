@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector, useDispatch } from "react-redux";
 import { TiFilter } from "react-icons/ti";
-import DashboardHeader from "../../../Layout/DashboardHeader";
+import DashboardHeader from "../../../layout/DashboardHeader";
 import { fetchAllTransactions } from "../../../store/actions/user";
 import { getCurrency, toMoney } from "../../../helpers";
 import { Button, InputGroup, Table } from "../../../UI";
