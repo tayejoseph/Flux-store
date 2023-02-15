@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import Container from "./styles";
 
 const Transactions = () => {

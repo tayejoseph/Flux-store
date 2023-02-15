@@ -4,7 +4,7 @@ import { RiAddLine } from "react-icons/ri";
 import { MdEdit } from "react-icons/md";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { Button, Table } from "../../UI";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import Container from "./styles";
 
 const Card = () => {

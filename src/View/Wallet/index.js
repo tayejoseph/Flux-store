@@ -10,7 +10,7 @@ import {
   getPersonalBankInfo,
 } from "../../store/actions/user";
 import WalletItem from "./WalletItem";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import { Button, Table } from "../../UI";
 import Container from "./styles";
 
