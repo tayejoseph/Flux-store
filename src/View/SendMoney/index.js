@@ -34,7 +34,6 @@ const SendMoney = () => {
           setDisplay((s) => ({ ...s, validated: true }));
           setState((s) => ({ ...s, receiveName: response.full_name }));
         }
-        console.log(response, "sdjksjskj");
       } catch {
         setDisplay((s) => ({ ...s, validated: false }));
       }
@@ -48,13 +47,10 @@ const SendMoney = () => {
         document.forms["sendMoney-form"].getElementsByTagName("input")
       )
     ) {
+      setDisplay((s) => ({ ...s, loading: true }));
       try {
-        setDisplay((s) => ({ ...s, loading: true }));
         const { receiveName, amount, ...rest } = formData;
-        const response = await dispatch(
-          sendMoney({ amount: Number(amount), ...rest })
-        );
-        console.log(response, "dksdslk");
+        await dispatch(sendMoney({ amount: Number(amount), ...rest }));
       } finally {
         setDisplay((s) => ({ ...s, loading: false }));
       }

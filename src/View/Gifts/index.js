@@ -4,7 +4,7 @@ import { IoMdAdd, IoMdTrash } from "react-icons/io";
 import { Helmet } from "react-helmet";
 import { Button, Table, TabNav } from "../../UI";
 import { getGiftLists } from "../../store/actions/user";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import Container from "./styles";
 
 const Gift = () => {

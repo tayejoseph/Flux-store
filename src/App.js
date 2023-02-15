@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 import { Switch, Route, useLocation, Redirect } from "react-router-dom";
 import { IconContext } from "react-icons";
+import Notifications from "react-notify-toast";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
-import DashBoard from "./Layout/DashBoard";
-import Notifications from "react-notify-toast";
+import DashBoard from "./layout/DashBoard";
 
 import {
   AirtimeTopUp,
@@ -13,7 +13,7 @@ import {
   WithDraw,
   Auth,
   Settings,
-} from "./View";
+} from "./view";
 import theme from "./base/theme";
 import GlobalStyle from "./base/globalStyles";
 

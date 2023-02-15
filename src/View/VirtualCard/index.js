@@ -5,7 +5,7 @@ import { MdAdd } from "react-icons/md";
 import cardImg from "../../assets/card.webp";
 import cardIllust from "../../assets/cardIllust.svg";
 import { Button } from "../../UI";
-import DashboardHeader from "../../Layout/DashboardHeader";
+import DashboardHeader from "../../layout/DashboardHeader";
 import Container from "./styles";
 import CardIntro from "./CardIntro";
 import CardForm from "./CardForm";
