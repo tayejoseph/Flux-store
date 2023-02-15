@@ -1,49 +1,50 @@
-import React, { useState, useMemo } from 'react'
-import { Helmet } from 'react-helmet'
-import { formValidator } from '../../helpers'
-import { Button, RadioButton, Modal, InputGroup } from '../../UI'
-import { handleAirTimeTopUp } from '../../store/actions/app'
-import { dataPlans } from '../../Constants'
-import Container from './styles'
+import React, { useState, useMemo } from "react";
+import { Helmet } from "react-helmet";
+import { formValidator } from "../../helpers";
+import { Button, RadioButton, Modal, InputGroup } from "../../UI";
+import { handleAirTimeTopUp } from "../../store/actions/app";
+import { dataPlans } from "../../Constants";
+import Container from "./styles";
 
 const AirTimeTopUp = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [formData, setFormState] = useState({
-    amount: '',
-    whoFor: 'self',
-    receiptNo: '',
-  })
+    amount: "",
+    whoFor: "self",
+    receiptNo: "",
+  });
 
-  const disabled = useMemo(() => !formData.amount || loading, [
-    formData,
-    loading,
-  ])
+  const disabled = useMemo(
+    () => !formData.amount || loading,
+    [formData, loading]
+  );
+
   const handleInput = ({ target }) => {
-    setFormState({
-      ...formData,
+    setFormState((s) => ({
+      ...s,
       [target.name]: target.value,
-    })
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (
       formValidator(
-        document.forms['airtime--form'].getElementsByTagName('input'),
+        document.forms["airtime-form"].getElementsByTagName("input")
       )
     ) {
       try {
-        setLoading(true)
-        const { receiptNo, amount, whoFor } = formData
+        setLoading(true);
+        const { receiptNo, amount, whoFor } = formData;
         await handleAirTimeTopUp({
-          receiver: whoFor === 'self' ? whoFor : receiptNo,
+          receiver: whoFor === "self" ? whoFor : receiptNo,
           amount,
-        })
+        });
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
-  }
+  };
 
   return (
     <Container>
@@ -52,47 +53,47 @@ const AirTimeTopUp = () => {
       </Helmet>
       <Modal
         showModal={true}
-        className="modal--size__sm modal--close__relative"
-        modalTitle={'Airtime Topup'}
+        className="modal-size_sm modal-close_relative"
+        modalTitle={"Airtime Topup"}
       >
-        <form onSubmit={handleSubmit} name="airtime--form" noValidate>
-          <div className="form--inputs">
+        <form onSubmit={handleSubmit} name="airtime-form" noValidate>
+          <div className="form-inputs">
             <InputGroup
-              placeholder={'Amount of Airtime'}
+              placeholder={"Amount of Airtime"}
               name="amount"
               value={formData.amount}
               required={true}
               onChange={handleInput}
             />
-            <p className="u--typo__normal u--color__light">Who is this for?</p>
-            <InputGroup className="radio--btn__container">
-              <label className="u--color__dark" for={'self'}>
+            <p className="u-typo_normal u-color_light">Who is this for?</p>
+            <InputGroup className="radio-btn_container">
+              <label className="u-color_dark" for={"self"}>
                 <RadioButton
                   type="radio"
-                  name={'whoFor'}
+                  name={"whoFor"}
                   id="self"
-                  checked={formData.whoFor === 'self' && true}
+                  checked={formData.whoFor === "self" && true}
                   onChange={({ target }) =>
                     setFormState({
                       ...formData,
-                      whoFor: target.checked ? 'self' : 'someoneElse',
+                      whoFor: target.checked ? "self" : "someoneElse",
                     })
                   }
                 />
                 My Self
               </label>
             </InputGroup>
-            <InputGroup className="radio--btn__container">
-              <label className="u--color__dark" for={'someone'}>
+            <InputGroup className="radio-btn_container">
+              <label className="u-color_dark" for={"someone"}>
                 <RadioButton
                   type="radio"
-                  name={'whoFor'}
+                  name={"whoFor"}
                   id="someone"
-                  checked={formData.whoFor === 'someoneElse' && true}
+                  checked={formData.whoFor === "someoneElse" && true}
                   onChange={({ target }) =>
                     setFormState({
                       ...formData,
-                      whoFor: target.checked ? 'someoneElse' : 'self',
+                      whoFor: target.checked ? "someoneElse" : "self",
                     })
                   }
                 />
@@ -101,7 +102,7 @@ const AirTimeTopUp = () => {
             </InputGroup>
             <InputGroup>
               <select
-                placeholder={'Network'}
+                placeholder={"Network"}
                 name="networkIndex"
                 onChange={handleInput}
               >
@@ -116,11 +117,11 @@ const AirTimeTopUp = () => {
                   ))}
               </select>
             </InputGroup>
-            {formData.whoFor !== 'self' && (
+            {formData.whoFor !== "self" && (
               <InputGroup
                 placeholder={"Recipient's Number"}
                 type="tel"
-                name={'receiptNo'}
+                name={"receiptNo"}
                 value={formData.receiptNo}
                 onChange={handleInput}
                 required={true}
@@ -141,7 +142,7 @@ const AirTimeTopUp = () => {
         </form>
       </Modal>
     </Container>
-  )
-}
+  );
+};
 
-export default AirTimeTopUp
+export default AirTimeTopUp;

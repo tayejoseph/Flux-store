@@ -1,28 +1,28 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { maxQuery } from '../../../helpers'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { maxQuery } from "../../../helpers";
 
 export default Styled.div`
-div.modal--backDrop {
+div.modal-backDrop {
     background-color: #fff;
-    div.modal--container {
-        width: ${rem('450px')};
-             ${maxQuery('sm')} {
-        width: ${rem('400px')};
+    div.modal-container {
+        width: ${rem("450px")};
+             ${maxQuery("sm")} {
+        width: ${rem("400px")};
                 }
     }
 }
-div.addCash--container {
+div.addCash-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0px 2.5em;
-    div.accNo--container {
+    div.accNo-container {
         border: 1px solid ${({ theme }) => theme.primary};
         border-radius: 4px;
         width: 100%;
-        height: ${rem('180px')};
+        height: ${rem("180px")};
         text-align: center;
         padding: 1em 2em;
         margin: 1.5em 0px;
@@ -50,4 +50,4 @@ div.addCash--container {
         margin-bottom: 1.5em;
     }
 }
-`
+`;

@@ -1,13 +1,13 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
-    div.modal--container {  
-        width: ${rem('373px')};
-        height: ${rem('485px')};
+    div.modal-container {  
+        width: ${rem("373px")};
+        height: ${rem("485px")};
     }
-    div.newuser--container {
-        height: ${rem('485px')};
+    div.newuser-container {
+        height: ${rem("485px")};
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -15,7 +15,7 @@ export default Styled.div`
             flex: 1;
             display: flex;
             flex-direction: column;
-            div.carousel--item {
+            div.carousel-item {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
@@ -28,7 +28,7 @@ export default Styled.div`
                     margin-bottom: 0.1em;
                     color: ${({ theme }) => theme.primary};
                 }
-                div.notification--bell {
+                div.notification-bell {
                     position: relative;
                     display: inline-block;
                     &:after {
@@ -38,14 +38,14 @@ export default Styled.div`
                         background: #FF5E5E;
                         border-radius: 50%;
                         border: 2px solid #fff;                        
-                        width: ${rem('9px')};
-                        height: ${rem('9px')};
+                        width: ${rem("9px")};
+                        height: ${rem("9px")};
                         top: 10px;
                         right: 0px;
                     }
                 }
-                div.img--container {
-                    height: ${rem('120px')};
+                div.img-container {
+                    height: ${rem("120px")};
                     width: 100%;
                 }
                 div {
@@ -56,7 +56,7 @@ export default Styled.div`
                     }
                 }
             }
-            div.coursel--action {
+            div.coursel-action {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -69,7 +69,7 @@ export default Styled.div`
                         opacity: 0.7;
                     }
                 }
-                div.active--indicator {
+                div.active-indicator {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -93,8 +93,8 @@ export default Styled.div`
             }
         }
         footer {        
-            width: ${rem('373px')};
-            height: ${rem('81px')};
+            width: ${rem("373px")};
+            height: ${rem("81px")};
             box-shadow: 0px 0px 1px #00000029;
             border-radius: 0px 0px 10px 10px;
             display: flex;
@@ -102,4 +102,4 @@ export default Styled.div`
             justify-content: center;
         }
     }
-`
+`;

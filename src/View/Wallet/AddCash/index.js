@@ -1,41 +1,41 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { Modal, Spinner, Button } from '../../../UI'
-import Container from './styles'
+import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Modal, Spinner, Button } from "../../../UI";
+import Container from "./styles";
 
 const AddCash = () => {
-  const history = useHistory()
-  const { personalBankInfo } = useSelector((state) => state.user)
+  const history = useHistory();
+  const { personalBankInfo } = useSelector((state) => state.user);
 
   return (
     <Container>
       <Modal
-        className="modal--size__sm modal--close__relative"
-        modalTitle={'Payment Account'}
+        className="modal-size_sm modal-close_relative"
+        modalTitle={"Payment Account"}
         showModal={true}
       >
-        <div className="addCash--container">
-          <div className="accNo--container">
+        <div className="addCash-container">
+          <div className="accNo-container">
             {personalBankInfo ? (
               <>
                 <h2 className="instruction">
                   Please pay into this bank account
                 </h2>
-                <h3 className="u--typo__headline">
+                <h3 className="u-typo_headline">
                   {personalBankInfo.account_no}
                 </h3>
                 <div className="bankInfo">
-                  <h4 className="u--typo__normalBold">
+                  <h4 className="u-typo_normalBold">
                     {personalBankInfo.bank_name} Bank
                   </h4>
-                  <h4 className="u--typo__normalBold">
+                  <h4 className="u-typo_normalBold">
                     {personalBankInfo.account_name}
                   </h4>
                 </div>
               </>
             ) : (
-              <div className="spinner--container">
+              <div className="spinner-container">
                 <Spinner />
               </div>
             )}
@@ -49,7 +49,7 @@ const AddCash = () => {
         </div>
       </Modal>
     </Container>
-  )
-}
+  );
+};
 
-export default AddCash
+export default AddCash;

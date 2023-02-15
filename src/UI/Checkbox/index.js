@@ -1,13 +1,13 @@
-import React from 'react'
-import Container from './styles'
+import React from "react";
+import Container from "./styles";
 
 const Checkbox = ({ className, ...props }) => {
   return (
-    <Container className={`flux--radion__btn ${className && className}`}>
+    <Container className={`flux-radion_btn ${className && className}`}>
       <input type="checkbox" {...props} />
       <span />
     </Container>
-  )
-}
+  );
+};
 
-export default Checkbox
+export default Checkbox;

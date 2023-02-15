@@ -1,5 +1,5 @@
 const unitRemoval = (item) => {
-    return item.replace(/\D/g, '');
-}
+  return item.replace(/\D/g, "");
+};
 
-export default unitRemoval
+export default unitRemoval;

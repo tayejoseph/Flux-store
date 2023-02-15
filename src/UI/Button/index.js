@@ -1,6 +1,6 @@
-import React from 'react'
-import Container from './style'
-import Spinner from '../Spinner'
+import React from "react";
+import Container from "./style";
+import Spinner from "../Spinner";
 
 const Button = ({
   disabled = false,
@@ -11,7 +11,7 @@ const Button = ({
   full,
   style,
   small,
-  type = 'button',
+  type = "button",
   className,
   rounded,
   icon,
@@ -25,7 +25,7 @@ const Button = ({
 }) => {
   return (
     <Container
-      className={`btn u--typo__btn ${className ? className : ''}`}
+      className={`btn u-typo_btn ${className ? className : ""}`}
       icon={icon ? icon : undefined}
       iconRight={iconRight ? iconRight : undefined}
       iconLeft={iconLeft ? iconLeft : undefined}
@@ -46,6 +46,6 @@ const Button = ({
     >
       {loading ? <Spinner /> : children}
     </Container>
-  )
-}
-export default Button
+  );
+};
+export default Button;

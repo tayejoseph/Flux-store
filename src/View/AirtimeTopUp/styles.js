@@ -1,13 +1,13 @@
-import Styled from 'styled-components'
+import Styled from "styled-components";
 
 export default Styled.div`
-    div.modal--container {
+    div.modal-container {
         form {
             padding-top: 0.5em;      
-            div.form--inputs {
+            div.form-inputs {
                 padding: 1.5em;
             }
-            div.radio--btn__container {
+            div.radio-btn_container {
                 font-weight: bold;
             }
             footer {
@@ -19,4 +19,4 @@ export default Styled.div`
             }
         }
     }
-`
+`;

@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { IoMdAdd, IoMdTrash } from 'react-icons/io'
-import { Helmet } from 'react-helmet'
-import { Button, Table, TabNav } from '../../UI'
-import { getGiftLists } from '../../store/actions/user'
-import DashboardHeader from '../../Layout/DashboardHeader'
-import Container from './styles'
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { IoMdAdd, IoMdTrash } from "react-icons/io";
+import { Helmet } from "react-helmet";
+import { Button, Table, TabNav } from "../../UI";
+import { getGiftLists } from "../../store/actions/user";
+import DashboardHeader from "../../Layout/DashboardHeader";
+import Container from "./styles";
 
 const Gift = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getGiftLists())
-  }, [dispatch])
+    dispatch(getGiftLists());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -20,9 +20,9 @@ const Gift = () => {
         <title>Flux Gifts</title>
       </Helmet>
       <DashboardHeader
-        title={'Flux Lists'}
+        title={"Flux Lists"}
         sectionAction={
-          <div className="card--action">
+          <div className="card-action">
             <Button rounded iconRight>
               <IoMdAdd />
               Create
@@ -30,18 +30,18 @@ const Gift = () => {
           </div>
         }
       />
-      <div className="gift--content">
+      <div className="gift-content">
         <header>
-          <TabNav tabItems={['Created', 'Sent', 'Received']} />
+          <TabNav tabItems={["Created", "Sent", "Received"]} />
         </header>
-        <div className="gift--table__container">
+        <div className="gift-table_container">
           <Table
             tableHeader={
               <thead>
                 <tr>
                   <th>Title</th>
                   <th>Description</th>
-                  <th className="action--cell">Action</th>
+                  <th className="action-cell">Action</th>
                 </tr>
               </thead>
             }
@@ -51,8 +51,8 @@ const Gift = () => {
                   <tr key={`table-${index}`}>
                     <td>Jackson Doe</td>
                     <td>Shopping List for Jason's</td>
-                    <td className="action--cell">
-                      <Button icon className="btn--delete">
+                    <td className="action-cell">
+                      <Button icon className="btn-delete">
                         <IoMdTrash />
                       </Button>
                     </td>
@@ -64,7 +64,7 @@ const Gift = () => {
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default Gift
+export default Gift;

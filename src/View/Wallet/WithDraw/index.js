@@ -1,127 +1,126 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { notify } from 'react-notify-toast'
-import { formValidator } from '../../../helpers'
-import { Button, Modal, InputGroup, Spinner } from '../../../UI'
-import { validateAccNo } from '../../../store/actions/app'
-import { handleWithdrawal } from '../../../store/actions/user'
-import { BankLists } from '../../../Constants'
-import Container from './styles'
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { notify } from "react-notify-toast";
+import { formValidator } from "../../../helpers";
+import { Button, Modal, InputGroup, Spinner } from "../../../UI";
+import { validateAccNo } from "../../../store/actions/app";
+import { handleWithdrawal } from "../../../store/actions/user";
+import { BankLists } from "../../../Constants";
+import Container from "./styles";
 
 const initState = {
   loading: false,
   error: false,
   validated: false,
-}
+};
 const WithDraw = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const [{ loading, validated, error }, setDisplay] = useState(initState)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [{ loading, validated, error }, setDisplay] = useState(initState);
 
-  const disabled = useMemo(() => loading || validated !== true || error, [
-    loading,
-    validated,
-    error,
-  ])
+  const disabled = useMemo(
+    () => loading || validated !== true || error,
+    [loading, validated, error]
+  );
 
   const [formData, setFormState] = useState({
-    amount: '',
-    acct_no: '',
-    acct_name: 'Account Name',
-    bank_code: '',
-  })
+    amount: "",
+    acct_no: "",
+    acct_name: "Account Name",
+    bank_code: "",
+  });
 
   const initBankValidation = useCallback(async () => {
-    const { acct_no, amount, bank_code } = formData
+    const { acct_no, amount, bank_code } = formData;
     if (acct_no && amount && bank_code) {
       try {
-        setDisplay((s) => ({ ...s, validated: 'validating' }))
+        setDisplay((s) => ({ ...s, validated: "validating" }));
         const { status, data: response } = await validateAccNo({
           account_no: acct_no,
           bank_code,
-        })
+        });
         if (status === 200) {
-          setDisplay((s) => ({ ...s, validated: true }))
-          if (response.status === 'error') {
-            setDisplay((s) => ({ ...s, validated: true, error: true }))
+          setDisplay((s) => ({ ...s, validated: true }));
+          if (response.status === "error") {
+            setDisplay((s) => ({ ...s, validated: true, error: true }));
             setFormState((s) => ({
               ...s,
-              acct_name: 'Invalid Account Number',
-            }))
+              acct_name: "Invalid Account Number",
+            }));
           } else {
-            setDisplay((s) => ({ ...s, validated: true }))
+            setDisplay((s) => ({ ...s, validated: true }));
             setFormState((s) => ({
               ...s,
               acct_name: response.data.account_name,
-            }))
+            }));
           }
         }
       } catch ({ response }) {
-        console.log(response, 'sdjkdsjkj')
+        console.log(response, "sdjkdsjkj");
         setTimeout(() => {
-          setDisplay((s) => ({ ...s, validated: true, error: true }))
+          setDisplay((s) => ({ ...s, validated: true, error: true }));
           setFormState((s) => ({
             ...s,
-            acct_name: 'No internet connection',
-          }))
-        }, 100)
+            acct_name: "No internet connection",
+          }));
+        }, 100);
       }
     }
-  }, [formData])
+  }, [formData]);
 
   useEffect(() => {
     if (formData.acct_no.length === 10 && !validated) {
-      initBankValidation()
+      initBankValidation();
     }
-  }, [formData.acct_no, initBankValidation, validated])
+  }, [formData.acct_no, initBankValidation, validated]);
 
   const handleInput = ({ target }) => {
-    if (target.name === 'acct_no' && target.value.length === 10) {
-      setDisplay((s) => ({ ...s, validated: false, error: false }))
+    if (target.name === "acct_no" && target.value.length === 10) {
+      setDisplay((s) => ({ ...s, validated: false, error: false }));
     }
     setFormState((s) => ({
       ...s,
       [target.name]: target.value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (
       formValidator(
-        document.forms['withdraw--form'].getElementsByTagName('input'),
+        document.forms["withdraw-form"].getElementsByTagName("input")
       )
     ) {
       try {
-        setDisplay((s) => ({ ...s, loading: true }))
-        const { status } = await dispatch(handleWithdrawal(formData))
+        setDisplay((s) => ({ ...s, loading: true }));
+        const { status } = await dispatch(handleWithdrawal(formData));
         if (status === 200) {
-          notify.show('Withdraw Successfull', 'success')
+          notify.show("Withdraw Successfull", "success");
           setTimeout(() => {
-            history.push('/dashboard/wallet/summary')
-          }, 500)
+            history.push("/dashboard/wallet/summary");
+          }, 500);
         }
       } finally {
-        setDisplay((s) => ({ ...s, loading: false }))
+        setDisplay((s) => ({ ...s, loading: false }));
       }
     }
-  }
+  };
 
   return (
     <Container>
       <Modal
         showModal={true}
-        className="modal--size__sm modal--close__relative"
-        modalTitle={'Withdraw'}
+        className="modal-size_sm modal-close_relative"
+        modalTitle={"Withdraw"}
       >
-        <form onSubmit={handleSubmit} name="withdraw--form" noValidate>
-          <div className="form--inputs">
-            <p className="intro--txt">
+        <form onSubmit={handleSubmit} name="withdraw-form" noValidate>
+          <div className="form-inputs">
+            <p className="intro-txt">
               Enter the amount and account you wish to withdraw
             </p>
             <InputGroup
-              placeholder={'₦0.00'}
+              placeholder={"₦0.00"}
               name="amount"
               type="number"
               onChange={handleInput}
@@ -129,7 +128,7 @@ const WithDraw = () => {
             />
             <InputGroup>
               <select
-                placeholder={'Network'}
+                placeholder={"Network"}
                 name="bank_code"
                 onChange={handleInput}
               >
@@ -144,18 +143,18 @@ const WithDraw = () => {
               </select>
             </InputGroup>
             <InputGroup
-              placeholder={'Account Number'}
+              placeholder={"Account Number"}
               name="acct_no"
               type="number"
               onChange={handleInput}
               value={formData.acct_no}
             />
             {validated && (
-              <div className="account--name">
-                {validated === 'validating' ? (
+              <div className="account-name">
+                {validated === "validating" ? (
                   <Spinner />
                 ) : (
-                  <p className={error ? 'u--status__error' : ''}>
+                  <p className={error ? "u-status_error" : ""}>
                     {formData.acct_name}
                   </p>
                 )}
@@ -176,7 +175,7 @@ const WithDraw = () => {
         </form>
       </Modal>
     </Container>
-  )
-}
+  );
+};
 
-export default WithDraw
+export default WithDraw;

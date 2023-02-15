@@ -1,8 +1,8 @@
-import React, { useEffect, useCallback } from 'react'
-import { IoClose } from 'react-icons/io5'
-import { useHistory } from 'react-router-dom'
-import { useExternalFocus } from '../../hooks'
-import Container from './styles'
+import React, { useEffect, useCallback } from "react";
+import { IoClose } from "react-icons/io5";
+import { useHistory } from "react-router-dom";
+import { useExternalFocus } from "../../hooks";
+import Container from "./styles";
 
 const Modal = ({
   showModal,
@@ -14,48 +14,48 @@ const Modal = ({
   className,
   children,
 }) => {
-  const history = useHistory()
+  const history = useHistory();
   const { containerRef } = useExternalFocus({
     onClose,
     showModal,
     escapeOnClose,
-  })
+  });
 
   useEffect(() => {
-    const body = document.body
-    if (showModal && !body.classList.contains('lock-scroll')) {
-      body.classList.add('lock-scroll')
-    } else if (!showModal && body.classList.contains('lock-scroll')) {
-      body.classList.remove('lock-scroll')
+    const body = document.body;
+    if (showModal && !body.classList.contains("lock-scroll")) {
+      body.classList.add("lock-scroll");
+    } else if (!showModal && body.classList.contains("lock-scroll")) {
+      body.classList.remove("lock-scroll");
     }
-  }, [showModal])
+  }, [showModal]);
 
   const handleClose = useCallback(
     (e) => {
-      e.stopPropagation()
-      if (typeof onClose === 'function') {
-        onClose()
+      e.stopPropagation();
+      if (typeof onClose === "function") {
+        onClose();
       } else {
-        history.goBack()
+        history.goBack();
       }
     },
-    [onClose, history],
-  )
+    [onClose, history]
+  );
 
   return showModal ? (
     <Container
       ref={containerRef}
       onClick={handleClose}
-      className="modal--backDrop"
+      className="modal-backDrop"
     >
       <div
-        className={`modal--container ${className ? className : ''}`}
+        className={`modal-container ${className ? className : ""}`}
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
       >
         {modalTitle && (
-          <h2 className="modal--title u--typo__title">{modalTitle}</h2>
+          <h2 className="modal-title u-typo_title">{modalTitle}</h2>
         )}
         {showCloseBtn && (
           <button className="close-btn" onClick={handleClose}>
@@ -66,7 +66,7 @@ const Modal = ({
         {children}
       </div>
     </Container>
-  ) : null
-}
+  ) : null;
+};
 
-export default Modal
+export default Modal;

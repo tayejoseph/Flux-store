@@ -1,19 +1,19 @@
-import { createGlobalStyle } from 'styled-components'
-import { maxQuery } from '../helpers'
+import { createGlobalStyle } from "styled-components";
+import { maxQuery } from "../helpers";
 
 export default createGlobalStyle`
-    div.app--container {
+    div.app-container {
         section {
-        	div.rayi--row {
+        	div.rayi-row {
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
-                ${maxQuery('md')} {
+                ${maxQuery("md")} {
                     flex-direction: column;
                 }
-                div.rayi--col {
+                div.rayi-col {
                     width: 45%;
-                    ${maxQuery('md')} {
+                    ${maxQuery("md")} {
                         width: 100%;
                     }
                     display: flex;
@@ -23,4 +23,4 @@ export default createGlobalStyle`
             }
         }
     }
-`
+`;

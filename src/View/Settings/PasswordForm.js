@@ -1,32 +1,32 @@
-import React from 'react'
-import { InputGroup } from '../../UI'
+import React from "react";
+import { InputGroup } from "../../UI";
 
-const PasswordForm = ({ userData, handleInput }) => {
+const PasswordForm = ({ handleInput }) => {
   return (
     <div>
       <InputGroup
-        label={'Old Password'}
-        placeholder={'**********'}
+        label={"Old Password"}
+        placeholder={"**********"}
         name="oldPassword"
-        type={'password'}
+        type={"password"}
         onChange={handleInput}
       />
       <InputGroup
-        label={'New Password'}
-        placeholder={'**********'}
+        label={"New Password"}
+        placeholder={"**********"}
         name="newPassword"
-        type={'password'}
+        type={"password"}
         onChange={handleInput}
       />
       <InputGroup
-        label={'Confirm New Password'}
-        placeholder={'**********'}
+        label={"Confirm New Password"}
+        placeholder={"**********"}
         name="confirmPassword"
-        type={'password'}
+        type={"password"}
         onChange={handleInput}
       />
     </div>
-  )
-}
+  );
+};
 
-export default PasswordForm
+export default PasswordForm;

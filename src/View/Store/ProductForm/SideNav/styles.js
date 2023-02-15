@@ -1,6 +1,6 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { maxQuery, minQuery } from '../../../../helpers'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { maxQuery, minQuery } from "../../../../helpers";
 
 export default Styled.aside`
     padding: 1em;
@@ -9,7 +9,7 @@ export default Styled.aside`
     width: 100%;
    
     nav { 
-        ${maxQuery('md')} {
+        ${maxQuery("md")} {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -19,7 +19,7 @@ export default Styled.aside`
             display: flex;
             user-select: none;
             position: relative;
-            ${maxQuery('md')} {
+            ${maxQuery("md")} {
                 align-items: center;
                 width: 50%;
                 flex-direction: column;
@@ -27,31 +27,31 @@ export default Styled.aside`
             &:before {
                 content: "";
                 display: block;
-                width: ${rem('12px')};
+                width: ${rem("12px")};
                 margin-right: 1em;
-                height: ${rem('12px')};
+                height: ${rem("12px")};
                 box-shadow: 0 0 0 2px ${(props) => props.theme.primary};
                 background: #fff;
                 z-index: 1;
                 border: 3px solid #fff;
                 border-radius: 50%;
-                ${maxQuery('md')} {
+                ${maxQuery("md")} {
                     margin-bottom: 1em;
                 }
             }
             &:not(:last-child) {
-                ${minQuery('>md')} {
-                margin-bottom: ${rem('43.5px')};
+                ${minQuery(">md")} {
+                margin-bottom: ${rem("43.5px")};
                 }
                 &:after {
                     content: "";
                     display: block;
                     position: absolute;
-                    left: ${rem('7.5px')};
-                    top: ${rem('20px')};
-                    height: ${rem('40px')};
+                    left: ${rem("7.5px")};
+                    top: ${rem("20px")};
+                    height: ${rem("40px")};
                     border: 1.5px solid ${({ theme }) => theme.primary};
-                    ${maxQuery('md')} {
+                    ${maxQuery("md")} {
                         height: 2.5px;
                         background: ${({ theme }) => theme.primary};
                         top: 5px;
@@ -70,7 +70,7 @@ export default Styled.aside`
                     border: 3px solid #fff;
                 }
             }
-            &.disable--link {
+            &.disable-link {
                 pointer-events: none;
                 cursor: no-drop;
                 opacity: 0.5;
@@ -78,4 +78,4 @@ export default Styled.aside`
             }
         }
     }
-`
+`;

@@ -1,11 +1,11 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { maxQuery } from '../../../helpers'
-import scrollBar from '../../../base/scrollBar'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { maxQuery } from "../../../helpers";
+import scrollBar from "../../../base/scrollBar";
 
 export default Styled.div`
    header {       
-        min-height: ${rem('118px')};
+        min-height: ${rem("118px")};
         box-shadow: 0px 0px 2px #00000029;
         border-radius: 10px;
         padding: 1.2em 2em;
@@ -13,11 +13,11 @@ export default Styled.div`
         background: #fff;
         flex-direction: column;
         justify-content: space-between;
-        div.transaction--header__row {
+        div.transaction-header_row {
             display: flex;
                 align-items: center;
                 justify-content: space-between;
-                ${maxQuery('md')} {
+                ${maxQuery("md")} {
                     flex-direction: column;
                     align-items: flex-start;
                     h1 {
@@ -28,7 +28,7 @@ export default Styled.div`
                         display: flex;
                         width: 100%;
                         justify-content: space-between;
-                        div.input--group {
+                        div.input-group {
                             width: fit-content;
                         }
                     }
@@ -49,40 +49,40 @@ export default Styled.div`
                     border-right: 1.2px solid #E1E1E1;
                 }
                 input {
-                    width: ${rem('232px')};
-                    height: ${rem('42px')};
+                    width: ${rem("232px")};
+                    height: ${rem("42px")};
                 }
             }
         }
    }
 
-   div.transaction--container {
+   div.transaction-container {
        margin-top: 1.2em;
-        max-width: ${rem('1078px')};
-       div.table--container {
+        max-width: ${rem("1078px")};
+       div.table-container {
            overflow: auto;
             box-shadow: 0px 0px 3px #00000029;
             border-radius: 10px;
             table {
-             width:  ${rem('1078px')};
+             width:  ${rem("1078px")};
                 tbody {
                     height: 70vh;
                     ${scrollBar};
-                    ${maxQuery('md')} {
+                    ${maxQuery("md")} {
                         height: 58vh;
                     }
-                    td.transaction--type {
+                    td.transaction-type {
                         text-transform: capitalize;
                     }
-                    span[class^="status--container"] {
+                    span[class^="status-container"] {
                         border-radius: 5px;
                         padding: 0.4em 0.5em;
                         font-weight: 100;
                         display: inline-block;
-                        width: ${rem('76px')};           
+                        width: ${rem("76px")};           
                     }
                 }
             }
        }
    }
-`
+`;
