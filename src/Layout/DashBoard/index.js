@@ -18,7 +18,7 @@ import {
   Transactions,
   Notification,
   VirtualCard,
-} from "../../View";
+} from "../../view";
 import Container from "./styles";
 
 const DashBoard = () => {
