@@ -46,7 +46,6 @@ const Wallet = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  console.log(transactionLists.length);
 
   useEffect(() => {
     dispatch(fetchAllTransactions());

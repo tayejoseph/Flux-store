@@ -5,7 +5,7 @@ import { addCatalog, updateCatalog } from "../../../store/actions/user";
 import { notify } from "react-notify-toast";
 import { formValidator } from "../../../helpers";
 import { Modal, Button } from "../../../UI";
-import { ProductCategories } from "../../../Constants";
+import { ProductCategories } from "../../../constants";
 import SideNav from "./SideNav";
 import InfoForm from "./InfoForm";
 import UploadForm from "./UploadForm";
@@ -51,7 +51,6 @@ const ProductForm = () => {
     ) {
       try {
         setLoading(true);
-        console.log(productId, "fddjkfdfkj");
         const { status } = productId
           ? await dispatch(
               updateCatalog(

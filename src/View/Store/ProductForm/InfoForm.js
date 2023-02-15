@@ -1,27 +1,27 @@
-import React from 'react'
-import { ProductCategories } from '../../../Constants'
-import { InputGroup } from '../../../UI'
+import React from "react";
+import { ProductCategories } from "../../../constants";
+import { InputGroup } from "../../../UI";
 
 const InfoForm = ({ formData, handleFormInput }) => {
   return (
     <div>
       <InputGroup
         label="Enter Product Title"
-        placeholder={'e.g PS4 Slim 500GB'}
+        placeholder={"e.g PS4 Slim 500GB"}
         name="name"
         value={formData.name}
         onChange={handleFormInput}
       />
       <InputGroup
         label="Enter Product Description"
-        placeholder={'Short Description'}
+        placeholder={"Short Description"}
         name="description"
         value={formData.description}
         onChange={handleFormInput}
       />
       <InputGroup
         label="Enter Product Price"
-        placeholder={'₦0.00'}
+        placeholder={"₦0.00"}
         name="amount"
         type="number"
         value={formData.amount}
@@ -30,7 +30,7 @@ const InfoForm = ({ formData, handleFormInput }) => {
       <InputGroup>
         <label>Product Categories</label>
         <select
-          placeholder={'Product Categorie'}
+          placeholder={"Product Categorie"}
           name="category"
           onChange={handleFormInput}
         >
@@ -43,7 +43,7 @@ const InfoForm = ({ formData, handleFormInput }) => {
       </InputGroup>
       <InputGroup
         label="Available Quantity"
-        placeholder={'200'}
+        placeholder={"200"}
         name="quantity"
         type="number"
         value={formData.quantity}
@@ -51,13 +51,13 @@ const InfoForm = ({ formData, handleFormInput }) => {
       />
       <InputGroup
         label="Delivery"
-        placeholder={'e.g PHC, LAG and ABJ'}
+        placeholder={"e.g PHC, LAG and ABJ"}
         name="delivery"
         value={formData.delivery}
         onChange={handleFormInput}
       />
     </div>
-  )
-}
+  );
+};
 
-export default InfoForm
+export default InfoForm;

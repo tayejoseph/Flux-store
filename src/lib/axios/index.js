@@ -5,7 +5,7 @@ import { notify } from "react-notify-toast";
 import NProgress from "../nprogress";
 
 const server = axios.create({
-  baseURL: "https://beta-api.fluxapi.co.uk",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
 

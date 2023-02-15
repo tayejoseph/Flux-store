@@ -11,7 +11,7 @@ export const DIMENSIONS = {
   mobileTopNavHeight: "56px",
 };
 
-const theme = {
+const theme = () => ({
   primary: "#855AAF",
   secondary: "#7B0073",
   bgColor: "#FCFCFC",
@@ -23,7 +23,6 @@ const theme = {
   'Caros Text',-apple-system,BlinkMacSystemFont,"Helvetica Neue",
   "Segoe UI","Oxygen","Ubuntu","Cantarell","Open Sans",sans-serif
   `,
-};
+});
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default () => theme;
+export default theme;
