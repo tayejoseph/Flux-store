@@ -1,6 +1,6 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { DIMENSIONS } from '../../base/theme'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { DIMENSIONS } from "../../base/theme";
 
 export default Styled.div`
     background: #fff;
@@ -15,7 +15,7 @@ export default Styled.div`
         display: flex;
         padding: 0.3em 0.8em;
         align-items: center;
-        div.img--container {            
+        div.img-container {            
             width: 32px;
             height: 32px;
             border: 50%;
@@ -51,7 +51,7 @@ export default Styled.div`
                 color: #222222;
                 text-decoration: none;
                 transition: all 0.3s;
-                font-size: ${rem('14px')};
+                font-size: ${rem("14px")};
                 opacity: 0.5;
                 user-select: none;
                 .icon {
@@ -66,4 +66,4 @@ export default Styled.div`
             }
         }
     }
-`
+`;

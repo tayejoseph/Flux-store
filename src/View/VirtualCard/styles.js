@@ -1,25 +1,25 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { maxQuery } from '../../helpers'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { maxQuery } from "../../helpers";
 
 export default Styled.div`    
     flex: 1;
     height: 100%;
     div.card {
-        ${maxQuery('415px')} {
+        ${maxQuery("415px")} {
         margin-top: 1.5em;
         }
-        width: ${rem('343px')};
-        height: ${rem('197px')};
+        width: ${rem("343px")};
+        height: ${rem("197px")};
         position: relative;
         * {
             z-index: 2;
             position: relative;
             color: #fff;
         }
-        div.card--content {
-            width: ${rem('343px')};
-            height: ${rem('197px')};
+        div.card-content {
+            width: ${rem("343px")};
+            height: ${rem("197px")};
             display: flex;
             padding: 1.5em;
             padding-top: 2em;
@@ -66,7 +66,7 @@ export default Styled.div`
         position: absolute;
         top: -0.5em;
         right: 0.5em;
-        width: ${rem('97px')};
-        height: ${rem('96px')};
+        width: ${rem("97px")};
+        height: ${rem("96px")};
     }
-`
+`;

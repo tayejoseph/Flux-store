@@ -1,9 +1,9 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
-  div.modal--container {
-        width: ${rem('375px')};
+  div.modal-container {
+        width: ${rem("375px")};
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -20,7 +20,7 @@ export default Styled.div`
             margin-top: 2.8em;
             padding-top: 1.8em;
             position: relative;
-            div.top--section {
+            div.top-section {
                 position: absolute;
                 display: flex;
                 background: #fff;
@@ -28,7 +28,7 @@ export default Styled.div`
                 top: -1.7em;
                 left: 50%;
                 transform: translateX(-50%);
-                width: ${rem('315px')};
+                width: ${rem("315px")};
                 box-shadow: 0px 3px 20px #00000029;
                 border: 1px solid #22222233;
                 border-radius: 10px;
@@ -55,7 +55,7 @@ export default Styled.div`
             padding: 1em;
         }
         /* padding: 1em; */
-        div.section--item {
+        div.section-item {
             display: flex;
             padding: 0.5em 1em;
             justify-content: space-between;
@@ -66,4 +66,4 @@ export default Styled.div`
 
         }
     }
-`
+`;

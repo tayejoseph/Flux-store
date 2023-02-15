@@ -1,9 +1,9 @@
-
 const isElementInViewport = (el) => {
-    const rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
-  }
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+  );
+};
 
-export default isElementInViewport
+export default isElementInViewport;

@@ -1,37 +1,37 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { maxQuery } from '../../helpers'
-import ScrollBar from '../../base/scrollBar'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { maxQuery } from "../../helpers";
+import ScrollBar from "../../base/scrollBar";
 
 export default Styled.div`
-    div.modal--container {                
-        width: ${rem('602px')};
-        height: ${rem('485px')};
-        ${maxQuery('md')} {
+    div.modal-container {                
+        width: ${rem("602px")};
+        height: ${rem("485px")};
+        ${maxQuery("md")} {
             width: 100vw;
             height: 100vh;
             border-radius: 0px;
         }
     }
-    div.productForm--container {
+    div.productForm-container {
         header {
             display: flex;
             align-items: center;
             padding: 0px 2em;
-            height: ${rem('63px')};
+            height: ${rem("63px")};
             box-shadow: 0px 0px 3px #00000029;
             border-radius: 10px 10px 0px 0px;
             opacity: 1;
         }
         main { 
             display: flex;
-            ${maxQuery('md')} {
+            ${maxQuery("md")} {
                 flex-direction: column;
             }
             aside {
-                width: ${rem('198px')};                
+                width: ${rem("198px")};                
                 box-shadow: 1.5px 0px 2px -1px #00000029;
-                 ${maxQuery('>md')} {
+                 ${maxQuery(">md")} {
                     width: 100%;
                                 box-shadow: 0px 0px 3px #00000029;
 
@@ -39,22 +39,22 @@ export default Styled.div`
             }
             form {                
                 ${ScrollBar};
-                height: ${rem('341px')};
+                height: ${rem("341px")};
                 overflow-y: auto;
-                width: calc(100% - ${rem('198px')});
+                width: calc(100% - ${rem("198px")});
                 padding: 1.5em 2em;
-                ${maxQuery('md')} {
+                ${maxQuery("md")} {
                     width: 100%;
                     height: 77.5vh;
                     overflow-y: auto;
                     display: flex;
                     flex-direction: column;
                     padding-top: 3em;
-                    div.input--group {
+                    div.input-group {
                         margin-bottom: 2.5em;
                     }
                 }
-                div.hide--section {
+                div.hide-section {
                     visibility: hidden;
                     pointer-events: none;
                     position: absolute;
@@ -64,7 +64,7 @@ export default Styled.div`
             }
         }
         footer {
-            height: ${rem('81px')};
+            height: ${rem("81px")};
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -72,7 +72,7 @@ export default Styled.div`
             box-shadow: 0px 0px 2px #00000029;
             border-radius: 0px 0px 10px 10px;
             div {
-                &.next--container {
+                &.next-container {
                     display: flex;
                     width: 100%;
                     justify-content: flex-end;
@@ -84,4 +84,4 @@ export default Styled.div`
         }
     }
 
-`
+`;

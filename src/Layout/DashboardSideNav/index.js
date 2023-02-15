@@ -1,40 +1,42 @@
-import React from 'react'
-import { IoMdWallet, IoMdBasket, IoMdCall } from 'react-icons/io'
-import { FaGift } from 'react-icons/fa'
-import { RiArrowUpDownFill, RiArrowLeftUpLine } from 'react-icons/ri'
-import { FiArrowUpRight } from 'react-icons/fi'
-import { ImCreditCard } from 'react-icons/im'
-import { useSelector } from 'react-redux'
-import fluxLogo from '../../assets/Flux Logo@2x.webp'
-import UserAvatar from '../../assets/autumn-goodman-vTL_qy03D1I-unsplash (1)@2x.webp'
-import { Link, useLocation } from 'react-router-dom'
-import { doesRouteMatch } from '../../helpers'
-import Container from './styles'
+import React, { useMemo } from "react";
+import { IoMdWallet, IoMdBasket, IoMdCall } from "react-icons/io";
+import { RiArrowUpDownFill, RiArrowLeftUpLine } from "react-icons/ri";
+import { FiArrowUpRight } from "react-icons/fi";
+import { ImCreditCard } from "react-icons/im";
+import { useSelector } from "react-redux";
+import fluxLogo from "../../assets/Flux Logo@2x.webp";
+import UserAvatar from "../../assets/autumn-goodman-vTL_qy03D1I-unsplash (1)@2x.webp";
+import { Link, useLocation } from "react-router-dom";
+import { doesRouteMatch } from "../../helpers";
+import Container from "./styles";
 
 const SideNav = ({ className }) => {
-  const location = useLocation()
+  const location = useLocation();
   const {
     userData: { full_name, email_verified, bvn_verified },
-  } = useSelector((s) => s.user)
+  } = useSelector((s) => s.user);
 
-  const backgroundPathname = location.state?.background
+  const backgroundPathname = useMemo(
+    () => location.state?.background,
+    [location]
+  );
 
   return (
-    <Container className={`dashboard--sideNav ${className}`}>
+    <Container className={`dashboard-sideNav ${className}`}>
       <header>
         <Link to="/">
-          <div className="img--container">
+          <div className="img-container">
             <img src={fluxLogo} alt="Flux Logo" />
           </div>
         </Link>
         <hr />
         <Link to="/">
-          <div className="img--container">
-            <img src={UserAvatar} alt={'User Avatar'} />
+          <div className="img-container">
+            <img src={UserAvatar} alt={"User Avatar"} />
           </div>
         </Link>
-        <p className="u--typo__normal">
-          Hi <span>{full_name.split(' ')[0]}</span>
+        <p className="u-typo_normal">
+          Hi <span>{full_name.split(" ")[0]}</span>
         </p>
       </header>
       <hr />
@@ -44,10 +46,10 @@ const SideNav = ({ className }) => {
             <Link
               to="/dashboard/wallet/summary"
               className={
-                doesRouteMatch('wallet', location.pathname) &&
+                doesRouteMatch("wallet", location.pathname) &&
                 !backgroundPathname
-                  ? 'active'
-                  : ''
+                  ? "active"
+                  : ""
               }
             >
               <IoMdWallet />
@@ -59,56 +61,28 @@ const SideNav = ({ className }) => {
             <Link
               to="/dashboard/virtualCard"
               className={
-                doesRouteMatch('virtualCard', location.pathname) &&
+                doesRouteMatch("virtualCard", location.pathname) &&
                 !backgroundPathname
-                  ? 'active'
-                  : ''
+                  ? "active"
+                  : ""
               }
             >
               <ImCreditCard />
               Virtual Cards
             </Link>
           </li>
-          {/* <li>
-            <Link
-              to="/dashboard/cards"
-              className={
-                doesRouteMatch('cards', location.pathname) &&
-                !backgroundPathname
-                  ? 'active'
-                  : ''
-              }
-            >
-              <ImCreditCard />
-              Cards
-            </Link>
-          </li> */}
-          {/* <li>
-            <Link
-              to="/dashboard/gifts?tab=created"
-              className={
-                doesRouteMatch('gifts', location.pathname) &&
-                !backgroundPathname
-                  ? 'active'
-                  : ''
-              }
-            >
-              <FaGift />
-              Gifts
-            </Link>
-          </li> */}
           <li>
             <Link
               className={
-                doesRouteMatch('store', location.pathname) &&
+                doesRouteMatch("store", location.pathname) &&
                 !backgroundPathname
-                  ? 'active'
-                  : ''
+                  ? "active"
+                  : ""
               }
               to={
                 email_verified && bvn_verified
-                  ? '/dashboard/store/'
-                  : '/dashboard/store/newUser'
+                  ? "/dashboard/store/"
+                  : "/dashboard/store/newUser"
               }
             >
               <IoMdBasket />
@@ -119,10 +93,10 @@ const SideNav = ({ className }) => {
             <Link
               to="/dashboard/requestMoney?tab=sent"
               className={
-                doesRouteMatch('requestMoney', location.pathname) &&
+                doesRouteMatch("requestMoney", location.pathname) &&
                 !backgroundPathname
-                  ? 'active'
-                  : ''
+                  ? "active"
+                  : ""
               }
             >
               <RiArrowLeftUpLine />
@@ -133,10 +107,10 @@ const SideNav = ({ className }) => {
           <li>
             <Link
               to={{
-                pathname: '/dashboard/sendMoney',
+                pathname: "/dashboard/sendMoney",
                 state: { background: location },
               }}
-              className={backgroundPathname === 'sendMoney' ? 'active' : ''}
+              className={backgroundPathname === "sendMoney" ? "active" : ""}
             >
               <FiArrowUpRight />
               Send Money
@@ -144,9 +118,9 @@ const SideNav = ({ className }) => {
           </li>
           <li>
             <Link
-              className={backgroundPathname === 'airtimeTopUp' ? 'active' : ''}
+              className={backgroundPathname === "airtimeTopUp" ? "active" : ""}
               to={{
-                pathname: '/dashboard/airtimeTopUp',
+                pathname: "/dashboard/airtimeTopUp",
                 state: { background: location },
               }}
             >
@@ -157,10 +131,10 @@ const SideNav = ({ className }) => {
           <li>
             <Link
               className={
-                doesRouteMatch('dataTopUp', location.pathname) ? 'active' : ''
+                doesRouteMatch("dataTopUp", location.pathname) ? "active" : ""
               }
               to={{
-                pathname: '/dashboard/dataTopUp',
+                pathname: "/dashboard/dataTopUp",
                 state: { background: location },
               }}
             >
@@ -171,7 +145,7 @@ const SideNav = ({ className }) => {
         </ol>
       </nav>
     </Container>
-  )
-}
+  );
+};
 
-export default SideNav
+export default SideNav;

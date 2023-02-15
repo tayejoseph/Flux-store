@@ -1,36 +1,35 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { IoMdSettings, IoMdArrowRoundBack } from 'react-icons/io'
-import { FaBell } from 'react-icons/fa'
-import { useHistory, useLocation } from 'react-router-dom'
-import { Button } from '../../UI'
-import Container from './styles'
+import React from "react";
+import { useSelector } from "react-redux";
+import { IoMdSettings, IoMdArrowRoundBack } from "react-icons/io";
+import { FaBell } from "react-icons/fa";
+import { useHistory, useLocation } from "react-router-dom";
+import { Button } from "../../UI";
+import Container from "./styles";
 
 const DashboardHeader = ({
   title,
   sectionAction,
   middleContent,
-  children,
-  navType = 'full',
+  navType = "full",
 }) => {
-  const { notificationData } = useSelector((s) => s.user)
-  const location = useLocation()
-  const history = useHistory()
+  const { notificationData } = useSelector((s) => s.user);
+  const location = useLocation();
+  const history = useHistory();
   return (
     <Container
-      className={`dashboard--header ${
-        navType === 'full' ? 'full--nav' : 'sm--nav'
+      className={`dashboard-header ${
+        navType === "full" ? "full-nav" : "sm-nav"
       }`}
     >
-      {navType === 'full' ? (
+      {navType === "full" ? (
         <>
-          <div className="flux--row">
-            <h2 className={'u--typo__headline'}>{title}</h2>
-            <div className="btn--tray">
+          <div className="flux-row">
+            <h2 className={"u-typo_headline"}>{title}</h2>
+            <div className="btn-tray">
               <Button
                 icon
                 onClick={() =>
-                  history.push('/dashboard/settings/accVerification', {
+                  history.push("/dashboard/settings/accVerification", {
                     background: location,
                   })
                 }
@@ -41,11 +40,11 @@ const DashboardHeader = ({
                 icon
                 className={
                   notificationData && notificationData.count
-                    ? 'notification--badge'
-                    : ''
+                    ? "notification-badge"
+                    : ""
                 }
                 onClick={() =>
-                  history.push('/dashboard/notification/fluxWallet')
+                  history.push("/dashboard/notification/fluxWallet")
                 }
               >
                 <FaBell />
@@ -53,12 +52,12 @@ const DashboardHeader = ({
             </div>
           </div>
           {middleContent && middleContent}
-          <div className="header--action">{sectionAction && sectionAction}</div>
+          <div className="header-action">{sectionAction && sectionAction}</div>
         </>
       ) : (
         <nav>
           <Button
-            className="back--btn"
+            className="back-btn"
             icon
             iconRight
             onClick={() => history.goBack()}
@@ -66,11 +65,11 @@ const DashboardHeader = ({
             <IoMdArrowRoundBack />
             Go Back
           </Button>
-          <div className="btn--tray">
+          <div className="btn-tray">
             <Button
               icon
               onClick={() =>
-                history.push('/dashboard/settings/accVerification', {
+                history.push("/dashboard/settings/accVerification", {
                   background: location,
                 })
               }
@@ -81,10 +80,10 @@ const DashboardHeader = ({
               icon
               className={
                 notificationData && notificationData.count
-                  ? 'notification--badge'
-                  : ''
+                  ? "notification-badge"
+                  : ""
               }
-              onClick={() => history.push('/dashboard/notification/fluxWallet')}
+              onClick={() => history.push("/dashboard/notification/fluxWallet")}
             >
               <FaBell />
             </Button>
@@ -92,7 +91,7 @@ const DashboardHeader = ({
         </nav>
       )}
     </Container>
-  )
-}
+  );
+};
 
-export default DashboardHeader
+export default DashboardHeader;

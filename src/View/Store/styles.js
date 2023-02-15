@@ -1,17 +1,17 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
-import { minQuery, maxQuery } from '../../helpers'
-import scrollBar from '../../base/scrollBar'
+import Styled from "styled-components";
+import { rem } from "polished";
+import { minQuery, maxQuery } from "../../helpers";
+import scrollBar from "../../base/scrollBar";
 
 export default Styled.div`
     height: 100%;
-    div.dashboard--header {
-        div.wallet--actions__container {
+    div.dashboard-header {
+        div.wallet-actions_container {
             display: flex;
             justify-content: space-between;
-            div.flux--row {
+            div.flux-row {
                 display: flex;
-                ${maxQuery('sm')} {
+                ${maxQuery("sm")} {
                     flex: 1;
                     justify-content: space-between;
                 }
@@ -19,23 +19,23 @@ export default Styled.div`
                     margin-right: 1em;
                 }
             }
-            button.viewall--btn {
-                    ${maxQuery('sm')} {
+            button.viewall-btn {
+                    ${maxQuery("sm")} {
                         display: none
                 }
             }
         }
     }
 
-    div.store--container {
+    div.store-container {
         box-shadow: 0px 0px 2px #00000029;
         border-radius: 10px;
         background: #fff;
         padding-top: 1em;
-        div.store--content {
+        div.store-content {
             height: 71.8vh;
             ${scrollBar}
-            ${maxQuery('lg')} {
+            ${maxQuery("lg")} {
                 height: 64vh;
             }
             padding: 0px 1.5em;
@@ -47,24 +47,24 @@ export default Styled.div`
             justify-content: center;
             grid-column-gap: 1.5em;
             grid-template-columns: repeat(3, 1fr); 
-            ${minQuery('1300px')} {
+            ${minQuery("1300px")} {
                 grid-template-columns: repeat(5, 1fr);
             }   
-            ${maxQuery('lg')} {
+            ${maxQuery("lg")} {
                 grid-template-columns: repeat(4, 1fr);
             }
-             ${maxQuery('md')} {
+             ${maxQuery("md")} {
                 grid-template-columns: repeat(3, 1fr);
             }
-            ${maxQuery('sm')} {
+            ${maxQuery("sm")} {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
         footer {
             box-shadow: 0px 0px 3px #00000029;
             border-radius: 0px 0px 10px 10px;
-            height: ${rem('53px')};
+            height: ${rem("53px")};
         }
     }
 
-`
+`;

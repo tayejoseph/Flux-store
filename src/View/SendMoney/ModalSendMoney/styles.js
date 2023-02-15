@@ -1,16 +1,16 @@
-import Styled from 'styled-components'
-import { rem } from 'polished'
+import Styled from "styled-components";
+import { rem } from "polished";
 
 export default Styled.div`
-    div.modal--container {
+    div.modal-container {
         p {
-            font-size: ${rem('14px')};
+            font-size: ${rem("14px")};
             letter-spacing: 0px;
             color: #222222;
             opacity: 0.7;
         }
         form {
-            div.form--inputs {
+            div.form-inputs {
                 padding: 1em 1.5em;  
                 padding-top: 2em;          
             }
@@ -23,4 +23,4 @@ export default Styled.div`
             }
         }
     }
-`
+`;

@@ -1,11 +1,11 @@
-import Styled from 'styled-components'
-import { rem, rgba } from 'polished'
+import Styled from "styled-components";
+import { rem, rgba } from "polished";
 
 export default Styled.div`
-    table.flux--table {
+    table.flux-table {
         width: 100%;
         background: #fff;
-        div.spinner--container {
+        div.spinner-container {
             width: 100%;
             height: 100%;
             display: flex;
@@ -30,7 +30,7 @@ export default Styled.div`
             display: block;
             overflow: auto;
         }
-        p.error--msg {
+        p.error-msg {
             margin-top: 3em;
             text-align: center;
         }
@@ -43,25 +43,25 @@ export default Styled.div`
             text-align: left;
             color: #222222;
             font-weight: normal;
-            font-size: ${rem('14px')};
-            line-height: ${rem('20px')};
+            font-size: ${rem("14px")};
+            line-height: ${rem("20px")};
             padding: 0.8em 0px;
             vertical-align: center;
         }
         tbody tr {
-            border-bottom: 1px solid ${rgba('#E1E1E1', 0.5)};
+            border-bottom: 1px solid ${rgba("#E1E1E1", 0.5)};
         }
 
-        th:first-child:not(.table--tab__container), td:first-child {
+        th:first-child:not(.table-tab_container), td:first-child {
             padding-left: 1.5em;
         }
     }
-  footer.flux--table__footer {
+  footer.flux-table_footer {
         width: 100%;
         background: #ffff;
-        height: ${rem('53px')};
+        height: ${rem("53px")};
         padding: 1em 1.5em;
         box-shadow: 0px 0px 3px #00000029;
         border-radius: 0px 0px 10px 10px;
     }
-`
+`;
